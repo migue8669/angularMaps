@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PetModel } from './pet-model/pet.model';
-
+import { map, catchError } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
@@ -10,18 +10,25 @@ export class FirebaseService {
   baseUrl:string;
 
   constructor(private http:HttpClient) {
-    this.baseUrl='https://nodejs-ea572.firebaseio.com'
+    this.baseUrl='https://node-c1ffb.firebaseio.com/'
    }
    getAll(){
-     return this.http.get(`${this.baseUrl}/nodejs-ea572.json`).pipe();
+     return this.http.get(`${this.baseUrl}node-c1ffb.json`).pipe(map(this.crearArreglo));
    }
    crearReporte(pet:PetModel){
-     return this.http.post(` ${this.baseUrl}/nodejs-ea572.json`,pet);
+     return this.http.post(` ${this.baseUrl}node-c1ffb.json`,pet);
    }
    private crearArreglo(petsObj:object){
+     
    const heroes:PetModel[]=[];
-   console.log(petsObj);
-    return "hola";
+   
+   Object.keys(petsObj).forEach(key=>{
+     const pet: PetModel = petsObj;
+pet.$key=key;
+heroes.push(pet);
+   })
+   console.log(heroes);
+    return heroes;
    }
 
 }
