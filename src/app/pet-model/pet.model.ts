@@ -6,6 +6,7 @@ export class PetModel{
     lat?:number;
 
 constructor(){
+    // this.$key=''
     this.reporte='';
     this.tipoReporte='';
     this.long=0;

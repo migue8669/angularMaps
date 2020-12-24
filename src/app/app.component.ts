@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   mapTypeId:string;
   located:boolean;
   pets:PetModel=new PetModel();
-  mascotas:PetModel=new PetModel();
+  mascotas:PetModel[]=[];
 
   constructor(    private petService:FirebaseService
     ){
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
 //this.petService.getAll().subscribe(resp=>{console.log(resp);
 this.petService.getAll()
-.subscribe(pets=>this.pets=pets)
+.subscribe(pets=>this.mascotas=pets)
 
 
 }    
@@ -41,7 +41,8 @@ this.petService.getAll()
      // this.lat=position.coords.latitude;
       this.pets.long=position.coords.longitude;
       console.log(this.pets);
-      this.petService.crearReporte(this.pets).subscribe(respuesta=>this.mascotas);
+      this.petService.crearReporte(this.pets)
+      .subscribe(respuesta=>{console.log(respuesta)});
 
       this.zoom=17;
       this.located=true;
