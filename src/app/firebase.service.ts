@@ -10,13 +10,14 @@ export class FirebaseService {
   baseUrl:string;
 
   constructor(private http:HttpClient) {
-    this.baseUrl='https://node-c1ffb.firebaseio.com/'
+    this.baseUrl='https://hermesbd-c571e.firebaseio.com/'
    }
    getAll(){
-     return this.http.get(`${this.baseUrl}node-c1ffb.json`).pipe(map(this.crearArreglo));
+    // return this.http.get<any[]>(this.baseUrl).toPromise();
+      return this.http.get(`${this.baseUrl}/reporte.json`).pipe(map(this.crearArreglo));
    }
    crearReporte(pet:PetModel){
-     return this.http.post(` ${this.baseUrl}node-c1ffb.json`,pet).pipe(map((resp:any)=>{
+     return this.http.post(` ${this.baseUrl}/reporte.json`,pet).pipe(map((resp:any)=>{
        pet.$key=resp.name;
        return pet;
     }));;
@@ -24,11 +25,11 @@ export class FirebaseService {
    private crearArreglo(petsObj:object){
      
    const heroes:PetModel[]=[];
-   
+   if(petsObj===null){return [];}
    Object.keys(petsObj).forEach(key=>{
      console.log(key);
      console.log(petsObj);
-     const pet: PetModel = petsObj;
+     const pet:any=petsObj[key];
 pet.$key=key;
 heroes.push(pet);
    })

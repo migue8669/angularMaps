@@ -9,8 +9,8 @@ constructor(){
     // this.$key=''
     this.reporte='';
     this.tipoReporte='';
-    this.long=0;
-    this.lat=0;
+    this.long;
+    this.lat;
 
 }
 }

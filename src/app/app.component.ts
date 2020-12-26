@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FirebaseService } from './firebase.service';
 import { PetModel } from './pet-model/pet.model';
@@ -17,21 +17,46 @@ export class AppComponent implements OnInit{
   mapTypeId:string;
   located:boolean;
   pets:PetModel=new PetModel();
-  mascotas:PetModel[]=[];
+  @Input() mascotass:PetModel[]=[];
+  markers:   PetModel [] = [];
 
   constructor(    private petService:FirebaseService
     ){
-    this.lat=40;
-    this.lng=-3;
+    this.lat=0;
+    this.lng=0;
     this.zoom=6;
     this.mapTypeId="hybrid";
     this.located=false;
   }
-  ngOnInit(){
-//this.petService.getAll().subscribe(resp=>{console.log(resp);
-this.petService.getAll()
-.subscribe(pets=>this.mascotas=pets)
+  async  ngOnInit(){
+ this.markers.push( {
+    lat: 51.673858,
+    long: 7.815982,
+    reporte: 'A',
+    tipoReporte: 'true'
+  },
+  {
+    lat: 51.373858,
+    long: 7.215982,
+    reporte: 'B',
+    tipoReporte: 'false'
+  },
+  {
+    lat: 51.723858,
+    long: 7.895982,
+    reporte: 'C',
+    tipoReporte: 'true'
+  }
+ )
 
+this.petService.getAll()
+.subscribe(pets=>{
+  console.log(pets);
+  this.mascotass=pets
+  console.log(this.mascotass);}
+)
+
+//this.petService.getAll().then(pets=>{this.mascotas=pets}).catch(error=>console.log(error));
 
 }    
   
@@ -42,7 +67,8 @@ this.petService.getAll()
       this.pets.long=position.coords.longitude;
       console.log(this.pets);
       this.petService.crearReporte(this.pets)
-      .subscribe(respuesta=>{console.log(respuesta)});
+      .subscribe(respuesta=>{console.log(respuesta);
+      this.pets=respuesta});
 
       this.zoom=17;
       this.located=true;

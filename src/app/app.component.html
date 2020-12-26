@@ -8,12 +8,14 @@
   <agm-marker
     [latitude]="lat"
     [longitude]="lng"
-    *ngIf="located"
-    [(ngModel)]="pets.long"
   >
     <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
-  </agm-marker>
-  <agm-marker *ngFor="let mascota of mascotas" [latitude]="mascota.lat[0]" [longitude]="mascota.long[1]"></agm-marker>
+ 
+</agm-marker>
+<agm-marker *ngFor="let mascota of mascotass let i=index"  [latitude]="mascota.lat" [longitude]="mascota.long"  >
+  <agm-info-window> {{mascota.reporte}}</agm-info-window>
+
+</agm-marker>
 </agm-map>
 
 <button (click)="getCurrentPosition()">Posición</button>
