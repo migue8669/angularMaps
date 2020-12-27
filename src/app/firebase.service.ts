@@ -10,17 +10,20 @@ export class FirebaseService {
   baseUrl:string;
 
   constructor(private http:HttpClient) {
-    this.baseUrl='https://hermesbd-c571e.firebaseio.com/'
+    this.baseUrl='https://maps-e7e33-default-rtdb.firebaseio.com/'
    }
    getAll(){
     // return this.http.get<any[]>(this.baseUrl).toPromise();
-      return this.http.get(`${this.baseUrl}/reporte.json`).pipe(map(this.crearArreglo));
+      return this.http.get(`${this.baseUrl}reporte.json`).pipe(map(this.crearArreglo));
    }
    crearReporte(pet:PetModel){
-     return this.http.post(` ${this.baseUrl}/reporte.json`,pet).pipe(map((resp:any)=>{
-       pet.$key=resp.name;
-       return pet;
-    }));;
+     console.log(pet)
+     return this.http.post(`${this.baseUrl}reporte.json`,pet);
+    //  .pipe(map((resp:any)=>{
+    //    console.log(resp);
+    //    pet.$key=resp.name;
+    //    return pet;
+    // }));
    }
    private crearArreglo(petsObj:object){
      

@@ -75,8 +75,14 @@ this.petService.getAll()
 
     })
   }
-  guardar(formulario:NgForm){
-    console.log(formulario);
-    console.log(this.pets);
-  }
+   initMap(){
+
+    this.petService.getAll()
+    .subscribe(pets=>{
+      console.log(pets);
+      this.mascotass=pets
+      console.log(this.mascotass);}
+    )
+
+  } 
 }

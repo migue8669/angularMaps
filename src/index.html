@@ -6,11 +6,31 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- <script http-equiv="Content-Security-Policy" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNixRXI8jnJ6qZfAmb52WVv3ZOH7RJ5JA&callback=initMap&libraries=&v=weekly" -->
-
-  <!-- type="text/javascript"></script>   -->
+  <!-- <script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHXr1K0fItJzIKlMkFSazmBaDoH94fhTU&libraries=&v=weekly" ></script>    -->
 </head>
 <body>
   <app-root></app-root>
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAkKf9zHtS6B41FQ8AuhMU51ktVHXFj2yI",
+    authDomain: "maps-e7e33.firebaseapp.com",
+    projectId: "maps-e7e33",
+    storageBucket: "maps-e7e33.appspot.com",
+    messagingSenderId: "688674976641",
+    appId: "1:688674976641:web:edfb128f37a385f4bbee80",
+    measurementId: "G-QZQE8R78FR"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </html>

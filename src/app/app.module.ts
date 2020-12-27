@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDHXr1K0fItJzIKlMkFSazmBaDoH94fhTU'
+      apiKey: 'AIzaSyCyOT4nvIe-BTHHxxphnARy5WZssGcju_k'
     }),
     AppRoutingModule,
   ],
