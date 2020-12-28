@@ -1,24 +1,53 @@
-<!-- <form (ngSubmit)="guardar()"> -->
-<agm-map
-  [latitude]="lat"
-  [longitude]="lng"
-  [zoom]="zoom"
-  [mapTypeId]="mapTypeId"
->
-  <agm-marker
+<div class="col-sm-4">
+  <agm-map
     [latitude]="lat"
     [longitude]="lng"
+    [zoom]="zoom"
+    [mapTypeId]="mapTypeId"
   >
-    <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
+    <agm-marker [latitude]="lat" [longitude]="lng">
+      <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
+    </agm-marker>
+    <agm-marker
+      *ngFor="let mascota of mascotass; let i = index"
+      [latitude]="mascota.lat"
+      [longitude]="mascota.long"
+    >
+      <agm-info-window> {{ mascota.reporte }}</agm-info-window>
+    </agm-marker>
+  </agm-map>
+</div>
+<form #myForm="ngForm">
+  <div class="col-xs-3" style="text-align: center">
+    <input
+      type="checkbox"
+      [(ngModel)]="pets.reporte"
+      name="tipoReporte"
+      ng-checked="all"
+    />Pérdida<br />
+    <input
+      type="checkbox"
+      [(ngModel)]="pets.reporte"
+      name="tipoReporte"
+      ng-checked="all"
+    />Abandonado/a<br />
+
+    <textarea
+      type="textArea"
+      [(ngModel)]="pets.reporte"
+      name="reporte"
+      placeholder="Describe los hechos"
+    ></textarea>
+    <br />
+    
+    <button type="button" class="btn btn-light"  (click)="open()">
+      <img  img src="./assets/camara.png"  width="30" height="30" >
+      <!-- Cargar foto -->
+    </button>
  
-</agm-marker>
-<agm-marker *ngFor="let mascota of mascotass let i=index"  [latitude]="mascota.lat" [longitude]="mascota.long"  >
-  <agm-info-window> {{mascota.reporte}}</agm-info-window>
-
-</agm-marker>
-</agm-map>
-
-<button (click)="getCurrentPosition()">Posición</button>
-<input [(ngModel)]="pets.reporte" name="reporte" />
-
-<!-- </form> -->
+    <button type="button" class="btn btn-secondary" (click)="getCurrentPosition()">
+      Guardar
+    </button>
+ 
+  </div>
+</form>

@@ -6,19 +6,26 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { ReduxModule } from './redux/redux.module';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './redux/reducers/app.reducer';
+import { PopUpFotoComponent } from './pop-up-foto/pop-up-foto.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PopUpFotoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    StoreModule.forRoot(reducer),
+
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCyOT4nvIe-BTHHxxphnARy5WZssGcju_k'
+      apiKey: 'AIzaSyDbaTXp_7uUTvGV0KEUQgZqEnLf-YtNiTE'
     }),
     AppRoutingModule,
+    ReduxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

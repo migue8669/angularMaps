@@ -2,3 +2,24 @@ agm-map {
     height: 600px;
     width: 600%;
    }
+   HTML CSSResult Skip Results Iframe
+   EDIT ON
+   .img1{
+     filter: invert(0.4);
+   }
+   .img2{
+     filter: invert(0.4) sepia(1);
+   }
+   .img3{
+     filter: invert(0.4) sepia(1) hue-rotate(20deg);
+   }
+   .img4{
+     filter: invert(0.4) sepia(1) hue-rotate(20deg) saturate(1000%);
+   }
+   .img5{
+       filter: contrast(40%) sepia(1) hue-rotate(20deg) saturate(1000%);
+   }
+   
+   .box{
+     background: black;
+   }
