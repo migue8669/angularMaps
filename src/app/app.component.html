@@ -20,16 +20,16 @@
 <form #myForm="ngForm">
   <div class="col-xs-3" style="text-align: center">
     <input
+      id="checkPerdida"
       type="checkbox"
-      [(ngModel)]="pets.reporte"
-      name="tipoReporte"
-      ng-checked="all"
+      [(ngModel)]="opcion1"
+      name="check"
     />Pérdida<br />
     <input
+      id="checkAbandono"
       type="checkbox"
-      [(ngModel)]="pets.reporte"
-      name="tipoReporte"
-      ng-checked="all"
+      [(ngModel)]="opcion2"
+      name="check"
     />Abandonado/a<br />
 
     <textarea
@@ -39,15 +39,73 @@
       placeholder="Describe los hechos"
     ></textarea>
     <br />
-    
-    <button type="button" class="btn btn-light"  (click)="open()">
-      <img  img src="./assets/camara.png"  width="30" height="30" >
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >
+      <img img src="./assets/camara.png" width="30" height="30" />
       <!-- Cargar foto -->
     </button>
- 
-    <button type="button" class="btn btn-secondary" (click)="getCurrentPosition()">
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="getCurrentPosition()"
+    >
       Guardar
     </button>
- 
   </div>
+  <div class="card" style="width:25rem">
+    <div class="card-body">
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="text-center">
+      <img
+        [src]="imgSrc"
+        width="150px"
+        height="150px"
+        (click)="fileUploader.click()"
+      />
+    </div>
+    <div class="form-group">
+      <label>Seleccione foto</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="form-control"
+        #fileUploader
+        (change)="showPreview($event)"
+      />
+      <!-- <input type="file" accept="image/*" class="form-control" #fileUploader formControlName="imageUrl"
+        (change)="showPreview($event)"> -->
+    </div>
+  </div>
+</div>
+</div>
+  <!-- <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div> -->
 </form>
