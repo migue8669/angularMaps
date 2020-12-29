@@ -22,7 +22,7 @@ import { PopUpFotoComponent } from './pop-up-foto/pop-up-foto.component';
     StoreModule.forRoot(reducer),
 
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDbaTXp_7uUTvGV0KEUQgZqEnLf-YtNiTE'
+      apiKey: 'AIzaSyAtiYd4amCt0El9P0Ft0JOllAXmQOH7DAI'
     }),
     AppRoutingModule,
     ReduxModule,
