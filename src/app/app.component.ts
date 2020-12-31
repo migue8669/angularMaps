@@ -20,7 +20,8 @@ import * as fromStore from './redux';
 })
 export class AppComponent implements OnInit {
   [x: string]: any;
-
+  opcion1=false;
+  opcion2=false;
   lat: number;
   lng: number;
   zoom: number;
@@ -29,7 +30,10 @@ export class AppComponent implements OnInit {
   pets: PetModel = new PetModel();
   @Input() mascotass: PetModel[] = [];
   markers: PetModel[] = [];
-
+  value: string;
+  selectedImage: any = null;
+  imgSrc: string="";
+  modal:boolean=true;
   constructor(
     private store: Store<fromStore.AppState>,
     private petService: FirebaseService,
@@ -40,6 +44,7 @@ export class AppComponent implements OnInit {
     this.zoom = 5;
     this.mapTypeId = 'hybrid';
     this.located = false;
+    this.value=""
   }
   async ngOnInit() {
     // this.store.dispatch(new fromStore.LoadCustomer());
@@ -70,6 +75,7 @@ export class AppComponent implements OnInit {
       this.mascotass = pets;
       console.log(this.mascotass);
     });
+    
 
     //this.petService.getAll().then(pets=>{this.mascotas=pets}).catch(error=>console.log(error));
   }
@@ -84,7 +90,15 @@ export class AppComponent implements OnInit {
   //   }
   // }
   getCurrentPosition() {
+
     navigator.geolocation.getCurrentPosition((position) => {
+      if(this.opcion1){
+        this.pets.tipoReporte="perdida"
+      }
+      if(this.opcion2){
+        this.pets.tipoReporte="abandono"
+      }
+      
       this.pets.lat = position.coords.latitude;
       // this.lat=position.coords.latitude;
       this.pets.long = position.coords.longitude;
@@ -105,7 +119,27 @@ export class AppComponent implements OnInit {
       console.log(this.mascotass);
     });
   }
-  open() {
-    this.modalService.open("a");
+
+  showPreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+      this.pets.foto=this.selectedImage;
+      console.log(this.pets.foto);
+    }
+    else {
+      this.imgSrc = "src/assets/image_placeholder.jpg";
+      this.selectedImage = null;
+    }
+  }
+
+  guardar(){
+   this.modal=  this.modal!=this.modal;
+  // this.modalService.dismissAll("exampleModal")
+  this.pets.foto=this.selectedImage;
+  console.log(this.pets.foto);
+  console.log(this.modal)
   }
 }

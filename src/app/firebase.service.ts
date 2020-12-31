@@ -10,7 +10,8 @@ export class FirebaseService {
   baseUrl:string;
 
   constructor(private http:HttpClient) {
-    this.baseUrl='https://maps-e7e33-default-rtdb.firebaseio.com/'
+    // this.baseUrl='https://maps-e7e33-default-rtdb.firebaseio.com/'
+   this.baseUrl='https://mytodolist-28b77.firebaseio.com/'
    }
    getAll(){
     // return this.http.get<any[]>(this.baseUrl).toPromise();

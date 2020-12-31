@@ -23,3 +23,11 @@ agm-map {
    .box{
      background: black;
    }
+
+   .modal-blue .modal-backdrop {
+    background-color: #0000ff;
+    }
+    
+    .modal-white .modal-backdrop {
+    background-color: #ffffff;
+    }

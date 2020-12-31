@@ -18,11 +18,12 @@ import { PopUpFotoComponent } from './pop-up-foto/pop-up-foto.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    
     FormsModule,
-    StoreModule.forRoot(reducer),
+     StoreModule.forRoot(reducer),
 
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAtiYd4amCt0El9P0Ft0JOllAXmQOH7DAI'
+      apiKey: 'AIzaSyBD5SGJTkfxcXf4tDSKJcTbaIL04lKY7GY'
     }),
     AppRoutingModule,
     ReduxModule,
