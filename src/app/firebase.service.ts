@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PetModel } from './pet-model/pet.model';
-import { map, catchError } from 'rxjs/operators'
+import { map, catchError } from 'rxjs/operators';
+import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
+import{Observable } from 'rxjs';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+petsCollection?: AngularFirestoreCollection<PetModel>;
+petsFotos?:Observable<PetModel>;
 
   baseUrl:string;
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,   private storage: AngularFireStorage) {
+    
     // this.baseUrl='https://maps-e7e33-default-rtdb.firebaseio.com/'
    this.baseUrl='https://mytodolist-28b77.firebaseio.com/'
    }
@@ -17,6 +23,18 @@ export class FirebaseService {
     // return this.http.get<any[]>(this.baseUrl).toPromise();
       return this.http.get(`${this.baseUrl}reporte.json`).pipe(map(this.crearArreglo));
    }
+   getPet(id:string){
+     return this.http.get( `${this.baseUrl}reporte/${id}.json`);
+   }
+
+   public tareaCloudStorage(nombreArchivo: string, datos: any) {
+    return this.storage.upload(nombreArchivo, datos);
+  }
+ //Referencia del archivo
+ public referenciaCloudStorage(nombreArchivo: any) {
+
+  return this.storage.ref(nombreArchivo);
+}
    crearReporte(pet:PetModel){
      console.log(pet)
      return this.http.post(`${this.baseUrl}reporte.json`,pet);
@@ -26,6 +44,12 @@ export class FirebaseService {
     //    return pet;
     // }));
    }
+   subirArchivo(nombreDelArchivo: string, datos: any): AngularFireUploadTask {
+    return this.storage.upload('fotos/' + nombreDelArchivo, datos);
+    }
+    referenciaDelArchivo(nombreArchivo: string): AngularFireStorageReference {
+    return this.storage.ref('fotos/' + nombreArchivo);
+    }
    private crearArreglo(petsObj:object){
      
    const heroes:PetModel[]=[];

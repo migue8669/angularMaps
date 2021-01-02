@@ -13,7 +13,11 @@
       [latitude]="mascota.lat"
       [longitude]="mascota.long"
     >
-      <agm-info-window> {{ mascota.reporte }}</agm-info-window>
+      <agm-info-window>
+        <img width='254' height='355' [src]="mascota.foto">
+
+        {{ mascota.reporte }}</agm-info-window>
+      
     </agm-marker>
   </agm-map>
 </div>
@@ -74,14 +78,14 @@
               </button>
               <!-- <h4 class="modal-title">Modal Header</h4> -->
 
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <img
                   [src]="imgSrc"
                   width="150px"
                   height="150px"
                   (click)="fileUploader.click()"
                 />
-              </div>
+              </div> -->
       
               <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
       
@@ -90,8 +94,35 @@
             <div class="modal-body">
 
               <div class="form-group">
+<div class="contenedor">
+  <div class="contenedor_formulario">
+    <h1 class="is-size-1">Subir archivos a Cloud Storage</h1>
+    <p class="download" *ngIf="finalizado">URL de descarga: <a href="{{ URLPublica }}" target="_blank">Descargar</a></p>
+    <form [formGroup]="archivoForm" (ngSubmit)="guardar($event)">
+  
+        
+      <div class="file has-name is-boxed">
+        <label class="file-label">
+          <input class="file-input" type="file" formControlName="archivo" (change)="cambioArchivo($event)">
+          <span class="file-cta">
+            <span class="file-label">
+              Elegir un archivo…
+            </span>
+          </span>
+          <span class="file-name">
+            {{ mensajeArchivo }}
+          </span>
+        </label>
+      </div>
+      <hr>
+      <progress class="progress-bar" [value]="porcentaje"></progress>
+      <!-- <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success" value="{{porcentaje}}" max="100">{{porcentaje}}%</progress> -->
+      <button [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
+    </form>
+  </div>
+</div>
                 <!-- <label>Seleccione una foto</label> -->
-                <input
+                <!-- <input
                   type="file"
                   accept="image/*"
                   class="form-control"
@@ -111,7 +142,9 @@
                 <button type="submit" class="btn btn-success" (click)="guardar()">Guardar</button>
               </div>
       
-              </button>
+              </button> -->
+
+              </div>
             </div>
           </div>
           <!-- <div
