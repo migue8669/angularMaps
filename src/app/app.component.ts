@@ -13,10 +13,9 @@ import { FirebaseService } from './firebase.service';
 import { PetModel } from './pet-model/pet.model';
 import * as fromStore from './redux';
 import { AngularFireStorage } from '@angular/fire/storage';
-import{finalize} from 'rxjs/operators'
+import { finalize } from 'rxjs/operators';
 import { fromEventPattern, Observable, pipe } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-root',
@@ -39,19 +38,18 @@ export class AppComponent implements OnInit {
   selectedImage: any = null;
   imgSrc: string = '';
   modal: boolean = true;
-   porcentaje = 0;
-    nombreArchivo = '';
-     datosFormulario = new FormData();
-      finalizado = false;
-       mensajeArchivo = 'No hay un archivo seleccionado';
-        URLPublica = '';
-        src = '';
+  porcentaje = 0;
+  nombreArchivo = '';
+  datosFormulario = new FormData();
+  finalizado = false;
+  mensajeArchivo = 'No hay un archivo seleccionado';
+  URLPublica = '';
+  src = '';
 
   constructor(
     private store: Store<fromStore.AppState>,
     private petService: FirebaseService,
-    private route: ActivatedRoute,
-
+    private route: ActivatedRoute
   ) {
     this.lat = 0;
     this.lng = 0;
@@ -64,29 +62,9 @@ export class AppComponent implements OnInit {
     archivo: new FormControl(null, Validators.required),
   });
   async ngOnInit() {
-
     // this.store.dispatch(new fromStore.LoadCustomer());
 
-    this.markers.push(
-      {
-        lat: 51.673858,
-        long: 7.815982,
-        reporte: 'A',
-        tipoReporte: 'true',
-      },
-      {
-        lat: 51.373858,
-        long: 7.215982,
-        reporte: 'B',
-        tipoReporte: 'false',
-      },
-      {
-        lat: 51.723858,
-        long: 7.895982,
-        reporte: 'C',
-        tipoReporte: 'true',
-      }
-    );
+
 
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);
@@ -107,10 +85,10 @@ export class AppComponent implements OnInit {
       }
 
       this.pets.lat = position.coords.latitude;
-      // this.lat=position.coords.latitude;
       this.pets.long = position.coords.longitude;
+      this.pets.foto = this.URLPublica;
       console.log(this.pets);
-      this.pets.foto = this.selectedImage.name;
+
       this.petService.crearReporte(this.pets).subscribe((respuesta) => {
         console.log(respuesta);
         this.pets = respuesta;
@@ -141,56 +119,59 @@ export class AppComponent implements OnInit {
       this.selectedImage = null;
     }
   }
-  public cambioArchivo(event:any) {
+  public cambioArchivo(event: any) {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
         this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
         this.nombreArchivo = event.target.files[i];
         this.datosFormulario.delete('archivo');
-        this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
+        this.datosFormulario.append(
+          'archivo',
+          event.target.files[i],
+          event.target.files[i].name
+        );
       }
     } else {
       this.mensajeArchivo = 'No hay un archivo seleccionado';
     }
   }
-  public guardar(event:any): void  {
+  public guardar(event: any): void {
     this.modal = this.modal != this.modal;
     // this.modalService.dismissAll("exampleModal")
 
-  for (let i = 0; i < event.target.files.length; i++) {
-    var archivo = event.target.files[0];
-
-  }
-
+    for (let i = 0; i < event.target.files.length; i++) {
+      var archivo = event.target.files[0];
+    }
 
     this.porcentaje = 0;
-   // const archivo = event.target.files[0];
-    console.log(archivo)
-    if (!archivo) { return; }
+    // const archivo = event.target.files[0];
+    console.log(archivo);
+    if (!archivo) {
+      return;
+    }
     const nombreDelArchivo = archivo.name; // Sustituir por un id
     const subida = this.petService.subirArchivo(nombreDelArchivo, archivo);
-    subida.percentageChanges().subscribe((porcentaje:any) => this.porcentaje = porcentaje);
+    subida
+      .percentageChanges()
+      .subscribe((porcentaje: any) => (this.porcentaje = porcentaje));
     subida.then((snapshot: any) => {
-    const referencia = this.petService.referenciaDelArchivo(nombreDelArchivo);
-    referencia.getDownloadURL().subscribe((URL: any) => this.src = URL);
-    console.log(referencia);
-
+      const referencia = this.petService.referenciaDelArchivo(nombreDelArchivo);
+      referencia.getDownloadURL().subscribe((URL: any) => (this.src = URL));
+      console.log(referencia);
     });
 
-
-     console.log(subida);
+    console.log(subida);
     console.log(event);
-
   }
 
   public subirArchivo() {
     let archivo = this.datosFormulario.get('archivo');
-    console.log(this.nombreArchivo)
+    console.log(this.nombreArchivo);
     let referencia = this.petService.referenciaDelArchivo(this.nombreArchivo);
     let tarea = this.petService.subirArchivo(this.nombreArchivo, archivo);
 
     //Cambia el porcentaje
-    tarea.percentageChanges().subscribe((porcentaje:any) => {
+    tarea.percentageChanges().subscribe((porcentaje: any) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
         this.finalizado = true;
@@ -199,8 +180,7 @@ export class AppComponent implements OnInit {
 
     referencia.getDownloadURL().subscribe((URL) => {
       this.URLPublica = URL;
-      console.log(this.URLPublica)
+      console.log(this.URLPublica);
     });
   }
 }
-

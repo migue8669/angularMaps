@@ -9,14 +9,14 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
   providedIn: 'root'
 })
 export class FirebaseService {
-petsCollection?: AngularFirestoreCollection<PetModel>;
+// petsCollection?: AngularFirestoreCollection<PetModel>;
 petsFotos?:Observable<PetModel>;
 
   baseUrl:string;
 
   constructor(private http:HttpClient,   private storage: AngularFireStorage) {
     
-    // this.baseUrl='https://maps-e7e33-default-rtdb.firebaseio.com/'
+//   this.baseUrl='https://maps-e7e33-default-rtdb.firebaseio.com/'
    this.baseUrl='https://mytodolist-28b77.firebaseio.com/'
    }
    getAll(){
@@ -37,21 +37,24 @@ petsFotos?:Observable<PetModel>;
 }
    crearReporte(pet:PetModel){
      console.log(pet)
-     return this.http.post(`${this.baseUrl}reporte.json`,pet);
-    //  .pipe(map((resp:any)=>{
-    //    console.log(resp);
-    //    pet.$key=resp.name;
-    //    return pet;
-    // }));
+     JSON.stringify(pet);
+     console.log(pet)
+
+     return this.http.post(`${this.baseUrl}reporte.json`,pet)
+     .pipe(map((resp:any)=>{
+       console.log(resp);
+       pet.$key=resp.name;
+       return pet;
+    })
+    );
    }
    subirArchivo(nombreDelArchivo: string, datos: any): AngularFireUploadTask {
     return this.storage.upload('fotos/' + nombreDelArchivo, datos);
     }
     referenciaDelArchivo(nombreArchivo: string): AngularFireStorageReference {
-    return this.storage.ref('fotos/' + nombreArchivo);
+    return this.storage.ref('fotos/'  + nombreArchivo);
     }
    private crearArreglo(petsObj:object){
-     
    const heroes:PetModel[]=[];
    if(petsObj===null){return [];}
    Object.keys(petsObj).forEach(key=>{
