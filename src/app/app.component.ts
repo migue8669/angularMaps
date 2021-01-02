@@ -96,16 +96,7 @@ export class AppComponent implements OnInit {
 
     //this.petService.getAll().then(pets=>{this.mascotas=pets}).catch(error=>console.log(error));
   }
-  // addCustomer(myForm : NgForm){
-  //   let userId = new Date().getTime();
-  //   let newCustomer = myForm.value;
-  //   newCustomer['id'] = userId;
 
-  //   if(newCustomer.name !== null && newCustomer !== undefined){
-  //       this.store.dispatch(new fromStore.AddCustomer(newCustomer));
-  //       this.closeModal(myForm);
-  //   }
-  // }
   getCurrentPosition() {
     navigator.geolocation.getCurrentPosition((position) => {
       if (this.opcion1) {
@@ -186,26 +177,30 @@ export class AppComponent implements OnInit {
 
     });
 
-    // this.pets.foto = this.selectedImage;
 
-    // console.log(this.pets.foto);
-    // let archivo = this.datosFormulario.get('archivo');
-    // let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
-    // let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
-
-    // // Cambia el porcentaje
-    // tarea.percentageChanges().subscribe((porcentaje: any) => {
-    //   this.porcentaje = Math.round(porcentaje);
-    //   if (this.porcentaje == 100) {
-    //     this.finalizado = true;
-    //   }
-    // });
-
-    // referencia.getDownloadURL().subscribe((URL) => {
-    //   this.URLPublica = URL;
-    // });
      console.log(subida);
     console.log(event);
 
   }
+
+  public subirArchivo() {
+    let archivo = this.datosFormulario.get('archivo');
+    console.log(this.nombreArchivo)
+    let referencia = this.petService.referenciaDelArchivo(this.nombreArchivo);
+    let tarea = this.petService.subirArchivo(this.nombreArchivo, archivo);
+
+    //Cambia el porcentaje
+    tarea.percentageChanges().subscribe((porcentaje:any) => {
+      this.porcentaje = Math.round(porcentaje);
+      if (this.porcentaje == 100) {
+        this.finalizado = true;
+      }
+    });
+
+    referencia.getDownloadURL().subscribe((URL) => {
+      this.URLPublica = URL;
+      console.log(this.URLPublica)
+    });
+  }
 }
+

@@ -98,7 +98,7 @@
   <div class="contenedor_formulario">
     <h1 class="is-size-1">Subir archivos a Cloud Storage</h1>
     <p class="download" *ngIf="finalizado">URL de descarga: <a href="{{ URLPublica }}" target="_blank">Descargar</a></p>
-    <form [formGroup]="archivoForm" (ngSubmit)="guardar($event)">
+    <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
   
         
       <div class="file has-name is-boxed">
