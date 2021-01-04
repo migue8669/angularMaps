@@ -16,6 +16,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { fromEventPattern, Observable, pipe } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -119,22 +120,7 @@ export class AppComponent implements OnInit {
       this.selectedImage = null;
     }
   }
-  public cambioArchivo(event: any) {
-    if (event.target.files.length > 0) {
-      for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
-        this.nombreArchivo = event.target.files[i];
-        this.datosFormulario.delete('archivo');
-        this.datosFormulario.append(
-          'archivo',
-          event.target.files[i],
-          event.target.files[i].name
-        );
-      }
-    } else {
-      this.mensajeArchivo = 'No hay un archivo seleccionado';
-    }
-  }
+
   public guardar(event: any): void {
     this.modal = this.modal != this.modal;
     // this.modalService.dismissAll("exampleModal")
@@ -164,23 +150,73 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
 
+  // public subirArchivo() {
+  //   let archivo = this.datosFormulario.get('archivo');
+  //   console.log(this.nombreArchivo);
+  //   let referencia = this.petService.referenciaDelArchivo(this.nombreArchivo);
+  //   let tarea = this.petService.subirArchivo(this.nombreArchivo, archivo);
+
+  //   //Cambia el porcentaje
+  //   tarea.percentageChanges().subscribe((porcentaje: any) => {
+  //     this.porcentaje = Math.round(porcentaje);
+  //     if (this.porcentaje == 100) {
+  //       this.finalizado = true;
+  //     }
+  //   });
+
+  //   referencia.getDownloadURL().subscribe((URL) => {
+  //     this.URLPublica = URL;
+  //     console.log(this.URLPublica);
+  //   });
+  // }
+  // public cambioArchivo(event: any) {
+  //   if (event.target.files.length > 0) {
+  //     for (let i = 0; i < event.target.files.length; i++) {
+  //       this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
+  //       this.nombreArchivo = event.target.files[i];
+  //       this.datosFormulario.delete('archivo');
+  //       this.datosFormulario.append(
+  //         'archivo',
+  //         event.target.files[i],
+  //         event.target.files[i].name
+  //       );
+  //     }
+  //   } else {
+  //     this.mensajeArchivo = 'No hay un archivo seleccionado';
+  //   }
+  // }
+  public cambioArchivo(event:any) {
+    if (event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
+        this.nombreArchivo = event.target.files[i].name;
+        this.datosFormulario.delete('archivo');
+        this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
+      }
+    } else {
+      this.mensajeArchivo = 'No hay un archivo seleccionado';
+    }
+  }
+
+  //Sube el archivo a Cloud Storage
   public subirArchivo() {
     let archivo = this.datosFormulario.get('archivo');
-    console.log(this.nombreArchivo);
-    let referencia = this.petService.referenciaDelArchivo(this.nombreArchivo);
-    let tarea = this.petService.subirArchivo(this.nombreArchivo, archivo);
+    let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
+    let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
 
     //Cambia el porcentaje
-    tarea.percentageChanges().subscribe((porcentaje: any) => {
+    tarea.percentageChanges().subscribe((porcentaje:any) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
         this.finalizado = true;
       }
     });
 
-    referencia.getDownloadURL().subscribe((URL) => {
+    referencia.getDownloadURL().subscribe((URL: any) => {
       this.URLPublica = URL;
-      console.log(this.URLPublica);
+      this.selectedImage=URL;
+      console.log(this.selectedImage)
     });
   }
+
 }
