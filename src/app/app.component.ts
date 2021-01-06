@@ -11,7 +11,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { FirebaseService } from './firebase.service';
 import { PetModel } from './pet-model/pet.model';
-import * as fromStore from './redux';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { fromEventPattern, Observable, pipe } from 'rxjs';
@@ -48,7 +47,6 @@ export class AppComponent implements OnInit {
   src = '';
 
   constructor(
-    private store: Store<fromStore.AppState>,
     private petService: FirebaseService,
     private route: ActivatedRoute
   ) {
@@ -76,7 +74,7 @@ export class AppComponent implements OnInit {
     //this.petService.getAll().then(pets=>{this.mascotas=pets}).catch(error=>console.log(error));
   }
 
-  getCurrentPosition() {
+  primerReporte() {
     navigator.geolocation.getCurrentPosition((position) => {
       if (this.opcion1) {
         this.pets.tipoReporte = 'perdida';
@@ -84,7 +82,7 @@ export class AppComponent implements OnInit {
       if (this.opcion2) {
         this.pets.tipoReporte = 'abandono';
       }
-
+      
       this.pets.lat = position.coords.latitude;
       this.pets.long = position.coords.longitude;
       this.pets.foto = this.URLPublica;
@@ -99,92 +97,68 @@ export class AppComponent implements OnInit {
       this.located = true;
     });
   }
+
+  segundoReporte(reporte:any){
+    console.log(reporte.$key)
+    console.log(reporte)
+this.petService.actualizarReporte(reporte).subscribe((respuesta)=>{
+  console.log(respuesta);
+})
+  }
+
   initMap() {
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);
       this.mascotass = pets;
       console.log(this.mascotass);
     });
+
+    
   }
 
-  showPreview(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => (this.imgSrc = e.target.result);
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
-      this.pets.foto = this.selectedImage;
-      console.log(this.pets.foto);
-    } else {
-      this.imgSrc = './assets/image_placeholder.jpg';
-      this.selectedImage = null;
-    }
-  }
-
-  public guardar(event: any): void {
-    this.modal = this.modal != this.modal;
-    // this.modalService.dismissAll("exampleModal")
-
-    for (let i = 0; i < event.target.files.length; i++) {
-      var archivo = event.target.files[0];
-    }
-
-    this.porcentaje = 0;
-    // const archivo = event.target.files[0];
-    console.log(archivo);
-    if (!archivo) {
-      return;
-    }
-    const nombreDelArchivo = archivo.name; // Sustituir por un id
-    const subida = this.petService.subirArchivo(nombreDelArchivo, archivo);
-    subida
-      .percentageChanges()
-      .subscribe((porcentaje: any) => (this.porcentaje = porcentaje));
-    subida.then((snapshot: any) => {
-      const referencia = this.petService.referenciaDelArchivo(nombreDelArchivo);
-      referencia.getDownloadURL().subscribe((URL: any) => (this.src = URL));
-      console.log(referencia);
-    });
-
-    console.log(subida);
-    console.log(event);
-  }
-
-  // public subirArchivo() {
-  //   let archivo = this.datosFormulario.get('archivo');
-  //   console.log(this.nombreArchivo);
-  //   let referencia = this.petService.referenciaDelArchivo(this.nombreArchivo);
-  //   let tarea = this.petService.subirArchivo(this.nombreArchivo, archivo);
-
-  //   //Cambia el porcentaje
-  //   tarea.percentageChanges().subscribe((porcentaje: any) => {
-  //     this.porcentaje = Math.round(porcentaje);
-  //     if (this.porcentaje == 100) {
-  //       this.finalizado = true;
-  //     }
-  //   });
-
-  //   referencia.getDownloadURL().subscribe((URL) => {
-  //     this.URLPublica = URL;
-  //     console.log(this.URLPublica);
-  //   });
-  // }
-  // public cambioArchivo(event: any) {
-  //   if (event.target.files.length > 0) {
-  //     for (let i = 0; i < event.target.files.length; i++) {
-  //       this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
-  //       this.nombreArchivo = event.target.files[i];
-  //       this.datosFormulario.delete('archivo');
-  //       this.datosFormulario.append(
-  //         'archivo',
-  //         event.target.files[i],
-  //         event.target.files[i].name
-  //       );
-  //     }
+  // showPreview(event: any) {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => (this.imgSrc = e.target.result);
+  //     reader.readAsDataURL(event.target.files[0]);
+  //     this.selectedImage = event.target.files[0];
+  //     this.pets.foto = this.selectedImage;
+  //     console.log(this.pets.foto);
   //   } else {
-  //     this.mensajeArchivo = 'No hay un archivo seleccionado';
+  //     this.imgSrc = './assets/image_placeholder.jpg';
+  //     this.selectedImage = null;
   //   }
   // }
+
+  // public guardar(event: any): void {
+  //   this.modal = this.modal != this.modal;
+  //   // this.modalService.dismissAll("exampleModal")
+
+  //   for (let i = 0; i < event.target.files.length; i++) {
+  //     var archivo = event.target.files[0];
+  //   }
+
+  //   this.porcentaje = 0;
+  //   // const archivo = event.target.files[0];
+  //   console.log(archivo);
+  //   if (!archivo) {
+  //     return;
+  //   }
+  //   const nombreDelArchivo = archivo.name; // Sustituir por un id
+  //   const subida = this.petService.subirArchivo(nombreDelArchivo, archivo);
+  //   subida
+  //     .percentageChanges()
+  //     .subscribe((porcentaje: any) => (this.porcentaje = porcentaje));
+  //   subida.then((snapshot: any) => {
+  //     const referencia = this.petService.referenciaDelArchivo(nombreDelArchivo);
+  //     referencia.getDownloadURL().subscribe((URL: any) => (this.src = URL));
+  //     console.log(referencia);
+  //   });
+
+  //   console.log(subida);
+  //   console.log(event);
+  // }
+
   public cambioArchivo(event:any) {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {

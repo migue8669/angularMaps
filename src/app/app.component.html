@@ -1,28 +1,9 @@
-<div class="col-sm-4">
-  <agm-map
-    [latitude]="lat"
-    [longitude]="lng"
-    [zoom]="zoom"
-    [mapTypeId]="mapTypeId"
-  >
-    <agm-marker [latitude]="lat" [longitude]="lng">
-      <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
-    </agm-marker>
-    <agm-marker
-      *ngFor="let mascota of mascotass; let i = index"
-      [latitude]="mascota.lat"
-      [longitude]="mascota.long"
-    >
-      <agm-info-window>
-        <img width="150" height="150" [src]="mascota.foto" />
 
-        {{ mascota.reporte }}</agm-info-window
-      >
-    </agm-marker>
-  </agm-map>
-</div>
-<form #myForm="ngForm">
+
+ <form #myForm="ngForm" class="containerDiv">
   <div class="col-xs-3" style="text-align: center">
+    <h1>Registro de animales perdidos o abandonados</h1>
+    <h6>Elige el tipo de reporte que realizarás</h6>
     <input
       id="checkPerdida"
       type="checkbox"
@@ -34,9 +15,10 @@
       type="checkbox"
       [(ngModel)]="opcion2"
       name="check"
-    />Abandonado/a<br />
+    />Abandono<br />
 
     <textarea
+    class="col-4"
       type="textArea"
       [(ngModel)]="pets.reporte"
       name="reporte"
@@ -44,16 +26,12 @@
     ></textarea>
     <br />
 
-    <!-- <button
-      type="button"
-      class="btn btn-light"
-      data-toggle="modal"
-      data-target="#exampleModal" -->
+
     <button
       type="button"
       class="btn btn-light"
       data-toggle="modal"
-      data-target="#myModal"
+      data-target="#myModalPicture"
     >
       <img img src="./assets/camara.png" width="30" height="30" />
       <!-- Cargar foto -->
@@ -62,12 +40,12 @@
     <button
       type="button"
       class="btn btn-secondary"
-      (click)="getCurrentPosition()"
+      (click)="primerReporte()"
     >
       Guardar
     </button>
   </div>
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModalPicture" role="dialog">
     <div class="modal-dialog">
       <div class="card" style="width: 25rem">
         <div class="card-body">
@@ -77,28 +55,56 @@
                 &times;
               </button>
             </div>
-           
+
             <div class="contenedor">
               <div class="contenedor_formulario">
-                <h1 class="is-size-1">Subir archivos a Cloud Storage</h1>
-                <p class="download" *ngIf="finalizado">URL de descarga: <a href="{{ URLPublica }}" target="_blank">Descargar</a></p>
+                <h1 class="is-size-1">Subir foto</h1>
+                <!-- <p class="download" *ngIf="finalizado">
+                  URL de descarga:
+                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
+                </p> -->
                 <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
                   <div class="file has-name is-boxed">
                     <label class="file-label">
-                      <input class="file-input" type="file" formControlName="archivo" (change)="cambioArchivo($event)">
-                      <span class="file-cta">
-                        <span class="file-label">
-                          Elegir un archivo…
-                        </span>
-                      </span>
+                      <input
+                        class="file-input"
+                        type="file"
+                        formControlName="archivo"
+                        (change)="cambioArchivo($event)"
+                      />
+                      <!-- <span class="file-cta">
+                        <span class="file-label"> Elegir un archivo… </span>
+                      </span> -->
                       <span class="file-name">
                         {{ mensajeArchivo }}
                       </span>
                     </label>
                   </div>
-                  <hr>
-                  <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success" value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
-                  <button [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
+                  <hr />
+                  <progress
+                    *ngIf="porcentaje > 0 && porcentaje < 100"
+                    class="progress is-large is-success"
+                    value="{{ porcentaje }}"
+                    max="100"
+                  >
+                    {{ porcentaje }}%
+                  </progress>
+                  <button
+                  class="btn btn-primary"
+                    [ngClass]="{
+                      button: true,
+                      'is-success': true,
+                      'is-large': true,
+                      'is-loading': porcentaje > 0 && porcentaje < 100
+                    }"
+                    [disabled]="
+                      !archivoForm.valid && porcentaje > 0 && porcentaje < 100
+                    "
+                  >
+                    Subir archivo
+                  </button>
+                    <!-- <input class="btnCamera" type="file"  accept="image/*" capture="camera"> -->
+
                 </form>
               </div>
             </div>
@@ -107,22 +113,69 @@
       </div>
     </div>
   </div>
-</form>
 
-<!-- <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+</form>
+<div>
+  <div class="map-responsive">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [mapTypeId]="mapTypeId"
+    >
+      <agm-marker [latitude]="lat" [longitude]="lng">
+        <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
+      </agm-marker>
+      <agm-marker
+        *ngFor="let mascota of mascotass; let i = index"
+        [latitude]="mascota.lat"
+        [longitude]="mascota.long"
+        [id]="mascota.$key"
+
+        >
+        <agm-info-window >
+          <img width="200" height="200" [src]="mascota.foto"   />
+          <br/>
+          <ul class="navbar">
+          <li>
+            {{ mascota.tipoReporte }}
+        <li>
+            {{ mascota.reporte }}
+          <br/>
+          </ul>
+          <textarea
+          
+          class="col-4"
+            type="textArea"
+            [(ngModel)]="mascota.segundoReporte"
+            name="segundoReporte"
+            placeholder="Describe los hechos"
+            ></textarea>
+            <br/>   
+        <button
+        (click)="segundoReporte(mascota)"
+
+        >guardar</button>
+        
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+   </div>
+  </div>
+    <div class="modal fade" id="myModalRespuesta" role="dialog">
+    <div class="modal-dialog">
+      <div class="card" style="width: 25rem">
+        <div class="card-body">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+      
+          </div>
         </div>
       </div>
-    </div> -->
+    </div>
+  </div>

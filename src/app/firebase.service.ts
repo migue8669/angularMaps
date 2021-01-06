@@ -36,12 +36,12 @@ petsFotos?:Observable<PetModel>;
   return this.storage.ref(nombreArchivo);
 }
 
-subirArchivo(nombreDelArchivo: string, datos: any): AngularFireUploadTask {
-  return this.storage.upload("fotos/"  + nombreDelArchivo, datos);
-  }
-  referenciaDelArchivo(nombreArchivo: string): AngularFireStorageReference {
-  return this.storage.ref("fotos/"   + nombreArchivo);
-  }
+// subirArchivo(nombreDelArchivo: string, datos: any): AngularFireUploadTask {
+//   return this.storage.upload("fotos/"  + nombreDelArchivo, datos);
+//   }
+//   referenciaDelArchivo(nombreArchivo: string): AngularFireStorageReference {
+//   return this.storage.ref("fotos/"   + nombreArchivo);
+//   }
    crearReporte(pet:PetModel){
     //  console.log(pet)
     //  JSON.stringify(pet);
@@ -54,6 +54,22 @@ subirArchivo(nombreDelArchivo: string, datos: any): AngularFireUploadTask {
        return pet;
     })
     );
+   }
+   actualizarReporte(pet:any){
+      console.log(pet)
+    //  JSON.stringify(pet);
+    //  console.log(pet)
+   const petTemporal={
+     ...pet
+   }
+
+   delete(petTemporal.$key);
+   console.log(pet)
+   console.log(petTemporal)
+
+     return this.http.put(`${this.baseUrl}/reporte/${pet.$key}.json`,petTemporal) ;
+    
+    
    }
 
    private crearArreglo(petsObj:object){
