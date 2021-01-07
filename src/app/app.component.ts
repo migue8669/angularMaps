@@ -13,7 +13,7 @@ import { FirebaseService } from './firebase.service';
 import { PetModel } from './pet-model/pet.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { fromEventPattern, Observable, pipe } from 'rxjs';
+import { fromEventPattern, Observable, pipe, Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase';
 
@@ -45,7 +45,9 @@ export class AppComponent implements OnInit {
   mensajeArchivo = 'No hay un archivo seleccionado';
   URLPublica = '';
   src = '';
-
+  valorReporte:any;
+ petActualizacion:PetModel=new PetModel()
+  v:any;
   constructor(
     private petService: FirebaseService,
     private route: ActivatedRoute
@@ -97,13 +99,25 @@ export class AppComponent implements OnInit {
       this.located = true;
     });
   }
-
-  segundoReporte(reporte:any){
-    console.log(reporte.$key)
-    console.log(reporte)
-this.petService.actualizarReporte(reporte).subscribe((respuesta)=>{
-  console.log(respuesta);
-})
+  async openDialog(key:PetModel){
+    this.valorReporte=key;
+    console.log(this.valorReporte)
+this.v=  this.petService.getPet(this.valorReporte).subscribe(
+      resp=>{this.petActualizacion=resp}
+      
+      );
+      console.log(this.v)
+    
+  }
+  segundoReporte(){
+ this.petService.getPet(this.valorReporte).subscribe(
+   resp=>{this.petActualizacion=resp});
+console.log(this.petActualizacion)
+    // console.log(reporte.$
+    // this.pets.$key=this.valorReporte;
+this.petService.actualizarReporte(this.petActualizacion).subscribe((respuesta)=>{
+  console.log(respuesta) 
+});
   }
 
   initMap() {
@@ -116,48 +130,7 @@ this.petService.actualizarReporte(reporte).subscribe((respuesta)=>{
     
   }
 
-  // showPreview(event: any) {
-  //   if (event.target.files && event.target.files[0]) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => (this.imgSrc = e.target.result);
-  //     reader.readAsDataURL(event.target.files[0]);
-  //     this.selectedImage = event.target.files[0];
-  //     this.pets.foto = this.selectedImage;
-  //     console.log(this.pets.foto);
-  //   } else {
-  //     this.imgSrc = './assets/image_placeholder.jpg';
-  //     this.selectedImage = null;
-  //   }
-  // }
 
-  // public guardar(event: any): void {
-  //   this.modal = this.modal != this.modal;
-  //   // this.modalService.dismissAll("exampleModal")
-
-  //   for (let i = 0; i < event.target.files.length; i++) {
-  //     var archivo = event.target.files[0];
-  //   }
-
-  //   this.porcentaje = 0;
-  //   // const archivo = event.target.files[0];
-  //   console.log(archivo);
-  //   if (!archivo) {
-  //     return;
-  //   }
-  //   const nombreDelArchivo = archivo.name; // Sustituir por un id
-  //   const subida = this.petService.subirArchivo(nombreDelArchivo, archivo);
-  //   subida
-  //     .percentageChanges()
-  //     .subscribe((porcentaje: any) => (this.porcentaje = porcentaje));
-  //   subida.then((snapshot: any) => {
-  //     const referencia = this.petService.referenciaDelArchivo(nombreDelArchivo);
-  //     referencia.getDownloadURL().subscribe((URL: any) => (this.src = URL));
-  //     console.log(referencia);
-  //   });
-
-  //   console.log(subida);
-  //   console.log(event);
-  // }
 
   public cambioArchivo(event:any) {
     if (event.target.files.length > 0) {

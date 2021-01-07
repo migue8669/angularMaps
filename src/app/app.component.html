@@ -1,6 +1,4 @@
-
-
- <form #myForm="ngForm" class="containerDiv">
+<form #myForm="ngForm" class="containerDiv">
   <div class="col-xs-3" style="text-align: center">
     <h1>Registro de animales perdidos o abandonados</h1>
     <h6>Elige el tipo de reporte que realizarás</h6>
@@ -14,18 +12,17 @@
       id="checkAbandono"
       type="checkbox"
       [(ngModel)]="opcion2"
-      name="check"
+      name="check1"
     />Abandono<br />
 
     <textarea
-    class="col-4"
+      class="col-4"
       type="textArea"
       [(ngModel)]="pets.reporte"
       name="reporte"
       placeholder="Describe los hechos"
     ></textarea>
     <br />
-
 
     <button
       type="button"
@@ -37,83 +34,10 @@
       <!-- Cargar foto -->
     </button>
 
-    <button
-      type="button"
-      class="btn btn-secondary"
-      (click)="primerReporte()"
-    >
+    <button type="button" class="btn btn-secondary" (click)="primerReporte()">
       Guardar
     </button>
   </div>
-  <div class="modal fade" id="myModalPicture" role="dialog">
-    <div class="modal-dialog">
-      <div class="card" style="width: 25rem">
-        <div class="card-body">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-            </div>
-
-            <div class="contenedor">
-              <div class="contenedor_formulario">
-                <h1 class="is-size-1">Subir foto</h1>
-                <!-- <p class="download" *ngIf="finalizado">
-                  URL de descarga:
-                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
-                </p> -->
-                <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
-                  <div class="file has-name is-boxed">
-                    <label class="file-label">
-                      <input
-                        class="file-input"
-                        type="file"
-                        formControlName="archivo"
-                        (change)="cambioArchivo($event)"
-                      />
-                      <!-- <span class="file-cta">
-                        <span class="file-label"> Elegir un archivo… </span>
-                      </span> -->
-                      <span class="file-name">
-                        {{ mensajeArchivo }}
-                      </span>
-                    </label>
-                  </div>
-                  <hr />
-                  <progress
-                    *ngIf="porcentaje > 0 && porcentaje < 100"
-                    class="progress is-large is-success"
-                    value="{{ porcentaje }}"
-                    max="100"
-                  >
-                    {{ porcentaje }}%
-                  </progress>
-                  <button
-                  class="btn btn-primary"
-                    [ngClass]="{
-                      button: true,
-                      'is-success': true,
-                      'is-large': true,
-                      'is-loading': porcentaje > 0 && porcentaje < 100
-                    }"
-                    [disabled]="
-                      !archivoForm.valid && porcentaje > 0 && porcentaje < 100
-                    "
-                  >
-                    Subir archivo
-                  </button>
-                    <!-- <input class="btnCamera" type="file"  accept="image/*" capture="camera"> -->
-
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </form>
 <div>
   <div class="map-responsive">
@@ -131,51 +55,143 @@
         [latitude]="mascota.lat"
         [longitude]="mascota.long"
         [id]="mascota.$key"
-
-        >
-        <agm-info-window >
-          <img width="200" height="200" [src]="mascota.foto"   />
-          <br/>
+      >
+        <agm-info-window>
+          <img width="200" height="200" [src]="mascota.foto" />
+          <br />
           <ul class="navbar">
-          <li>
-            {{ mascota.tipoReporte }}
-        <li>
-            {{ mascota.reporte }}
-          <br/>
+            <li>
+              {{ mascota.tipoReporte }}
+            </li>
+
+            <li>
+              {{ mascota.reporte }}
+              <br />
+            </li>
           </ul>
-          <textarea
+
+          <!-- <textarea
           
-          class="col-4"
+          class="col-8"
             type="textArea"
             [(ngModel)]="mascota.segundoReporte"
             name="segundoReporte"
             placeholder="Describe los hechos"
-            ></textarea>
-            <br/>   
-        <button
-        (click)="segundoReporte(mascota)"
-
-        >guardar</button>
-        
+            ></textarea>  -->
+          <button
+            type="button"
+            class="btn btn-info btn-lg"
+            data-toggle="modal"
+            data-target="#myModalRespuesta"
+            name="btn-newR"
+            value="mascota.key"
+            (click)="openDialog(mascota.$key)"
+          >
+            Nuevo Reporte
+          </button>
         </agm-info-window>
       </agm-marker>
     </agm-map>
-   </div>
   </div>
-    <div class="modal fade" id="myModalRespuesta" role="dialog">
-    <div class="modal-dialog">
-      <div class="card" style="width: 25rem">
-        <div class="card-body">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-            </div>
+</div>
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+  <div class="modal-dialog">
+    <div class="card" style="width: 25rem">
+      <div class="card-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
 
-      
+            <div class="contenedor">
+              <div class="contenedor_formulario">
+                <h1 class="is-size-1">¿Que sabes de este caso?</h1>
+                <textarea
+                  class="col-8"
+                  type="textArea"
+                  [(ngModel)]="pets.segundoReporte"
+
+                  name="segundoReporte"
+                  placeholder="Describe los hechos"
+                >{{v}}</textarea>
+                <button (click)="segundoReporte()">guardar</button>
+                <!-- <p class="download" *ngIf="finalizado">
+                  URL de descarga:
+                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
+                </p> -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="modal fade" id="myModalPicture" role="dialog">
+  <div class="modal-dialog">
+    <div class="card" style="width: 25rem">
+      <div class="card-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <div class="contenedor">
+            <div class="contenedor_formulario">
+              <h1 class="is-size-1">Subir foto</h1>
+              <!-- <p class="download" *ngIf="finalizado">
+                  URL de descarga:
+                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
+                </p> -->
+              <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
+                <div class="file has-name is-boxed">
+                  <label class="file-label">
+                    <input
+                      class="file-input"
+                      type="file"
+                      formControlName="archivo"
+                      (change)="cambioArchivo($event)"
+                    />
+                    <!-- <span class="file-cta">
+                        <span class="file-label"> Elegir un archivo… </span>
+                      </span> -->
+                    <span class="file-name">
+                      {{ mensajeArchivo }}
+                    </span>
+                  </label>
+                </div>
+                <hr />
+                <progress
+                  *ngIf="porcentaje > 0 && porcentaje < 100"
+                  class="progress is-large is-success"
+                  value="{{ porcentaje }}"
+                  max="100"
+                >
+                  {{ porcentaje }}%
+                </progress>
+                <button
+                  class="btn btn-primary"
+                  [ngClass]="{
+                    button: true,
+                    'is-success': true,
+                    'is-large': true,
+                    'is-loading': porcentaje > 0 && porcentaje < 100
+                  }"
+                  [disabled]="
+                    !archivoForm.valid && porcentaje > 0 && porcentaje < 100
+                  "
+                >
+                  Subir archivo
+                </button>
+                <!-- <input class="btnCamera" type="file"  accept="image/*" capture="camera"> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
