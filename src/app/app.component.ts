@@ -110,12 +110,14 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
     
   }
   segundoReporte(){
- this.petService.getPet(this.valorReporte).subscribe(
-   resp=>{this.petActualizacion=resp});
-console.log(this.petActualizacion)
-    // console.log(reporte.$
+//  this.petService.getPet(this.valorReporte).subscribe(
+//    resp=>{this.petActualizacion=resp});
+// console.log(this.petActualizacion)
+this.petActualizacion.$key=this.valorReporte;
+this.petActualizacion.segundoReporte=this.pets.segundoReporte
+     console.log(this.petActualizacion)
     // this.pets.$key=this.valorReporte;
-this.petService.actualizarReporte(this.petActualizacion).subscribe((respuesta)=>{
+this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
   console.log(respuesta) 
 });
   }

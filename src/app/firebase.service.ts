@@ -55,19 +55,21 @@ petsFotos?:Observable<PetModel>;
     })
     );
    }
-   actualizarReporte(pet:any){
+   actualizarReporte(id:any,pet:any){
       console.log(pet)
-    //  JSON.stringify(pet);
+
+      console.log(id)
+      //  JSON.stringify(pet);
     //  console.log(pet)
    const petTemporal={
      ...pet
    }
 
    delete(petTemporal.$key);
-   console.log(pet)
+   console.log(id)
    console.log(petTemporal)
 
-     return this.http.put(`${this.baseUrl}/reporte/${pet.$key}.json`,petTemporal) ;
+     return this.http.put(`${this.baseUrl}reporte/${id}.json`,petTemporal) ;
     
     
    }
