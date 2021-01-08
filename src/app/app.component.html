@@ -35,7 +35,12 @@
       <!-- Cargar foto -->
     </button>
 
-    <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="primerReporte()">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      style="margin: 10px"
+      (click)="primerReporte()"
+    >
       Guardar
     </button>
   </div>
@@ -58,39 +63,42 @@
         [id]="mascota.$key"
       >
         <agm-info-window>
-          <img width="200" height="200" [src]="mascota.foto" />
+          <img width="230" height="170" [src]="mascota.foto" />
+          <div>
+            <br />
+            {{ mascota.tipoReporte }}
+            <h6>Reporte:</h6>
+            {{ mascota.reporte }}
+            <br />
+            <h6>Actualización del reporte:</h6>
+            <button
+              type="button"
+              value="Mostrar"
+              (click)="openDialogo(mascota.segundoReporte)"
+              class="btn btn-primary btn-sm"
+              data-toggle="modal"
+              data-target="#actualizacionModal"
+            >
+              Mostrar
+            </button>
+
+            <!-- {{ mascota.segundoReporte }} -->
+          </div>
           <br />
-          <ul class="navbar">
-            <li>
-              {{ mascota.tipoReporte }}
-            </li>
-
-            <li>
-              {{ mascota.reporte }}
-              <br />
-            </li>
-          </ul>
-
-          <!-- <textarea
-          
-          class="col-8"
-            type="textArea"
-            [(ngModel)]="mascota.segundoReporte"
-            name="segundoReporte"
-            placeholder="Describe los hechos"
-            ></textarea>  -->
-          <button
-            type="button"
-            style="margin: 10px"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#myModalRespuesta"
-            name="btn-newR"
-            value="mascota.key"
-            (click)="openDialog(mascota.$key)"
-          >
-            Nuevo Reporte
-          </button>
+          <div class="center">
+            <button
+              type="button"
+              style="margin: 8px"
+              class="btn btn-primary btn-sm"
+              data-toggle="modal"
+              data-target="#myModalRespuesta"
+              name="btn-newR"
+              value="mascota.key"
+              (click)="openDialog(mascota.$key)"
+            >
+              Nuevo Reporte
+            </button>
+          </div>
         </agm-info-window>
       </agm-marker>
     </agm-map>
@@ -102,28 +110,35 @@
       <div class="card-body">
         <div class="modal-content">
           <div class="modal-header">
-        
-
             <div class="contenedor">
               <div class="contenedor_formulario">
                 <div>
-                  <button type="button" style="margin: 10px" class="close" data-dismiss="modal">
+                  <button
+                    type="button"
+                    style="margin: 10px"
+                    class="close"
+                    data-dismiss="modal"
+                  >
                     &times;
                   </button>
-                <h2>¿Que sabes de éste caso?</h2>
-              
-              </div>
+                  <h5>¿Que sabes de éste caso?</h5>
+                </div>
                 <textarea
                   class="col-12"
                   type="textArea"
                   [(ngModel)]="pets.segundoReporte"
-
                   name="segundoReporte"
-                  placeholder="Describe los hechos">
-               </textarea>
-               <br>
-                <button      style="margin: 10px"       class="btn btn-primary"
-                 (click)="segundoReporte()">guardar</button>
+                  placeholder="Describe los hechos"
+                >
+                </textarea>
+                <br />
+                <button
+                  style="margin: 10px"
+                  class="btn btn-primary"
+                  (click)="segundoReporte()"
+                >
+                  guardar
+                </button>
                 <!-- <p class="download" *ngIf="finalizado">
                   URL de descarga:
                   <a href="{{ URLPublica }}" target="_blank">Descargar</a>
@@ -142,6 +157,7 @@
       <div class="card-body">
         <div class="modal-content">
           <div class="modal-header">
+              <h4 >Subir foto</h4>
             <button type="button" class="close" data-dismiss="modal">
               &times;
             </button>
@@ -149,7 +165,7 @@
 
           <div class="contenedor">
             <div class="contenedor_formulario">
-              <h1 class="is-size-1">Subir foto</h1>
+             
               <!-- <p class="download" *ngIf="finalizado">
                   URL de descarga:
                   <a href="{{ URLPublica }}" target="_blank">Descargar</a>
@@ -172,6 +188,7 @@
                   </label>
                 </div>
                 <hr />
+                <div class="center">
                 <progress
                   *ngIf="porcentaje > 0 && porcentaje < 100"
                   class="progress is-large is-success"
@@ -181,6 +198,8 @@
                   {{ porcentaje }}%
                 </progress>
                 <button
+                style="margin: 10px"
+
                   class="btn btn-primary"
                   [ngClass]="{
                     button: true,
@@ -194,8 +213,40 @@
                 >
                   Subir archivo
                 </button>
+              </div>
                 <!-- <input class="btnCamera" type="file"  accept="image/*" capture="camera"> -->
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="actualizacionModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="card" style="width: 25rem">
+      <div class="card-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="contenedor">
+              <div class="contenedor_formulario">
+                <div>
+                  <button
+                    type="button"
+                    style="margin: 10px"
+                    class="close"
+                    data-dismiss="modal"
+                  >
+                    &times;
+                  </button>
+                  {{ segundoReporteView }}
+                  <!-- <p class="download" *ngIf="finalizado">
+                  URL de descarga:
+                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
+                </p> -->
+                </div>
+              </div>
             </div>
           </div>
         </div>

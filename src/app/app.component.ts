@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
   valorReporte:any;
  petActualizacion:PetModel=new PetModel()
   v:any;
+  segundoReporteView:any;
   constructor(
     private petService: FirebaseService,
     private route: ActivatedRoute
@@ -107,6 +108,13 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
       
       );
       console.log(this.v)
+    
+  }
+
+  async openDialogo(segundoReporte:PetModel){
+    this.segundoReporteView=segundoReporte;
+    console.log(this.segundoReporteView)
+
     
   }
   segundoReporte(){
