@@ -27,6 +27,7 @@
     <button
       type="button"
       class="btn btn-light"
+      style="margin: 10px"
       data-toggle="modal"
       data-target="#myModalPicture"
     >
@@ -34,7 +35,7 @@
       <!-- Cargar foto -->
     </button>
 
-    <button type="button" class="btn btn-secondary" (click)="primerReporte()">
+    <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="primerReporte()">
       Guardar
     </button>
   </div>
@@ -80,7 +81,8 @@
             ></textarea>  -->
           <button
             type="button"
-            class="btn btn-info btn-lg"
+            style="margin: 10px"
+            class="btn btn-primary"
             data-toggle="modal"
             data-target="#myModalRespuesta"
             name="btn-newR"
@@ -100,22 +102,28 @@
       <div class="card-body">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
+        
 
             <div class="contenedor">
               <div class="contenedor_formulario">
-                <h1 class="is-size-1">¿Que sabes de este caso?</h1>
+                <div>
+                  <button type="button" style="margin: 10px" class="close" data-dismiss="modal">
+                    &times;
+                  </button>
+                <h2>¿Que sabes de éste caso?</h2>
+              
+              </div>
                 <textarea
-                  class="col-8"
+                  class="col-12"
                   type="textArea"
                   [(ngModel)]="pets.segundoReporte"
 
                   name="segundoReporte"
-                  placeholder="Describe los hechos"
-                >{{v}}</textarea>
-                <button (click)="segundoReporte()">guardar</button>
+                  placeholder="Describe los hechos">
+               </textarea>
+               <br>
+                <button      style="margin: 10px"       class="btn btn-primary"
+                 (click)="segundoReporte()">guardar</button>
                 <!-- <p class="download" *ngIf="finalizado">
                   URL de descarga:
                   <a href="{{ URLPublica }}" target="_blank">Descargar</a>
