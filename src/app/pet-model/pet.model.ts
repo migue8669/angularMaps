@@ -2,7 +2,7 @@ export class PetModel{
     $key?:string;
     tipoReporte?:string;
     reporte?:string;
-    segundoReporte?:string;
+    segundoReporte?:[];
     foto?:string;
     long?:number;
     lat?:number;
@@ -11,7 +11,7 @@ constructor(){
     // this.$key=''
     this.reporte='';
     this.tipoReporte='';
-    this.segundoReporte='';
+    this.segundoReporte=[];
     this.foto='';
     this.long;
     this.lat;

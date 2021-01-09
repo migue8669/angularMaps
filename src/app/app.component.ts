@@ -85,12 +85,31 @@ export class AppComponent implements OnInit {
       if (this.opcion2) {
         this.pets.tipoReporte = 'abandono';
       }
-      
+
+     this.lat= position.coords.latitude;
+     this.lng= position.coords.longitude;
+
+      this.mascotass.forEach(r=>{console.log(this.pets.lat=r.lat)})
+      console.log(this.lat)
+      this.mascotass.forEach(r=>{console.log(this.pets.long=r.long)})
+
+      console.log(this.lng)
+      if(this.pets.lat == this.lat && this.pets.long==this.lng ){
+        console.log(this.pets.lat);
+
+        this.pets.lat = position.coords.latitude+0.000010;
+        console.log(this.pets.lat);
+
+        this.pets.long = position.coords.longitude+0.000010;
+        this.pets.foto = this.URLPublica;
+        console.log(this.pets);
+
+      }else{
       this.pets.lat = position.coords.latitude;
       this.pets.long = position.coords.longitude;
       this.pets.foto = this.URLPublica;
       console.log(this.pets);
-
+      }
       this.petService.crearReporte(this.pets).subscribe((respuesta) => {
         console.log(respuesta);
         this.pets = respuesta;
@@ -104,10 +123,10 @@ export class AppComponent implements OnInit {
     this.valorReporte=key;
     console.log(this.valorReporte)
 this.v=  this.petService.getPet(this.valorReporte).subscribe(
-      resp=>{this.petActualizacion=resp}
-      
+      resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
+      }
+
       );
-      console.log(this.v)
     
   }
 
@@ -118,6 +137,9 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
     
   }
   segundoReporte(){
+    
+if(this.petActualizacion.segundoReporte){
+}
 //  this.petService.getPet(this.valorReporte).subscribe(
 //    resp=>{this.petActualizacion=resp});
 // console.log(this.petActualizacion)
