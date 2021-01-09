@@ -7,15 +7,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+
 import { FirebaseService } from './firebase.service';
 import { PetModel } from './pet-model/pet.model';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import { fromEventPattern, Observable, pipe, Subscription } from 'rxjs';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +41,7 @@ export class AppComponent implements OnInit {
   mensajeArchivo = 'No hay un archivo seleccionado';
   URLPublica = '';
   src = '';
+  arraySegundoReporte:any[]=[];
   valorReporte:any;
  petActualizacion:PetModel=new PetModel()
   v:any;
@@ -123,7 +120,7 @@ export class AppComponent implements OnInit {
     this.valorReporte=key;
     console.log(this.valorReporte)
 this.v=  this.petService.getPet(this.valorReporte).subscribe(
-      resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
+      resp=>{this.petActualizacion=resp
       }
 
       );
@@ -139,7 +136,14 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
   segundoReporte(){
     
 if(this.petActualizacion.segundoReporte){
-}
+  console.log(this.petActualizacion.segundoReporte,this.pets.segundoReporte)
+  this.arraySegundoReporte.push(this.petActualizacion.segundoReporte,this.pets.segundoReporte);
+
+  console.log(this.arraySegundoReporte.toString())
+  this.petActualizacion.segundoReporte=this.arraySegundoReporte.toString()
+  // this.arraySegundoReporte.forEach(i=>{this.petActualizacion.segundoReporte=i})
+  // console.log(this.petActualizacion.segundoReporte)
+}else{
 //  this.petService.getPet(this.valorReporte).subscribe(
 //    resp=>{this.petActualizacion=resp});
 // console.log(this.petActualizacion)
@@ -147,10 +151,10 @@ this.petActualizacion.$key=this.valorReporte;
 this.petActualizacion.segundoReporte=this.pets.segundoReporte
      console.log(this.petActualizacion)
     // this.pets.$key=this.valorReporte;
-this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
+
+}this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
   console.log(respuesta) 
-});
-  }
+});}
 
   initMap() {
     this.petService.getAll().subscribe((pets) => {
