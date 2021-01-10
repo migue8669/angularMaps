@@ -1,1 +1,176 @@
 /* You can add global styles to this file, and also import other style files */
+agm-map {
+    height: 600px;
+    width: 600%;
+   }
+   HTML CSSResult Skip Results Iframe
+   EDIT ON
+   .img1{
+     filter: invert(0.4);
+   }
+   .img2{
+     filter: invert(0.4) sepia(1);
+   }
+   .img3{
+     filter: invert(0.4) sepia(1) hue-rotate(20deg);
+   }
+   .img4{
+     filter: invert(0.4) sepia(1) hue-rotate(20deg) saturate(1000%);
+   }
+   .img5{
+       filter: contrast(40%) sepia(1) hue-rotate(20deg) saturate(1000%);
+   }
+   
+   .box{
+     background: black;
+   }
+
+   .modal-blue .modal-backdrop {
+    background-color: #0000ff;
+    }
+    
+    .modal-white .modal-backdrop {
+    background-color: #ffffff;
+    }
+
+    .map-responsive{
+      overflow:hidden;
+      padding-bottom:56.25%;
+      position:relative;
+      height:0;
+  }
+  .map-responsive iframe{
+      left:0;
+      top:0;
+      /* height:80%;
+      width:100%; */
+      position:absolute;
+  }
+  body {
+    font-family: Arial;
+    font-size: 17px;
+    padding: 8px;
+ }
+ * {
+    box-sizing: border-box;
+ }
+ .Fields {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-around;
+ }
+ .Fields div {
+    margin-right: 10px;
+ }
+ label {
+    margin: 15px;
+ }
+ .formContainer {
+    margin: 10px;
+    background-color: #efffc9;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid rgb(191, 246, 250);
+    border-radius: 3px;
+ }
+ input[type="text"] {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+ }
+ label {
+    margin-left: 20px;
+    display: block;
+ }
+ .icon-formContainer {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+ }
+ .checkout {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+ }
+ .checkout:hover {
+    background-color: #45a049;
+ }
+ a {
+    color: black;
+ }
+ span.price {
+    float: right;
+    color: grey;
+ }
+ @media (max-width: 657px) {
+    .Fields {
+       flex-direction: column-reverse;
+    }
+ }
+
+ #map {
+  height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.map-control {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+  font-family: "Roboto", "sans-serif";
+  margin: 10px;
+  /* Hide the control initially, to prevent it from appearing
+           before the map loads. */
+  display: none;
+}
+
+/* Display the control once it is inside the map. */
+#map .map-control {
+  display: block;
+}
+
+.selector-control {
+  font-size: 14px;
+  line-height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.centerImg {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 50%;
+ }
+ div.center {
+   text-align: center;
+ }
+.btnCamera{
+   background-image: "./assets/camara.png"
+
+}
+#modal2 {
+   background: rgba(0, 0, 0, 0.9);
+   color: #fff;
+   position: fixed;
+   top: 0;
+   left: 0;
+   height: 100vh;
+   width: 100vw;
+   transition: all .5s;
+ }

@@ -138,18 +138,27 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
   }
   segundoReporte(){
     
-if(this.petActualizacion.segundoReporte){
-}
-//  this.petService.getPet(this.valorReporte).subscribe(
-//    resp=>{this.petActualizacion=resp});
-// console.log(this.petActualizacion)
-this.petActualizacion.$key=this.valorReporte;
-this.petActualizacion.segundoReporte=this.pets.segundoReporte
-     console.log(this.petActualizacion)
-    // this.pets.$key=this.valorReporte;
-this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
-  console.log(respuesta) 
-});
+
+    if(this.petActualizacion.segundoReporte){
+      console.log(this.petActualizacion.segundoReporte,this.pets.segundoReporte)
+      this.arraySegundoReporte.push(this.petActualizacion.segundoReporte,this.pets.segundoReporte);
+    
+      console.log(this.arraySegundoReporte.toString())
+      this.petActualizacion.segundoReporte=this.arraySegundoReporte.toString()
+      // this.arraySegundoReporte.forEach(i=>{this.petActualizacion.segundoReporte=i})
+      // console.log(this.petActualizacion.segundoReporte)
+    }else{
+    //  this.petService.getPet(this.valorReporte).subscribe(
+    //    resp=>{this.petActualizacion=resp});
+    // console.log(this.petActualizacion)
+    this.petActualizacion.$key=this.valorReporte;
+    this.petActualizacion.segundoReporte=this.pets.segundoReporte
+         console.log(this.petActualizacion)
+        // this.pets.$key=this.valorReporte;
+    
+    }this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
+      console.log(respuesta) 
+    });
   }
 
   initMap() {

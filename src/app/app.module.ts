@@ -11,9 +11,17 @@ import { StoreModule } from '@ngrx/store';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ActualizacionModelComponent } from './actualizacion-model/actualizacion-model.component';
+import { ImagenModelComponent } from './imagen-model/imagen-model.component';
+import { RespuestaModelComponent } from './respuesta-model/respuesta-model.component';
+import { MapaFormComponent } from './mapa-form/mapa-form.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ActualizacionModelComponent,
+    ImagenModelComponent,
+    RespuestaModelComponent,
+    MapaFormComponent,
   ],
   imports: [
     BrowserModule,

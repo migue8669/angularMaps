@@ -1,4 +1,4 @@
-<form #myForm="ngForm" class="containerDiv">
+<!-- <form #myForm="ngForm" class="containerDiv">
   <div class="col-xs-3" style="text-align: center">
     <h1>Registro de animales perdidos o abandonados</h1>
     <h6>Elige el tipo de reporte que realizarás</h6>
@@ -32,7 +32,6 @@
       data-target="#myModalPicture"
     >
       <img img src="./assets/camara.png" width="30" height="30" />
-      <!-- Cargar foto -->
     </button>
 
     <button
@@ -44,8 +43,8 @@
       Guardar
     </button>
   </div>
-</form>
-<div>
+</form> -->
+<!-- <div>
   <div class="map-responsive">
     <agm-map
       [latitude]="lat"
@@ -82,7 +81,7 @@
               Mostrar
             </button>
 
-            <!-- {{ mascota.segundoReporte }} -->
+             {{ mascota.segundoReporte }} 
           </div>
           <br />
           <div class="center">
@@ -103,13 +102,14 @@
       </agm-marker>
     </agm-map>
   </div>
-</div>
+</div> -->
+
+<!-- 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
   <div class="modal-dialog">
     <div class="card" style="width: 25rem">
       <div class="card-body">
         <div class="modal-content">
-          <!-- <div class="modal-header"> -->
             <div class="contenedor">
               <div class="contenedor_formulario" style="margin: 10px;"> 
                 <div>
@@ -139,19 +139,16 @@
                 >
                   guardar
                 </button>
-                <!-- <p class="download" *ngIf="finalizado">
-                  URL de descarga:
-                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
-                </p> -->
-              <!-- </div> -->
+            
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="modal fade" id="myModalPicture" role="dialog">
+</div> -->
+
+<!-- <div class="modal fade" id="myModalPicture" role="dialog">
   <div class="modal-dialog">
     <div class="card" style="width: 25rem">
       <div class="card-body">
@@ -166,10 +163,10 @@
           <div class="contenedor">
             <div class="contenedor_formulario">
              
-              <!-- <p class="download" *ngIf="finalizado">
+              <<p class="download" *ngIf="finalizado">
                   URL de descarga:
                   <a href="{{ URLPublica }}" target="_blank">Descargar</a>
-                </p> -->
+                </p> 
               <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
                 <div class="file has-name is-boxed">
                   <label class="file-label">
@@ -179,9 +176,9 @@
                       formControlName="archivo"
                       (change)="cambioArchivo($event)"
                     />
-                    <!-- <span class="file-cta">
+                    <span class="file-cta">
                         <span class="file-label"> Elegir un archivo… </span>
-                      </span> -->
+                      </span> 
                     <span class="file-name">
                       {{ mensajeArchivo }}
                     </span>
@@ -214,7 +211,7 @@
                   Subir archivo
                 </button>
               </div>
-                <!-- <input class="btnCamera" type="file"  accept="image/*" capture="camera"> -->
+                 <input class="btnCamera" type="file"  accept="image/*" capture="camera"> 
               </form>
             </div>
           </div>
@@ -222,7 +219,12 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+<app-mapa-form [selectedImage]="selectedImage" [segundoReporte]="segundoReporteView"></app-mapa-form>
+<app-respuesta-model (report)="petActualizacion=$event"></app-respuesta-model>
+<app-imagen-model (url)="selectedImage=$event" ></app-imagen-model>
+
+
 <div class="modal fade" id="actualizacionModal" role="dialog">
   <div class="modal-dialog">
     <div class="card" style="width: 25rem">
@@ -241,10 +243,7 @@
                     &times;
                   </button>
                   {{ segundoReporteView }}
-                  <!-- <p class="download" *ngIf="finalizado">
-                  URL de descarga:
-                  <a href="{{ URLPublica }}" target="_blank">Descargar</a>
-                </p> -->
+        
                 </div>
               </div>
             </div>

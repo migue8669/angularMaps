@@ -1,0 +1,106 @@
+<form #myForm="ngForm" >
+    <div class="col-xs-3" style="text-align: center">
+      <h1>Registro de animales perdidos o abandonados</h1>
+      <h6>Elige el tipo de reporte que realizarás</h6>
+      <input
+        id="checkPerdida"
+        type="checkbox"
+        [(ngModel)]="opcion1"
+        name="check"
+      />Pérdida<br />
+      <input
+        id="checkAbandono"
+        type="checkbox"
+        [(ngModel)]="opcion2"
+        name="check1"
+      />Abandono<br />
+  
+      <textarea
+        class="col-4"
+        type="textArea"
+        [(ngModel)]="pets.reporte"
+        name="reporte"
+        placeholder="Describe los hechos"
+      ></textarea>
+      <br />
+  
+      <button
+        type="button"
+        class="btn btn-light"
+        style="margin: 10px"
+        data-toggle="modal"
+        data-target="#myModalPicture"
+      >
+        <img img src="./assets/camara.png" width="30" height="30" />
+        <!-- Cargar foto -->
+      </button>
+  
+      <button
+        type="button"
+        class="btn btn-secondary"
+        style="margin: 10px"
+        (click)="primerReporte()"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+  <div>
+    <div class="map-responsive">
+      <agm-map
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="zoom"
+        [mapTypeId]="mapTypeId"
+      >
+        <agm-marker [latitude]="lat" [longitude]="lng">
+          <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
+        </agm-marker>
+        <agm-marker
+          *ngFor="let mascota of mascotass; let i = index"
+          [latitude]="mascota.lat"
+          [longitude]="mascota.long"
+          [id]="mascota.$key"
+        >
+          <agm-info-window>
+            <img width="230" height="170" [src]="mascota.foto" />
+            <div>
+              <br />
+              {{ mascota.tipoReporte }}
+              <h6>Reporte:</h6>
+              {{ mascota.reporte }}
+              <br />
+              <h6>Actualización del reporte:</h6>
+              <button
+                type="button"
+                value="Mostrar"
+                (click)="openDialogo(mascota.segundoReporte)"
+                class="btn btn-primary btn-sm"
+                data-toggle="modal"
+                data-target="#actualizacionModal"
+              >
+                Mostrar
+              </button>
+  
+              <!-- {{ mascota.segundoReporte }} -->
+            </div>
+            <br />
+            <div class="center">
+              <button
+                type="button"
+                style="margin: 8px"
+                class="btn btn-primary btn-sm"
+                data-toggle="modal"
+                data-target="#myModalRespuesta"
+                name="btn-newR"
+                value="mascota.key"
+                (click)="openDialog(mascota.$key)"
+              >
+                Nuevo Reporte
+              </button>
+            </div>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
