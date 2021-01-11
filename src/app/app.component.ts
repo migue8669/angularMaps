@@ -35,7 +35,8 @@ export class AppComponent implements OnInit {
   @Input() mascotass: PetModel[] = [];
   markers: PetModel[] = [];
   value: string;
-  selectedImage: any = null;
+   @Input()
+ selectedImage: any = null;
   imgSrc: string = '';
   modal: boolean = true;
   porcentaje = 0;
@@ -49,6 +50,10 @@ export class AppComponent implements OnInit {
  petActualizacion:PetModel=new PetModel()
   v:any;
   segundoReporteView:any;
+  textoHijo1: PetModel[] = [];
+  value: string;
+  textoHijo11: PetModel[] = [];
+
   constructor(
     private petService: FirebaseService,
     private route: ActivatedRoute

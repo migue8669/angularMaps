@@ -16,6 +16,9 @@ export class ImagenModelComponent implements OnInit {
    selectedImage: any = null;
   finalizado = false;
   URLPublica = '';
+  tarea:any;
+  referencia:any;
+
   @Output()
 url:EventEmitter<string>=new EventEmitter<string>();
 
@@ -26,37 +29,42 @@ url:EventEmitter<string>=new EventEmitter<string>();
   ngOnInit(): void {
   }
 
-  public cambioArchivo(event:any) {
+  async  cambioArchivo(event:any) {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
         this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
         this.nombreArchivo = event.target.files[i].name;
+        console.log(this.nombreArchivo)
         this.datosFormulario.delete('archivo');
         this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
       }
     } else {
       this.mensajeArchivo = 'No hay un archivo seleccionado';
     }
+    let archivo = this.datosFormulario.get('archivo');
+      this.referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
+     this.tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
   }
 
   //Sube el archivo a Cloud Storage
-  public subirArchivo() {
+  async subirArchivo() {
     let archivo = this.datosFormulario.get('archivo');
-    let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
-    let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
+   // let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
+//let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
+    console.log(this.referencia)
+    console.log(this.tarea)
 
     //Cambia el porcentaje
-    tarea.percentageChanges().subscribe((porcentaje:any) => {
+    this.tarea.percentageChanges().subscribe((porcentaje:any) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
         this.finalizado = true;
       }
     });
-
-    referencia.getDownloadURL().subscribe((URL: any) => {
+this.referencia.getDownloadURL().subscribe((URL: any) => {
       this.URLPublica = URL;
       this.selectedImage=URL;
-      console.log(this.selectedImage)
+      console.log(URL)
       this.url.emit(this.selectedImage)
     });
 

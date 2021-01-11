@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ComponentService } from '../component.service';
@@ -29,9 +29,16 @@ export class MapaFormComponent implements OnInit {
   segundoReporteView:any;
   @Input()
   selectedImage!: string;
-
   @Input()
-  segundoReporte!: string;
+  textoHijo2: PetModel[] = [];
+@Output()
+textoCambiado:EventEmitter<PetModel>=new EventEmitter<PetModel>();
+@Output()
+textoCambiado2:EventEmitter<PetModel>=new EventEmitter<PetModel>();
+  arraySegundoReporte:any[]=[];
+
+  // @Input()
+  // segundoReporte!: string;
 
   constructor(private messageService: ComponentService,
     private petService: FirebaseService,
@@ -115,15 +122,15 @@ console.log(this.URLPublica)
       this.located = true;
     });
   }
-  async openDialog(key:PetModel){
+   openDialog(key:PetModel){
     this.valorReporte=key;
+    this.valorReporte.$key=key.$key;
     console.log(this.valorReporte)
 // this.v=  this.petService.getPet(this.valorReporte).subscribe(
 //       resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
       // }
-
-      // );
-    
+this.textoCambiado.emit(this.valorReporte);      // );
+  this.textoCambiado2.emit(this.valorReporte.$key);
   }
 
   async openDialogo(segundoReporte:PetModel){
@@ -132,4 +139,4 @@ console.log(this.URLPublica)
 
     
   }
-}
+ }

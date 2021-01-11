@@ -21,7 +21,7 @@
         [(ngModel)]="pets.reporte"
         name="reporte"
         placeholder="Describe los hechos"
-      ></textarea>
+      >{{textoHijo2}}</textarea>
       <br />
   
       <button
@@ -93,8 +93,8 @@
                 data-toggle="modal"
                 data-target="#myModalRespuesta"
                 name="btn-newR"
-                value="mascota.key"
-                (click)="openDialog(mascota.$key)"
+                value="mascota"
+                (click)="openDialog(mascota)"
               >
                 Nuevo Reporte
               </button>

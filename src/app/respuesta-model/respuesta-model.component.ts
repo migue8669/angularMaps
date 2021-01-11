@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { clear } from 'console';
 import { FirebaseService } from '../firebase.service';
 import { PetModel } from '../pet-model/pet.model';
 
@@ -10,41 +11,61 @@ import { PetModel } from '../pet-model/pet.model';
 export class RespuestaModelComponent implements OnInit {
   pets: PetModel = new PetModel();
   petActualizacion:PetModel=new PetModel()
+  @Input()
   valorReporte:any;
   arraySegundoReporte:any[]=[];
 
+@Output()
+  textoCambiado:EventEmitter<string>=new EventEmitter<string>();
+
   @Input()
-  key!: string;
-  
-  constructor(private petService:FirebaseService) { }
+  textoHijo2: PetModel = new PetModel;
+  @Input()
+  textoHijo21: string ;
+  constructor(private petService:FirebaseService) { 
+    this.textoHijo21=""
+  }
 
   ngOnInit(): void {
+    this.textoHijo2.$key=this.textoHijo21;
+
   }
-  segundoReporte(){
-    
+  inicio(){
+    this.textoHijo2.$key=this.textoHijo21;
+    console.log(this.textoHijo2)
+    console.log(this.textoHijo21)
+  this.segundoReporte(this.textoHijo2)
+  }
+  segundoReporte(texto:PetModel){
 
-
-    if(this.petActualizacion.segundoReporte){
-      console.log(this.petActualizacion.segundoReporte,this.pets.segundoReporte)
-      this.arraySegundoReporte.push(this.petActualizacion.segundoReporte,this.pets.segundoReporte);
+    console.log(this.textoHijo2)
+    console.log(this.textoHijo21)
+    this.textoHijo2.$key==this.textoHijo21;
+ 
+    if(this.textoHijo2.segundoReporte){
+      console.log(this.textoHijo2.segundoReporte,this.pets.segundoReporte)
+      this.arraySegundoReporte.push(this.textoHijo2.segundoReporte,this.pets.segundoReporte);
     
       console.log(this.arraySegundoReporte.toString())
-      // this.petActualizacion.segundoReporte=this.arraySegundoReporte.toString()
+       this.textoHijo2.segundoReporte=this.arraySegundoReporte.toString();
 
+      // this.petService.actualizarReporte(this.valorReporte,this.textoHijo2).subscribe((respuesta)=>{
+      //   console.log(respuesta) 
+      // });
 
-      
       // this.arraySegundoReporte.forEach(i=>{this.petActualizacion.segundoReporte=i})
       // console.log(this.petActualizacion.segundoReporte)
     }else{
-    //  this.petService.getPet(this.valorReporte).subscribe(
-    //    resp=>{this.petActualizacion=resp});
-    // console.log(this.petActualizacion)
-    this.petActualizacion.$key=this.valorReporte;
-    this.petActualizacion.segundoReporte=this.pets.segundoReporte
-         console.log(this.petActualizacion)
+      console.log(this.valorReporte)
+      this.petService.getPet(this.textoHijo21).subscribe(
+        resp=>{console.log(resp)});
+     console.log(this.petActualizacion)
+    this.textoHijo2.$key=this.textoHijo21;
+    this.textoHijo2.segundoReporte=this.pets.segundoReporte;
+         console.log(this.textoHijo2)
         // this.pets.$key=this.valorReporte;
     
-    }this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
+    }this.petService.actualizarReporte(this.textoHijo21,this.textoHijo2).subscribe((respuesta)=>{
       console.log(respuesta) 
     });
 
@@ -61,5 +82,8 @@ export class RespuestaModelComponent implements OnInit {
     // this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
     //   console.log(respuesta) 
     // });
+    this.arraySegundoReporte.length=0;
       }
+
+
 }

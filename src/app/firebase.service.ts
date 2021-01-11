@@ -32,7 +32,7 @@ petsFotos?:Observable<PetModel>;
   }
  //Referencia del archivo
  public referenciaCloudStorage(nombreArchivo: any) {
-
+console.log("referenciaCloud")
   return this.storage.ref(nombreArchivo);
 }
 
