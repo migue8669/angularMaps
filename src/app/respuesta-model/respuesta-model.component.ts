@@ -10,6 +10,7 @@ import { PetModel } from '../pet-model/pet.model';
 export class RespuestaModelComponent implements OnInit {
   pets: PetModel = new PetModel();
   petActualizacion:PetModel=new PetModel()
+  puerta=true;
   @Input()
   valorReporte:any;
   arraySegundoReporte:any[]=[];
@@ -82,6 +83,8 @@ export class RespuestaModelComponent implements OnInit {
     //   console.log(respuesta) 
     // });
     this.arraySegundoReporte.length=0;
+    this.pets.segundoReporte=""
+    this.puerta=false
       }
 
 

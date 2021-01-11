@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComponentService } from '../component.service';
 import { FirebaseService } from '../firebase.service';
@@ -8,26 +8,27 @@ import { FirebaseService } from '../firebase.service';
   templateUrl: './imagen-model.component.html',
   styleUrls: ['./imagen-model.component.css']
 })
-export class ImagenModelComponent implements OnInit {
+export class ImagenModelComponent implements OnDestroy {
   datosFormulario = new FormData();
   mensajeArchivo = 'No hay un archivo seleccionado';
   nombreArchivo = '';
   porcentaje = 0;
    selectedImage: any = null;
-  finalizado = false;
+  finalizado = true;
   URLPublica = '';
   tarea:any;
   referencia:any;
-
+  close= '';
   @Output()
 url:EventEmitter<string>=new EventEmitter<string>();
 
   constructor(private petService:FirebaseService,private componentS:ComponentService) { }
+  
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
   });
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   async  cambioArchivo(event:any) {
     if (event.target.files.length > 0) {
@@ -58,7 +59,8 @@ url:EventEmitter<string>=new EventEmitter<string>();
     this.tarea.percentageChanges().subscribe((porcentaje:any) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
-        this.finalizado = true;
+        this.finalizado = false;
+        console.log(this.finalizado)
       }
     });
 this.referencia.getDownloadURL().subscribe((URL: any) => {
@@ -67,6 +69,10 @@ this.referencia.getDownloadURL().subscribe((URL: any) => {
       console.log(URL)
       this.url.emit(this.selectedImage)
     });
+// this.close=document.getElementById('myModalPicture');
 
+  }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
   }
 }
