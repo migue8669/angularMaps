@@ -1,21 +1,14 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   Input,
-  OnInit,
-  ViewChild,
+  OnInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+
 import { FirebaseService } from './firebase.service';
 import { PetModel } from './pet-model/pet.model';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import { fromEventPattern, Observable, pipe, Subscription } from 'rxjs';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -129,8 +122,7 @@ export class AppComponent implements OnInit {
     this.valorReporte=key;
     console.log(this.valorReporte)
 this.v=  this.petService.getPet(this.valorReporte).subscribe(
-      resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
-      }
+      resp=>{this.petActualizacion=resp;      }
 
       );
     

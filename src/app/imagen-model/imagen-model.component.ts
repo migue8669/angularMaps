@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComponentService } from '../component.service';
 import { FirebaseService } from '../firebase.service';
@@ -49,9 +49,6 @@ url:EventEmitter<string>=new EventEmitter<string>();
 
   //Sube el archivo a Cloud Storage
   async subirArchivo() {
-    let archivo = this.datosFormulario.get('archivo');
-   // let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
-//let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
     console.log(this.referencia)
     console.log(this.tarea)
 

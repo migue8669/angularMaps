@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {  Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ComponentService } from '../component.service';
 import { FirebaseService } from '../firebase.service';
-import { ImagenModelComponent } from '../imagen-model/imagen-model.component';
 import { PetModel } from '../pet-model/pet.model';
 
 @Component({

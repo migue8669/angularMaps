@@ -13,10 +13,7 @@
             <div class="contenedor">
               <div class="contenedor_formulario">
                
-                <!-- <p class="download" *ngIf="finalizado">
-                    URL de descarga:
-                    <a href="{{ URLPublica }}" target="_blank">Descargar</a>
-                  </p> -->
+           
                 <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
                   <div class="file has-name is-boxed">
                     <label class="file-label">
@@ -26,9 +23,7 @@
                         formControlName="archivo"
                         (change)="cambioArchivo($event)"
                       />
-                      <!-- <span class="file-cta">
-                          <span class="file-label"> Elegir un archivo… </span>
-                        </span> -->
+                
                       <span class="file-name">
                         {{ mensajeArchivo }}
                       </span>
@@ -61,7 +56,6 @@
                     Subir archivo
                   </button>
                 </div>
-                  <!-- <input class="btnCamera" type="file"  accept="image/*" capture="camera"> -->
                 </form>
               </div>
             </div>

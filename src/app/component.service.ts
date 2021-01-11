@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import {  Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { PetModel } from './pet-model/pet.model';
 
