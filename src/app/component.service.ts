@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { PetModel } from './pet-model/pet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,8 @@ import { Observable, Subject } from 'rxjs';
 export class ComponentService {
   private subject = new Subject<any>();
 
-  sendMessage(message: string) {
-      this.subject.next({ text: message });
+  sendMessage(message: PetModel) {
+      this.subject.next({ text: message.segundoReporte });
   }
 
   clearMessage() {

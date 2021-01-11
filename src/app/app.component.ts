@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
  petActualizacion:PetModel=new PetModel()
   v:any;
   segundoReporteView:any;
+  segundoReporteMain:PetModel[]=[];
   textoHijo1: PetModel[] = [];
   value: string;
   textoHijo11: PetModel[] = [];

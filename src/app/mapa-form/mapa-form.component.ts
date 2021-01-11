@@ -35,12 +35,15 @@ export class MapaFormComponent implements OnInit {
 textoCambiado:EventEmitter<PetModel>=new EventEmitter<PetModel>();
 @Output()
 textoCambiado2:EventEmitter<PetModel>=new EventEmitter<PetModel>();
+@Output()
+segundoReporte:EventEmitter<PetModel>=new EventEmitter<PetModel>();
   arraySegundoReporte:any[]=[];
 
   // @Input()
   // segundoReporte!: string;
 
   constructor(private messageService: ComponentService,
+    
     private petService: FirebaseService,
     private route: ActivatedRoute
   ) {
@@ -132,11 +135,17 @@ console.log(this.URLPublica)
 this.textoCambiado.emit(this.valorReporte);      // );
   this.textoCambiado2.emit(this.valorReporte.$key);
   }
+   openDialogo(segundoReporte:PetModel){
+    this.segundoReporte.emit(segundoReporte);
 
-  async openDialogo(segundoReporte:PetModel){
     this.segundoReporteView=segundoReporte;
-    console.log(this.segundoReporteView)
+console.log(segundoReporte)
+    // this.messageService.sendMessage(segundoReporte);
+  }
+  // async openDialogo(segundoReporte:PetModel){
+  //   this.segundoReporteView=segundoReporte;
+  //   console.log(this.segundoReporteView)
 
     
-  }
+  // }
  }

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { clear } from 'console';
 import { FirebaseService } from '../firebase.service';
 import { PetModel } from '../pet-model/pet.model';
 
