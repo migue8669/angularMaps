@@ -15,6 +15,7 @@ import { ActualizacionModelComponent } from './actualizacion-model/actualizacion
 import { ImagenModelComponent } from './imagen-model/imagen-model.component';
 import { RespuestaModelComponent } from './respuesta-model/respuesta-model.component';
 import { MapaFormComponent } from './mapa-form/mapa-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { MapaFormComponent } from './mapa-form/mapa-form.component';
       apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U'
     }),
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [AngularFireStorage],
   bootstrap: [AppComponent]

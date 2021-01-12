@@ -174,3 +174,8 @@ body {
    width: 100vw;
    transition: all .5s;
  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
