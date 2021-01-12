@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
+import { MaterialModule } from './material/material.module';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -16,6 +16,7 @@ import { ImagenModelComponent } from './imagen-model/imagen-model.component';
 import { RespuestaModelComponent } from './respuesta-model/respuesta-model.component';
 import { MapaFormComponent } from './mapa-form/mapa-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule,
-
+    AngularFirestoreModule, 
+    MaterialModule,
+    FlexLayoutModule,
+    AngularFireAuthModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U'
     }),
