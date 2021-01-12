@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from '@angular/material';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
