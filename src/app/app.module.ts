@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -30,10 +29,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule,
-    AngularFirestoreModule, 
-    MaterialModule,
-    FlexLayoutModule,
-    AngularFireAuthModule,
+    // AngularFirestoreModule, 
+ 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U'
     }),
