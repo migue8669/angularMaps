@@ -8,7 +8,7 @@ import { FirebaseService } from '../firebase.service';
   templateUrl: './imagen-model.component.html',
   styleUrls: ['./imagen-model.component.css']
 })
-export class ImagenModelComponent implements OnDestroy {
+export class ImagenModelComponent  {
   datosFormulario = new FormData();
   mensajeArchivo = 'No hay un archivo seleccionado';
   nombreArchivo = '';
@@ -69,7 +69,5 @@ this.referencia.getDownloadURL().subscribe((URL: any) => {
 // this.close=document.getElementById('myModalPicture');
 
   }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
+
 }

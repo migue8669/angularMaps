@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-
+recordar=true;
 usuario!: UsuarioModel;
   constructor(private auth:AuthService, private router:Router) { }
 submit(form:NgForm){
@@ -23,6 +23,9 @@ submit(form:NgForm){
   });
   this.auth.nuevoUsuario(this.usuario).subscribe(resp=>{
     Swal.close();
+    if(this.recordar){
+      localStorage.setItem('email',this.usuario.email);
+    }
     this.router.navigateByUrl('/login')
     console.log(resp)
   }, (err)=>{
