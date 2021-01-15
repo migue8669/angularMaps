@@ -1,8 +1,9 @@
 import {  Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentService } from '../component.service';
 import { FirebaseService } from '../firebase.service';
 import { PetModel } from '../pet-model/pet.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-mapa-form',
@@ -43,7 +44,10 @@ segundoReporte:EventEmitter<PetModel>=new EventEmitter<PetModel>();
   constructor(private messageService: ComponentService,
     
     private petService: FirebaseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+
+    private auth:AuthService
   ) {
     this.lat = 0;
     this.lng = 0;
@@ -140,10 +144,8 @@ this.textoCambiado.emit(this.valorReporte);      // );
 console.log(segundoReporte)
     // this.messageService.sendMessage(segundoReporte);
   }
-  // async openDialogo(segundoReporte:PetModel){
-  //   this.segundoReporteView=segundoReporte;
-  //   console.log(this.segundoReporteView)
-
-    
-  // }
+salir(){
+  this.auth.logOut();
+  this.router.navigateByUrl('/login')
+}
  }

@@ -14,8 +14,8 @@ private apiKey='AIzaSyDxt9Juen-d02GQG_dspB_7kZVb__J-gVY'
     this.leerToken();
   }
 
-  logOut(usuario:UsuarioModel){
-
+  logOut(){
+localStorage.removeItem('token')
   }
 
   logIn(usuario:UsuarioModel){
@@ -24,7 +24,7 @@ private apiKey='AIzaSyDxt9Juen-d02GQG_dspB_7kZVb__J-gVY'
       returnSecureToke:true
     }
     return this.http.post(`${this.url}signInWithPassword?key=${this.apiKey}`,authData).pipe(map(resp=>{
-      this.guardarToken(resp["idtoken"]);
+      this.guardarToken(resp["idToken"]);
       return resp;
     }));
   }
@@ -38,13 +38,17 @@ private apiKey='AIzaSyDxt9Juen-d02GQG_dspB_7kZVb__J-gVY'
       `${this.url}signUp?key=${this.apiKey}`,
       authData
     ).pipe(map(resp=>{
-      this.guardarToken(resp["idtoken"]);
+      this.guardarToken(resp["idToken"]);
       return resp;
     }));
+
   }
   private guardarToken(idtoken:string){
     this.userToken=idtoken;
     localStorage.setItem('token',idtoken);
+    let hoy=new Date();
+    hoy.setSeconds(3600);
+    localStorage.setItem('expira',hoy.getTime().toString())
 
   }
 
@@ -56,4 +60,21 @@ this.userToken=(localStorage.getItem('token'));
     }
     return this.userToken;
   }
+  estaAutenticado():boolean{
+if(this.userToken.length<2){
+  return false;
 }
+const expira= Number(localStorage.getItem('expira'));
+const expiraDate=new Date();
+expiraDate.setTime(expira);
+
+if(expiraDate>new Date){
+  return true;}else{
+    return false;
+  }
+
+}
+    // return this.userToken.length>2;
+  }
+
+

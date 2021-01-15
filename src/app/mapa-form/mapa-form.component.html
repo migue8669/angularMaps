@@ -1,4 +1,6 @@
 <form #myForm="ngForm" >
+
+
     <div class="col-xs-3" style="text-align: center">
       <h1>Registro de animales perdidos o abandonados</h1>
       <h6>Elige el tipo de reporte que realizarás</h6>
@@ -43,6 +45,14 @@
       >
         Guardar
       </button>
+      <button
+      type="button"
+      class="btn btn-danger"
+      style="margin: 10px"
+      (click)="salir()"
+    >
+      Salir
+    </button>
     </div>
   </form>
   <div>

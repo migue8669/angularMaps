@@ -29,7 +29,7 @@ import { HomeComponent } from './pages/home/home.component';
     MapaFormComponent,
     RegistroComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
     
   ],
   imports: [
