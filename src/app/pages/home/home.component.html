@@ -1,3 +1,4 @@
-<p>
-  home works!
-</p>
+<app-actualizacion-model [segundoReporte]="segundoReporteMain"></app-actualizacion-model>
+<app-mapa-form [selectedImage]="selectedImage" (textoCambiado)="textoHijo1=$event" (textoCambiado2)="textoHijo11=$event" (segundoReporte)="segundoReporteMain=$event"></app-mapa-form>
+<app-respuesta-model [textoHijo2]="textoHijo1" [textoHijo21]="textoHijo11"></app-respuesta-model>
+<app-imagen-model (url)="selectedImage=$event" ></app-imagen-model> 

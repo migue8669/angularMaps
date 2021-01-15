@@ -50,7 +50,7 @@ private apiKey='AIzaSyDxt9Juen-d02GQG_dspB_7kZVb__J-gVY'
 
   leerToken(){
     if(localStorage.getItem('token')){
-this.userToken=JSON.parse(localStorage.getItem('token')!);
+this.userToken=(localStorage.getItem('token'));
     }else{
       this.userToken=''
     }
