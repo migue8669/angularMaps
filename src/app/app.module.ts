@@ -8,7 +8,7 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ComponentService } from './services/component.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,6 @@ import { HomeComponent } from './pages/home/home.component';
     RegistroComponent,
     LoginComponent,
     HomeComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -40,13 +40,13 @@ import { HomeComponent } from './pages/home/home.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U'
+      apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U',
     }),
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [AngularFireStorage],
-  bootstrap: [AppComponent]
+  providers: [AngularFireStorage,ComponentService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

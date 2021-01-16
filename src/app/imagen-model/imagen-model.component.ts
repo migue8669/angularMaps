@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ComponentService } from '../component.service';
+import { ComponentService } from '../services/component.service';
 import { FirebaseService } from '../firebase.service';
 
 @Component({
@@ -66,7 +66,6 @@ this.referencia.getDownloadURL().subscribe((URL: any) => {
       console.log(URL)
       this.url.emit(this.selectedImage)
     });
-// this.close=document.getElementById('myModalPicture');
 
   }
 

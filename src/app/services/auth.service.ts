@@ -41,6 +41,21 @@ localStorage.removeItem('token')
       this.guardarToken(resp["idToken"]);
       return resp;
     }));
+  }
+
+  usuarioAnonimo(usuario:UsuarioModel){
+    const authData={
+      email:usuario.email,
+      password:usuario.password,
+      returnSegureToken:true
+    };
+    return this.http.post(
+      `${this.url}signUp?key=${this.apiKey}`,
+      authData
+    ).pipe(map(resp=>{
+      this.guardarToken(resp["idToken"]);
+      return resp;
+    }));
 
   }
   private guardarToken(idtoken:string){

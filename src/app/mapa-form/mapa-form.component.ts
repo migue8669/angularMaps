@@ -1,6 +1,6 @@
-import {  Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ComponentService } from '../component.service';
+import { ComponentService } from '../services/component.service';
 import { FirebaseService } from '../firebase.service';
 import { PetModel } from '../pet-model/pet.model';
 import { AuthService } from '../services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-mapa-form',
   templateUrl: './mapa-form.component.html',
-  styleUrls: ['./mapa-form.component.css']
+  styleUrls: ['./mapa-form.component.css'],
 })
 export class MapaFormComponent implements OnInit {
   opcion1 = false;
@@ -20,34 +20,37 @@ export class MapaFormComponent implements OnInit {
   located: boolean;
   value: string;
   @Input() mascotass: PetModel[] = [];
-  URLPublica = "";
-  valorReporte:any;
- petActualizacion:PetModel=new PetModel()
+  URLPublica = '';
+  valorReporte: any;
+  petActualizacion: PetModel = new PetModel();
   pets: PetModel = new PetModel();
-  v:any;
-  segundoReporteView:any;
+  v: any;
+  segundoReporteView: any;
   @Input()
   selectedImage!: string;
   @Input()
   textoHijo2: PetModel[] = [];
-@Output()
-textoCambiado:EventEmitter<PetModel>=new EventEmitter<PetModel>();
-@Output()
-textoCambiado2:EventEmitter<PetModel>=new EventEmitter<PetModel>();
-@Output()
-segundoReporte:EventEmitter<PetModel>=new EventEmitter<PetModel>();
-  arraySegundoReporte:any[]=[];
-
+  @Output()
+  textoCambiado: EventEmitter<PetModel> = new EventEmitter<PetModel>();
+  @Output()
+  textoCambiado2: EventEmitter<PetModel> = new EventEmitter<PetModel>();
+  @Output()
+  emailReporte: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  segundoReporte: EventEmitter<PetModel> = new EventEmitter<PetModel>();
+  arraySegundoReporte: any[] = [];
+  token: any[] = [];
   // @Input()
   // segundoReporte!: string;
 
-  constructor(private messageService: ComponentService,
-    
+  constructor(
+    private messageService: ComponentService,
+
     private petService: FirebaseService,
     private route: ActivatedRoute,
     private router: Router,
-
-    private auth:AuthService
+    private componentService: ComponentService,
+    private auth: AuthService
   ) {
     this.lat = 0;
     this.lng = 0;
@@ -60,14 +63,11 @@ segundoReporte:EventEmitter<PetModel>=new EventEmitter<PetModel>();
   async ngOnInit() {
     // this.store.dispatch(new fromStore.LoadCustomer());
 
-
-
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);
       this.mascotass = pets;
       console.log(this.mascotass);
     });
-
   }
   initMap() {
     this.petService.getAll().subscribe((pets) => {
@@ -75,12 +75,10 @@ segundoReporte:EventEmitter<PetModel>=new EventEmitter<PetModel>();
       this.mascotass = pets;
       console.log(this.mascotass);
     });
-
-    
   }
 
   primerReporte() {
-console.log(this.URLPublica)
+    console.log(this.URLPublica);
     navigator.geolocation.getCurrentPosition((position) => {
       if (this.opcion1) {
         this.pets.tipoReporte = 'perdida';
@@ -89,34 +87,36 @@ console.log(this.URLPublica)
         this.pets.tipoReporte = 'abandono';
       }
 
-     this.lat= position.coords.latitude;
-     this.lng= position.coords.longitude;
+      this.lat = position.coords.latitude;
+      this.lng = position.coords.longitude;
 
-      this.mascotass.forEach(r=>{console.log(this.pets.lat=r.lat)})
-      console.log(this.lat)
-      this.mascotass.forEach(r=>{console.log(this.pets.long=r.long)})
+      this.mascotass.forEach((r) => {
+        console.log((this.pets.lat = r.lat));
+      });
+      console.log(this.lat);
+      this.mascotass.forEach((r) => {
+        console.log((this.pets.long = r.long));
+      });
 
-      console.log(this.lng)
-      if(this.pets.lat == this.lat && this.pets.long==this.lng ){
+      console.log(this.lng);
+      if (this.pets.lat == this.lat && this.pets.long == this.lng) {
         console.log(this.pets.lat);
 
-        this.pets.lat = position.coords.latitude+0.000010;
+        this.pets.lat = position.coords.latitude + 0.00001;
         console.log(this.pets.lat);
 
-        this.pets.long = position.coords.longitude+0.000010;
+        this.pets.long = position.coords.longitude + 0.00001;
         // this.pets.foto = this.URLPublica;
         this.pets.foto = this.selectedImage;
 
         console.log(this.pets);
+      } else {
+        this.pets.lat = position.coords.latitude;
+        this.pets.long = position.coords.longitude;
+        // this.pets.foto = this.URLPublica;
+        this.pets.foto = this.selectedImage;
 
-      }else{
-      this.pets.lat = position.coords.latitude;
-      this.pets.long = position.coords.longitude;
-      // this.pets.foto = this.URLPublica;
-      this.pets.foto = this.selectedImage ;    
-      
-
-      console.log(this.pets);
+        console.log(this.pets);
       }
       this.petService.crearReporte(this.pets).subscribe((respuesta) => {
         console.log(respuesta);
@@ -127,25 +127,28 @@ console.log(this.URLPublica)
       this.located = true;
     });
   }
-   openDialog(key:PetModel){
-    this.valorReporte=key;
-    this.valorReporte.$key=key.$key;
-    console.log(this.valorReporte)
-// this.v=  this.petService.getPet(this.valorReporte).subscribe(
-//       resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
-      // }
-this.textoCambiado.emit(this.valorReporte);      // );
-  this.textoCambiado2.emit(this.valorReporte.$key);
-  }
-   openDialogo(segundoReporte:PetModel){
-    this.segundoReporte.emit(segundoReporte);
+  openDialog(key: PetModel) {
+    this.valorReporte = key;
+    this.valorReporte.$key = key.$key;
 
-    this.segundoReporteView=segundoReporte;
-console.log(segundoReporte)
+    console.log(this.valorReporte);
+    // this.v=  this.petService.getPet(this.valorReporte).subscribe(
+    //       resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
+    // }
+    this.textoCambiado.emit(this.valorReporte); // );
+    this.textoCambiado2.emit(this.valorReporte.$key);
+  }
+  openDialogo(segundoReporte: PetModel) {
+  //  this.componentService.getMessage().subscribe(res=>{this.token=res} );
+  this.token=localStorage.getItem('email'); 
+console.log(this.token);
+    this.segundoReporte.emit(segundoReporte);
+this.emailReporte.emit(this.token)
+    this.segundoReporteView = segundoReporte;
     // this.messageService.sendMessage(segundoReporte);
   }
-salir(){
-  this.auth.logOut();
-  this.router.navigateByUrl('/login')
+  salir() {
+    this.auth.logOut();
+    this.router.navigateByUrl('/login');
+  }
 }
- }

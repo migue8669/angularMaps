@@ -39,7 +39,7 @@
   
       <button
         type="button"
-        class="btn btn-secondary"
+        class="btn btn-outline-primary"
         style="margin: 10px"
         (click)="primerReporte()"
       >
@@ -47,7 +47,7 @@
       </button>
       <button
       type="button"
-      class="btn btn-danger"
+      class="btn btn-outline-danger"
       style="margin: 10px"
       (click)="salir()"
     >
@@ -75,17 +75,21 @@
           <agm-info-window>
             <img width="230" height="170" [src]="mascota.foto" />
             <div>
-              <br />
+              <br/>
+
+              <h6>Causa:</h6>
               {{ mascota.tipoReporte }}
+              <br/>
+
               <h6>Reporte:</h6>
               {{ mascota.reporte }}
-              <br />
+              <br/>
               <h6>Actualización del reporte:</h6>
               <button
                 type="button"
                 value="Mostrar"
                 (click)="openDialogo(mascota.segundoReporte)"
-                class="btn btn-primary btn-sm"
+                class="btn btn-outline-primary btn-sm"
                 data-toggle="modal"
                 data-target="#actualizacionModal"
            
@@ -100,7 +104,7 @@
               <button
                 type="button"
                 style="margin: 8px"
-                class="btn btn-primary btn-sm"
+                class="btn btn-outline-primary btn-sm"
                 data-toggle="modal"
                 data-target="#myModalRespuesta"
                 name="btn-newR"

@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+npm i @angular/cli
+npm i @angular/google-maps
+npm i @agm/core --save
+npm i @angular/fire firebase --save
+npm i angularfire2

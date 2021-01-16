@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   textoHijo1: PetModel[] = [];
   segundoReporteMain:PetModel[]=[];
   selectedImage: any = null;
-
+  emailEnviado:any=null;
   constructor() { }
 
   ngOnInit() {

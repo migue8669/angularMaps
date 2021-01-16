@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   porcentaje = 0;
   nombreArchivo = '';
   datosFormulario = new FormData();
-  finalizado = false;
+  // finalizado = false;
   mensajeArchivo = 'No hay un archivo seleccionado';
   URLPublica = '';
   src = '';
@@ -185,24 +185,24 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
   }
 
   //Sube el archivo a Cloud Storage
-  public subirArchivo() {
-    let archivo = this.datosFormulario.get('archivo');
-    let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
-    let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
+  // public subirArchivo() {
+  //   let archivo = this.datosFormulario.get('archivo');
+  //   let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
+  //   let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
 
-    //Cambia el porcentaje
-    tarea.percentageChanges().subscribe((porcentaje:any) => {
-      this.porcentaje = Math.round(porcentaje);
-      if (this.porcentaje == 100) {
-        this.finalizado = true;
-      }
-    });
+  //   //Cambia el porcentaje
+  //   tarea.percentageChanges().subscribe((porcentaje:any) => {
+  //     this.porcentaje = Math.round(porcentaje);
+  //     if (this.porcentaje == 100) {
+  //       this.finalizado = true;
+  //     }
+  //   });
 
-    referencia.getDownloadURL().subscribe((URL: any) => {
-      this.URLPublica = URL;
-      this.selectedImage=URL;
-      console.log(this.selectedImage)
-    });
-  }
+  //   referencia.getDownloadURL().subscribe((URL: any) => {
+  //     this.URLPublica = URL;
+  //     this.selectedImage=URL;
+  //     console.log(this.selectedImage)
+  //   });
+  // }
 
 }

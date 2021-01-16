@@ -1,11 +1,13 @@
 <app-actualizacion-model
   [segundoReporte]="segundoReporteMain"
+  [token]="emailEnviado"
 ></app-actualizacion-model>
 <app-mapa-form
   [selectedImage]="selectedImage"
   (textoCambiado)="textoHijo1 = $event"
   (textoCambiado2)="textoHijo11 = $event"
   (segundoReporte)="segundoReporteMain = $event"
+  (emailReporte)="emailEnviado=$event"
 ></app-mapa-form>
 <app-respuesta-model
   [textoHijo2]="textoHijo1"

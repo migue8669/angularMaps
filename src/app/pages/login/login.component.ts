@@ -18,6 +18,10 @@ recordar=false;
   ngOnInit() {
     if(localStorage.getItem('email')){
       this.usuario.email=localStorage.getItem('email');
+      
+      if(this.usuario.email="undefined"){
+            this.usuario.email=""
+      }
       this.recordar=true;
     }
   }

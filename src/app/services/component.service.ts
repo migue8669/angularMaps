@@ -1,6 +1,6 @@
 import {  Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { PetModel } from './pet-model/pet.model';
+import { PetModel } from '../pet-model/pet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,9 @@ import { PetModel } from './pet-model/pet.model';
 export class ComponentService {
   private subject = new Subject<any>();
 
-  sendMessage(message: PetModel) {
-      this.subject.next({ text: message.segundoReporte });
+  sendMessage(message: any) {
+      this.subject.next({ text: message });
+      console.log(message)
   }
 
   clearMessage() {
@@ -18,5 +19,6 @@ export class ComponentService {
 
   getMessage(): Observable<any> {
       return this.subject.asObservable();
+      
   }
 }
