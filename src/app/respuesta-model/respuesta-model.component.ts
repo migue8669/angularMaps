@@ -57,7 +57,7 @@ segReporte:SegundoReporte=new SegundoReporte();
     if (this.textoHijo2.segundoReporte) {
       console.log(this.textoHijo2.segundoReporte, this.pets.segundoReporte);
       this.arraySegundoReporte.push(
-        this.textoHijo2.segundoReporte,
+       // this.textoHijo2.segundoReporte,
         this.pets.segundoReporte
       );
        this.textoHijo2.nombre=this.correo

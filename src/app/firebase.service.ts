@@ -86,7 +86,7 @@ console.log("referenciaCloud")
 //  }
 
 //  delete(petTemporal.$key);
- console.log(reporte.id)
+ console.log(reporte)
 //  console.log(petTemporal)
 
    return this.http.put(`${this.baseUrl}reporte/${id}/segundoReporte/${reporte.id}.json`,reporte) ;
