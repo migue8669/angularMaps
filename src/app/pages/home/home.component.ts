@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   segundoReporteMain:PetModel[]=[];
   selectedImage: any = null;
   emailEnviado:any=null;
+  puerta:boolean=true;
   constructor() { }
 
   ngOnInit() {

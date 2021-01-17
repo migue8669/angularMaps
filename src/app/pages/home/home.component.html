@@ -1,16 +1,19 @@
 <app-actualizacion-model
   [segundoReporte]="segundoReporteMain"
-  [token]="emailEnviado"
 ></app-actualizacion-model>
+<app-search-component></app-search-component>
 <app-mapa-form
   [selectedImage]="selectedImage"
   (textoCambiado)="textoHijo1 = $event"
   (textoCambiado2)="textoHijo11 = $event"
   (segundoReporte)="segundoReporteMain = $event"
   (emailReporte)="emailEnviado=$event"
+  (abrirModal)="puerta=$event"
 ></app-mapa-form>
 <app-respuesta-model
   [textoHijo2]="textoHijo1"
   [textoHijo21]="textoHijo11"
+  [token]="emailEnviado"
+
 ></app-respuesta-model>
 <app-imagen-model (url)="selectedImage = $event"></app-imagen-model>

@@ -56,7 +56,7 @@ url:EventEmitter<string>=new EventEmitter<string>();
     this.tarea.percentageChanges().subscribe((porcentaje:any) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
-        this.finalizado = false;
+        // this.finalizado = false;
         console.log(this.finalizado)
       }
     });

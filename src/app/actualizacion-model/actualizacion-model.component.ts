@@ -22,12 +22,10 @@ export class ActualizacionModelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.segundoReporte);
-    this.componentService.getMessage().subscribe(res=>{this.token=res
-    });
-    console.log(this.token);
 
-  }
+    }
+
+  
   async openDialogo() {
     this.componentService.getMessage().subscribe(res=>{this.token=res
     });

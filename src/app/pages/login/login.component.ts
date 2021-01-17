@@ -39,6 +39,8 @@ Swal.showLoading();
       Swal.close()
       if(this.recordar){
         localStorage.setItem('email',this.usuario.email);
+        localStorage.setItem('nombre',this.usuario.nombre);
+
       }
       this.router.navigateByUrl('/home')
 

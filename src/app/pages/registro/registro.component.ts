@@ -31,6 +31,8 @@ export class RegistroComponent implements OnInit {
         Swal.close();
         if (this.recordar) {
           localStorage.setItem('email', this.usuario.email);
+          localStorage.setItem('nombre',this.usuario.nombre);
+
         }
         this.router.navigateByUrl('/login');
         console.log(resp);
@@ -61,6 +63,7 @@ export class RegistroComponent implements OnInit {
         Swal.close();
         if (this.recordar) {
           localStorage.setItem('email', this.usuario.email);
+          localStorage.setItem('nombre',this.usuario.nombre);
         }
         this.router.navigateByUrl('/home');
 this.componentService.sendMessage(resp);

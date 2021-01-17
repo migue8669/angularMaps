@@ -36,10 +36,12 @@ export class MapaFormComponent implements OnInit {
   textoCambiado2: EventEmitter<PetModel> = new EventEmitter<PetModel>();
   @Output()
   emailReporte: EventEmitter<any> = new EventEmitter<any>();
+  abrirModal: boolean=true;
   @Output()
   segundoReporte: EventEmitter<PetModel> = new EventEmitter<PetModel>();
   arraySegundoReporte: any[] = [];
   token: any[] = [];
+  puerta: boolean = true;
   // @Input()
   // segundoReporte!: string;
 
@@ -130,7 +132,9 @@ export class MapaFormComponent implements OnInit {
   openDialog(key: PetModel) {
     this.valorReporte = key;
     this.valorReporte.$key = key.$key;
-
+    // this.abrirModal.emit(this.puerta);
+    // console.log(this.puerta);
+this.componentService.sendMessage(this.abrirModal)
     console.log(this.valorReporte);
     // this.v=  this.petService.getPet(this.valorReporte).subscribe(
     //       resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
@@ -139,12 +143,14 @@ export class MapaFormComponent implements OnInit {
     this.textoCambiado2.emit(this.valorReporte.$key);
   }
   openDialogo(segundoReporte: PetModel) {
-  //  this.componentService.getMessage().subscribe(res=>{this.token=res} );
-  this.token=localStorage.getItem('email'); 
-console.log(this.token);
-    this.segundoReporte.emit(segundoReporte);
-this.emailReporte.emit(this.token)
+    //  this.componentService.getMessage().subscribe(res=>{this.token=res} );
+    this.token = localStorage.getItem('email');
+    console.log(this.token);
+
+    this.segundoReporte.emit(this.pets);
+    this.emailReporte.emit(this.token);
     this.segundoReporteView = segundoReporte;
+    
     // this.messageService.sendMessage(segundoReporte);
   }
   salir() {

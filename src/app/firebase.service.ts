@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 import{Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { SegundoReporte } from './models/segundoReporte.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -73,6 +74,25 @@ console.log("referenciaCloud")
     
     
    }
+
+   actualizarReporteConModelo(id:any,reporte:SegundoReporte){
+    console.log(reporte)
+
+    console.log(id)
+    //  JSON.stringify(pet);
+  //  console.log(pet)
+//  const petTemporal={
+//    ...pet
+//  }
+
+//  delete(petTemporal.$key);
+ console.log(id)
+//  console.log(petTemporal)
+
+   return this.http.put(`${this.baseUrl}reporte/${id}/segundoReporte/${reporte.id}.json`,reporte) ;
+  
+  
+ }
 
    private crearArreglo(petsObj:object){
    const heroes:PetModel[]=[];

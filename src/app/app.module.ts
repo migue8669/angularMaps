@@ -21,6 +21,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ComponentService } from './services/component.service';
+import { SearchComponentComponent } from './search-component/search-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { ComponentService } from './services/component.service';
     RegistroComponent,
     LoginComponent,
     HomeComponent,
+    SearchComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,9 @@ import { ComponentService } from './services/component.service';
     AngularFirestoreModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U',
+      // libraries: ['places']
+
+
     }),
     AppRoutingModule,
     ReactiveFormsModule,
