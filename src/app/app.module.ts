@@ -22,6 +22,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ComponentService } from './services/component.service';
 import { SearchComponentComponent } from './search-component/search-component.component';
+import { FirebaseService } from './firebase.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,7 @@ import { SearchComponentComponent } from './search-component/search-component.co
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [AngularFireStorage,ComponentService],
+  providers: [AngularFireStorage,ComponentService,FirebaseService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

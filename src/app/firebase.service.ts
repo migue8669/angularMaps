@@ -27,7 +27,9 @@ petsFotos?:Observable<PetModel>;
    getPet(id:string){
      return this.http.get( `${this.baseUrl}reporte/${id}.json`);
    }
-
+   getReporteAll(id:string){
+    return this.http.get(`${this.baseUrl}reporte/${id}/segundoReporte.json`).pipe(map(this.crearArregloReporte));
+  }
    public tareaCloudStorage(nombreArchivo: string, datos: any) {
     return this.storage.upload(nombreArchivo, datos);
   }
@@ -107,5 +109,17 @@ heroes.push(pet);
    console.log(heroes);
     return heroes;
    }
-
+   private crearArregloReporte(petsObj:object){
+    const heroes:SegundoReporte[]=[];
+    if(petsObj===null){return [];}
+    Object.keys(petsObj).forEach(key=>{
+      console.log(key);
+      console.log(petsObj);
+      const pet:any=petsObj[key];
+ pet.$key=key;
+ heroes.push(pet);
+    })
+    console.log(heroes);
+     return heroes;
+    }
 }

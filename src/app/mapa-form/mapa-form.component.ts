@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentService } from '../services/component.service';
 import { FirebaseService } from '../firebase.service';
 import { PetModel } from '../pet-model/pet.model';
 import { AuthService } from '../services/auth.service';
+import { SegundoReporte } from '../models/segundoReporte.model';
+import { ActualizacionModelComponent } from '../actualizacion-model/actualizacion-model.component';
 
 @Component({
   selector: 'app-mapa-form',
@@ -38,10 +40,14 @@ export class MapaFormComponent implements OnInit {
   emailReporte: EventEmitter<any> = new EventEmitter<any>();
   abrirModal: boolean=true;
   @Output()
-  segundoReporte: EventEmitter<PetModel> = new EventEmitter<PetModel>();
+  segReporte: SegundoReporte = new SegundoReporte;
   arraySegundoReporte: any[] = [];
   token: any[] = [];
   puerta: boolean = true;
+  reporte: any ;
+  nombre:any;
+
+
   // @Input()
   // segundoReporte!: string;
 
@@ -60,6 +66,7 @@ export class MapaFormComponent implements OnInit {
     this.mapTypeId = 'hybrid';
     this.located = false;
     this.value = '';
+    
   }
 
   async ngOnInit() {
@@ -76,6 +83,7 @@ export class MapaFormComponent implements OnInit {
       console.log(pets);
       this.mascotass = pets;
       console.log(this.mascotass);
+
     });
   }
 
@@ -143,14 +151,23 @@ this.componentService.sendMessage(this.abrirModal)
     this.textoCambiado2.emit(this.valorReporte.$key);
   }
   openDialogo(segundoReporte: PetModel) {
+    this.valorReporte = segundoReporte;
+    console.log(this.valorReporte)
+
+    this.petService.getReporteAll(this.valorReporte.$key).subscribe((res)=>{res.forEach(element=> {
+      this.reporte=element.reporte,console.log(this.reporte),  this.nombre=element.nombre,this.arraySegundoReporte.push(this.reporte,this.nombre)
+    })
+    }); 
+   // this.valorReporte.$key = segundoReporte.$key;
     //  this.componentService.getMessage().subscribe(res=>{this.token=res} );
     this.token = localStorage.getItem('email');
-    console.log(this.token);
+//this.reporte.push(segundoReporte)
+    console.log(this.segReporte);
+    console.log(this.reporte);
 
-    this.segundoReporte.emit(this.pets);
+  this.componentService.sendMessage(segundoReporte);
     this.emailReporte.emit(this.token);
     this.segundoReporteView = segundoReporte;
-    
     // this.messageService.sendMessage(segundoReporte);
   }
   salir() {

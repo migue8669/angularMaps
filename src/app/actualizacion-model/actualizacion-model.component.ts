@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
+import { SegundoReporte } from '../models/segundoReporte.model';
 import { PetModel } from '../pet-model/pet.model';
 import { ComponentService } from '../services/component.service';
 
@@ -11,10 +12,9 @@ import { ComponentService } from '../services/component.service';
 export class ActualizacionModelComponent implements OnInit {
   segundoReporteView: PetModel = new PetModel();
   @Input()
-  segundoReporte: PetModel = new PetModel();
-  @Input()
+  segundoReporte: SegundoReporte= new SegundoReporte();
 
-  token: any = null;
+  info: any=null;
 
   constructor(
     private petService: FirebaseService,
@@ -25,14 +25,14 @@ export class ActualizacionModelComponent implements OnInit {
 
     }
 
-  
-  async openDialogo() {
-    this.componentService.getMessage().subscribe(res=>{this.token=res
-    });
+ 
+   openDialogo(value: string) {
+    this.info=value;
+    console.log(this.info);
+    
 
 
     this.segundoReporteView = this.segundoReporte;
     //console.log(this.segundoReporte);
-    console.log(this.token);
   }
 }

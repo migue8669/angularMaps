@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SegundoReporte } from 'src/app/models/segundoReporte.model';
 import { PetModel } from 'src/app/pet-model/pet.model';
 
 @Component({
@@ -9,7 +10,7 @@ import { PetModel } from 'src/app/pet-model/pet.model';
 export class HomeComponent implements OnInit {
   textoHijo11: PetModel[] = [];
   textoHijo1: PetModel[] = [];
-  segundoReporteMain:PetModel[]=[];
+  segundoReporteMain:SegundoReporte[]=[];
   selectedImage: any = null;
   emailEnviado:any=null;
   puerta:boolean=true;
