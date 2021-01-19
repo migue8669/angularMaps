@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   segundoReporteMain:SegundoReporte[]=[];
   selectedImage: any = null;
   emailEnviado:any=null;
+  arrayReporte:any=[];
   puerta:boolean=true;
   constructor() { }
 

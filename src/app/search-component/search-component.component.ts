@@ -24,25 +24,25 @@ export class SearchComponentComponent implements OnInit {
   ) { }
   
   ngOnInit() {
-    // this.mapsAPILoader.load().then(() => {
-    //   this.setCurrentLocation();
-    //   this.geoCoder = new google.maps.Geocoder;
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
   
-    //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-    //   autocomplete.addListener("place_changed", () => {
-    //     this.ngZone.run(() => {
-    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
   
-    //       if (place.geometry === undefined || place.geometry === null) {
-    //         return;
-    //       }
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
   
-    //       this.latitude = place.geometry.location.lat();
-    //       this.longitude = place.geometry.location.lng();
-    //       this.zoom = 12;
-    //     });
-    //   });
-    // });
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
   }
   
   private setCurrentLocation() {

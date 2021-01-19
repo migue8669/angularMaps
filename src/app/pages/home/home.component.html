@@ -1,6 +1,6 @@
-<!-- <app-actualizacion-model
-  [segundoReporte]="segundoReporteMain"
-></app-actualizacion-model> -->
+<app-actualizacion-model
+  [segundoReporte]="arrayReporte"
+></app-actualizacion-model>
 <app-search-component></app-search-component>
 <app-mapa-form
   [selectedImage]="selectedImage"
@@ -8,6 +8,7 @@
   (textoCambiado2)="textoHijo11 = $event"
   (segundoReporte)="segundoReporteMain = $event"
   (emailReporte)="emailEnviado=$event"
+  (emitReport)="arrayReporte=$event"
   (abrirModal)="puerta=$event"
 ></app-mapa-form>
 <app-respuesta-model

@@ -43,9 +43,11 @@ import { FirebaseService } from './firebase.service';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U',
-      // libraries: ['places']
 
+      //apiKey: 'AIzaSyAASA9Tbu8ea5MGhF84EcPl8fuOJ_EvH3U',
+      apiKey: 'AIzaSyAHCQdz0nc3T7MXerXoGl9cIy1LA6YZp14',
+      libraries: ['places'],
+      apiVersion: 'quarterly'
 
     }),
     AppRoutingModule,

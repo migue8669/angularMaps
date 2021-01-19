@@ -41,6 +41,8 @@ export class MapaFormComponent implements OnInit {
   abrirModal: boolean=true;
   @Output()
   segReporte: SegundoReporte = new SegundoReporte;
+  @Output()
+  emitReport: EventEmitter<any>=new EventEmitter<any>();
   arraySegundoReporte: any[] = [];
   token: any[] = [];
   puerta: boolean = true;
@@ -155,7 +157,9 @@ this.componentService.sendMessage(this.abrirModal)
     console.log(this.valorReporte)
 
     this.petService.getReporteAll(this.valorReporte.$key).subscribe((res)=>{res.forEach(element=> {
-      this.reporte=element.reporte,console.log(this.reporte),  this.nombre=element.nombre,this.arraySegundoReporte.push(this.reporte,this.nombre)
+      this.reporte=element.reporte,console.log(this.reporte),  this.nombre=element.nombre,this.arraySegundoReporte.push(this.reporte,this.nombre),
+       this.emitReport.emit(this.arraySegundoReporte)
+
     })
     }); 
    // this.valorReporte.$key = segundoReporte.$key;
