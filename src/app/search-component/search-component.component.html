@@ -1,13 +1,24 @@
+<div class="form-group">
+  <label>Enter address</label>
+  <input id="search" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+</div>
+<!--<div class="container">
+  <div class="form-group">
+  <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+  </div>
+  -- <sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+  <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"></sebm-google-map-marker>
+  </sebm-google-map> 
+  </div>
+
 <div class="container">
    
-
-    
     <div class="form-group">
       <label>Enter address</label>
-      <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+      <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search [formControl] = "searchControl ">
     </div>
     
-    <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+ <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
       <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
         ></agm-marker>
     </agm-map>
@@ -16,4 +27,3 @@
     <div>Latitude: {{latitude}}</div>
     <div>Longitude: {{longitude}}</div>
      -->
-  </div>
