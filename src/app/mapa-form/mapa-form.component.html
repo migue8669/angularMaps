@@ -56,6 +56,8 @@
     </div>
   </form>
   <div>
+    <input id="search" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+
     <div class="map-responsive">
  
       <agm-map
@@ -64,11 +66,11 @@
         [zoom]="zoom"
         [mapTypeId]="mapTypeId"
       >
-        <agm-marker [latitude]="lat" [longitude]="lng">
+        <agm-marker [markerDraggable]="true" [latitude]="lat" [longitude]="lng">
           <agm-info-window (ngModelChange)="(pets.reporte)"> </agm-info-window>
         </agm-marker>
         <agm-marker
-          *ngFor="let mascota of mascotass; let i = index"
+          *ngFor="let mascota of mascotass ; let i = index"
           [latitude]="mascota.lat"
           [longitude]="mascota.long"
           [id]="mascota.$key"

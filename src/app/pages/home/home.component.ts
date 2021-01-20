@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   selectedImage: any = null;
   emailEnviado:any=null;
   arrayReporte:any=[];
+  arrayUbicacion:any=[];
   puerta:boolean=true;
   constructor() { }
 

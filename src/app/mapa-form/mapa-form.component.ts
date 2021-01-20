@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentService } from '../services/component.service';
 import { FirebaseService } from '../firebase.service';
@@ -6,6 +6,8 @@ import { PetModel } from '../pet-model/pet.model';
 import { AuthService } from '../services/auth.service';
 import { SegundoReporte } from '../models/segundoReporte.model';
 import { ActualizacionModelComponent } from '../actualizacion-model/actualizacion-model.component';
+import { UbicacionModel } from '../models/ubicacion.model';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-mapa-form',
@@ -18,6 +20,9 @@ export class MapaFormComponent implements OnInit {
   lat: number;
   lng: number;
   zoom: number;
+  address: string;
+  private geoCoder: google.maps.Geocoder;
+
   mapTypeId: string;
   located: boolean;
   value: string;
@@ -48,14 +53,16 @@ export class MapaFormComponent implements OnInit {
   puerta: boolean = true;
   reporte: any ;
   nombre:any;
-
+  @Input()
+  ubicacionSearch:UbicacionModel=new UbicacionModel;
 
   // @Input()
   // segundoReporte!: string;
 
   constructor(
     private messageService: ComponentService,
-
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
     private petService: FirebaseService,
     private route: ActivatedRoute,
     private router: Router,
@@ -70,16 +77,84 @@ export class MapaFormComponent implements OnInit {
     this.value = '';
     
   }
+  @ViewChild('search')
+  public searchElementRef: ElementRef=new ElementRef('');
 
-  async ngOnInit() {
-    // this.store.dispatch(new fromStore.LoadCustomer());
 
+
+  ngOnInit() {
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);
       this.mascotass = pets;
       console.log(this.mascotass);
     });
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
+
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          console.log("return")
+
+          //set latitude, longitude and zoom
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
+          this.zoom = 12;
+     
+        });
+      });
+    });
   }
+
+  // Get Current Location Coordinates
+  private setCurrentLocation() {
+    console.log("set")
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        this.zoom = 8;
+        this.getAddress(this.lat, this.lng);
+      });
+    }
+  }
+
+
+  markerDragEnd($event: MouseEvent) {
+    console.log($event);
+    this.lat = $event.coords.lat;
+    this.lng = $event.coords.lng;
+    this.getAddress(this.lat, this.lng);
+  }
+
+  getAddress(latitude: number, longitude: number) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results: { formatted_address: string; }[], status: string) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.address = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
+    });
+  }
+
+
   initMap() {
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);

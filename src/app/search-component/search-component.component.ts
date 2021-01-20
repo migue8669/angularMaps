@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, EventEmitter, Output } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 
 import PlaceResult = google.maps.places.PlaceResult;
@@ -15,7 +15,9 @@ export class SearchComponentComponent implements OnInit {
   zoom: number;
   address: string;
   private geoCoder: google.maps.Geocoder;
-
+  @Output()
+  emitUbicacion: EventEmitter<any>=new EventEmitter<any>();
+  arrayUbicacion: any[] = [];
   @ViewChild('search')
   public searchElementRef: ElementRef=new ElementRef('');
 
@@ -42,11 +44,14 @@ export class SearchComponentComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+          console.log("return")
 
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+          this.arrayUbicacion.push(this.latitude,this.longitude,this.zoom)
+          this.emitUbicacion.emit(this.arrayUbicacion)
         });
       });
     });
@@ -54,6 +59,7 @@ export class SearchComponentComponent implements OnInit {
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
+    console.log("set")
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
