@@ -31,5 +31,5 @@ npm i @angular/cli
 npm i @angular/google-maps
 npm i @agm/core --save
 npm i @angular/fire firebase --save 
-
+npm i bootstrap
 npm i angularfire2
