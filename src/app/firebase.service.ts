@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PetModel } from './pet-model/pet.model';
+import { PetModel } from './models/pet.model';
 import { map, catchError } from 'rxjs/operators';
 import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 import{Observable } from 'rxjs';

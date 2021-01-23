@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { SegundoReporte } from '../models/segundoReporte.model';
-import { PetModel } from '../pet-model/pet.model';
+import { PetModel } from '../models/pet.model';
 import { UUID } from 'angular2-uuid';
 
 @Component({

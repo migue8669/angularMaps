@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, Vie
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentService } from '../services/component.service';
 import { FirebaseService } from '../firebase.service';
-import { PetModel } from '../pet-model/pet.model';
+import { PetModel } from '../models/pet.model';
 import { AuthService } from '../services/auth.service';
 import { SegundoReporte } from '../models/segundoReporte.model';
 import { ActualizacionModelComponent } from '../actualizacion-model/actualizacion-model.component';
@@ -83,6 +83,7 @@ export class MapaFormComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log(this.searchElementRef)
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);
       this.mascotass = pets;
@@ -109,6 +110,53 @@ export class MapaFormComponent implements OnInit {
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 12;
+        //  navigator.geolocation.getCurrentPosition((position) => {
+            if (this.opcion1) {
+              this.pets.tipoReporte = 'perdida';
+            }
+            if (this.opcion2) {
+              this.pets.tipoReporte = 'abandono';
+            }
+  //          console.log(position)
+            // this.lat = position.coords.latitude;
+            // this.lng = position.coords.longitude;
+      
+            this.mascotass.forEach((r) => {
+              console.log((this.pets.lat = r.lat));
+            });
+            console.log(this.lat);
+            this.mascotass.forEach((r) => {
+              console.log((this.pets.long = r.long));
+            });
+      
+            console.log(this.lng);
+            if (this.pets.lat == this.lat && this.pets.long == this.lng) {
+              console.log(this.pets.lat);
+      
+              // this.pets.lat = position.coords.latitude + 0.00001;
+              // console.log(this.pets.lat);
+      
+              // this.pets.long = position.coords.longitude + 0.00001;
+              // this.pets.foto = this.URLPublica;
+              this.pets.foto = this.selectedImage;
+      
+              console.log(this.pets);
+            } else {
+              // this.pets.lat = position.coords.latitude;
+              // this.pets.long = position.coords.longitude;
+              // this.pets.foto = this.URLPublica;
+              this.pets.foto = this.selectedImage;
+      
+              console.log(this.pets);
+            }
+            this.petService.crearReporte(this.pets).subscribe((respuesta) => {
+              console.log(respuesta);
+              this.pets = respuesta;
+            });
+      
+            this.zoom = 17;
+            this.located = true;
+     //     });
      
         });
       });
@@ -173,7 +221,7 @@ export class MapaFormComponent implements OnInit {
       if (this.opcion2) {
         this.pets.tipoReporte = 'abandono';
       }
-
+      console.log(position)
       this.lat = position.coords.latitude;
       this.lng = position.coords.longitude;
 

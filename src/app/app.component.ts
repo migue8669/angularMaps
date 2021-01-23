@@ -6,7 +6,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { FirebaseService } from './firebase.service';
-import { PetModel } from './pet-model/pet.model';
+import { PetModel } from './models/pet.model';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

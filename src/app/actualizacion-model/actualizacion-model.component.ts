@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { SegundoReporte } from '../models/segundoReporte.model';
-import { PetModel } from '../pet-model/pet.model';
+import { PetModel } from '../models/pet.model';
 import { ComponentService } from '../services/component.service';
 
 @Component({
