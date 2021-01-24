@@ -845,3 +845,10 @@ body .table thead th {
     display: none;
   }
 }
+#derecha   { float: right; }
+#izquierda { float: left;  }
+#paginacion {
+  border: 1px solid #CCC;
+  background-color: #E0E0E0;
+  padding: .5em;
+}

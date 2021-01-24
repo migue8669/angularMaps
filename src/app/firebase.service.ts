@@ -33,6 +33,7 @@ petsFotos?:Observable<PetModel>;
    public tareaCloudStorage(nombreArchivo: string, datos: any) {
     return this.storage.upload(nombreArchivo, datos);
   }
+  
  //Referencia del archivo
  public referenciaCloudStorage(nombreArchivo: any) {
 console.log("referenciaCloud")

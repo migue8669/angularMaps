@@ -3,23 +3,26 @@
     <div class="card" style="width: 25rem">
       <div class="card-body">
         <div class="modal-content">
-          <div class="modal-header">
+          <!-- <div class="modal-header">  -->
             <div class="contenedor">
-              <div class="contenedor">
-                <button
-                  type="button"
-                  style="margin: 10px"
-                  class="close"
-                  data-dismiss="modal"
-                >
-                  &times;
-                </button>
+              <div >
+              <button
+              id="derecha"
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >
+              &times;
+            </button>
+            </div>
+              
+            
                 <div *ngFor="let item of segundoReporte">{{ item }}</div>
-              </div>
+              
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      <!-- </div>-->
+    </div> 
   </div>
 </div>
