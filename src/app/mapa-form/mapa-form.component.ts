@@ -220,6 +220,7 @@ export class MapaFormComponent implements OnInit {
       this.pets.lat = this.lat;
       this.pets.long = this.lng;
     }
+ 
 
     if (this.pets.lat == this.lat && this.pets.long == this.lng) {
       console.log(this.pets.lat);
@@ -240,6 +241,7 @@ export class MapaFormComponent implements OnInit {
 
       console.log(this.pets);
     }
+    
     this.petService.crearReporte(this.pets).subscribe((respuesta) => {
       console.log(respuesta);
       this.pets = respuesta;
