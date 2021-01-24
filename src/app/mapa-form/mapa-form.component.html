@@ -56,7 +56,7 @@
     </div>
   </form>
   <div>
-    <input id="search" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+    <input id="search" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" (focus)="openAlert()" placeholder="Escribe la ubicación o dirección de los hechos" data-target="actualizacionModal1" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
 
     <div class="map-responsive">
  
@@ -123,4 +123,3 @@
  
     </div>
   </div>
-<

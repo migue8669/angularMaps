@@ -23,6 +23,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ComponentService } from './services/component.service';
 import { SearchComponentComponent } from './search-component/search-component.component';
 import { FirebaseService } from './firebase.service';
+import { AlertModalComponent } from './alert-modal/alert-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { FirebaseService } from './firebase.service';
     RegistroComponent,
     LoginComponent,
     HomeComponent,
-    SearchComponentComponent
+    SearchComponentComponent,
+    AlertModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,7 @@
 <app-actualizacion-model
   [segundoReporte]="arrayReporte"
 ></app-actualizacion-model>
-<!-- <app-search-component
-(emitUbicacion)="arrayUbicacion"
-></app-search-component> -->
+<app-alert-modal [alert]="puerta" ></app-alert-modal>
 <app-mapa-form
   [selectedImage]="selectedImage"
   (textoCambiado)="textoHijo1 = $event"
@@ -11,7 +9,7 @@
   (segundoReporte)="segundoReporteMain = $event"
   (emailReporte)="emailEnviado=$event"
   (emitReport)="arrayReporte=$event"
-  (abrirModal)="puerta=$event"
+  (alertEmit)="puerta=$event"
 ></app-mapa-form>
 <app-respuesta-model
   [textoHijo2]="textoHijo1"

@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   emailEnviado:any=null;
   arrayReporte:any=[];
   arrayUbicacion:any=[];
-  puerta:boolean=true;
+  puerta:boolean=false;
   constructor() { }
 
   ngOnInit() {
