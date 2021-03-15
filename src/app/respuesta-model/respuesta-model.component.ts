@@ -23,7 +23,7 @@ export class RespuestaModelComponent implements OnInit {
   @Input()
   textoHijo2: PetModel = new PetModel();
   @Input()
-  textoHijo21: string;
+  textoHijo21!: string;
   @Input()
   token: string;
 
@@ -62,7 +62,7 @@ segReporte:SegundoReporte=new SegundoReporte();
       );
        this.textoHijo2.nombre=this.correo
       console.log(this.arraySegundoReporte.toString());
-      this.textoHijo2.segundoReporte = this.arraySegundoReporte.toString();
+      this.textoHijo2.segundoReporte.reporte = this.arraySegundoReporte.toString();
 this.segReporte.nombre=this.correo;
 this.segReporte.reporte=this.arraySegundoReporte.toString();
 this.segReporte.id=UUID.UUID();
@@ -82,7 +82,7 @@ this.segReporte.id=UUID.UUID();
       this.textoHijo2.segundoReporte = this.pets.segundoReporte;
       this.textoHijo2.nombre=this.correo
       this.segReporte.nombre=this.correo
-      this.segReporte.reporte=this.pets.segundoReporte;
+      this.segReporte.reporte==this.pets.segundoReporte;
       this.segReporte.id=UUID.UUID();
 
       console.log(this.segReporte);
@@ -106,6 +106,6 @@ this.segReporte.id=UUID.UUID();
     //   console.log(respuesta)
     // });
     this.arraySegundoReporte.length = 0;
-    this.pets.segundoReporte = '';
+    this.pets.segundoReporte?.reporte == '';
   }
 }

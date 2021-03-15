@@ -10,11 +10,11 @@ import { FormControl } from '@angular/forms';
 })
 export class SearchComponentComponent implements OnInit {
   title: string = 'AGM project';
-  latitude: number;
-  longitude: number;
-  zoom: number;
-  address: string;
-  private geoCoder: google.maps.Geocoder;
+  latitude!: number;
+  longitude!: number;
+  zoom!: number;
+  address!: string;
+  private geoCoder!: google.maps.Geocoder;
   @Output()
   emitUbicacion: EventEmitter<any>=new EventEmitter<any>();
   arrayUbicacion: any[] = [];
@@ -71,7 +71,7 @@ export class SearchComponentComponent implements OnInit {
   }
 
 
-  markerDragEnd($event: MouseEvent) {
+  markerDragEnd($event: any) {
     console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;

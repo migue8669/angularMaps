@@ -1,7 +1,7 @@
 export class UbicacionModel {
-    lat: string;
-    long: string;
-    zoom: string;
+    lat!: string;
+    long!: string;
+    zoom!: string;
   }
   
   
