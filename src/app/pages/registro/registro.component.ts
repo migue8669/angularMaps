@@ -30,8 +30,8 @@ export class RegistroComponent implements OnInit {
       (resp) => {
         Swal.close();
         if (this.recordar) {
-          localStorage.setItem('email', this.usuario.email);
-          localStorage.setItem('nombre',this.usuario.nombre);
+          localStorage.setItem('email', this.usuario.email||"");
+          localStorage.setItem('nombre',this.usuario.nombre||"");
 
         }
         this.router.navigateByUrl('/login');
@@ -45,6 +45,7 @@ export class RegistroComponent implements OnInit {
           type: 'error',
           title: 'Error al autenticar',
           text: err.error.error.message,
+
         });
       }
     );
@@ -62,8 +63,8 @@ export class RegistroComponent implements OnInit {
       (resp) => {
         Swal.close();
         if (this.recordar) {
-          localStorage.setItem('email', this.usuario.email);
-          localStorage.setItem('nombre',this.usuario.nombre);
+          localStorage.setItem('email', this.usuario.email||"");
+          localStorage.setItem('nombre',this.usuario.nombre||"");
         }
         this.router.navigateByUrl('/home');
 this.componentService.sendMessage(resp);

@@ -27,7 +27,7 @@ export class RespuestaModelComponent implements OnInit {
   @Input()
   token: string;
 
-segReporte:SegundoReporte=new SegundoReporte();
+  segReporte: SegundoReporte = new SegundoReporte();
 
   correo: any;
   constructor(private petService: FirebaseService) {
@@ -45,11 +45,11 @@ segReporte:SegundoReporte=new SegundoReporte();
     this.segundoReporte(this.textoHijo2);
   }
   segundoReporte(texto: PetModel) {
-    this.correo = localStorage.getItem('email')
-    if(this.correo='undefined'){
-      this.correo='Anónimo'
+    this.correo = localStorage.getItem('email');
+    if ((this.correo = 'undefined')) {
+      this.correo = 'Anónimo';
     }
-    console.log(this.correo)
+    console.log(this.correo);
     console.log(this.textoHijo2);
     console.log(this.textoHijo21);
     this.textoHijo2.$key == this.textoHijo21;
@@ -57,15 +57,15 @@ segReporte:SegundoReporte=new SegundoReporte();
     if (this.textoHijo2.segundoReporte) {
       console.log(this.textoHijo2.segundoReporte, this.pets.segundoReporte);
       this.arraySegundoReporte.push(
-       // this.textoHijo2.segundoReporte,
+        // this.textoHijo2.segundoReporte,
         this.pets.segundoReporte
       );
-       this.textoHijo2.nombre=this.correo
+      this.textoHijo2.nombre = this.correo;
       console.log(this.arraySegundoReporte.toString());
-      this.textoHijo2.segundoReporte = this.arraySegundoReporte.toString();
-this.segReporte.nombre=this.correo;
-this.segReporte.reporte=this.arraySegundoReporte.toString();
-this.segReporte.id=UUID.UUID();
+      this.textoHijo2.segundoReporte == this.arraySegundoReporte.toString();
+      this.segReporte.nombre = this.correo;
+      this.segReporte.reporte = this.arraySegundoReporte.toString();
+      this.segReporte.id = UUID.UUID();
       // this.petService.actualizarReporte(this.valorReporte,this.textoHijo2).subscribe((respuesta)=>{
       //   console.log(respuesta)
       // });
@@ -80,10 +80,10 @@ this.segReporte.id=UUID.UUID();
       console.log(this.petActualizacion);
       this.textoHijo2.$key = this.textoHijo21;
       this.textoHijo2.segundoReporte = this.pets.segundoReporte;
-      this.textoHijo2.nombre=this.correo
-      this.segReporte.nombre=this.correo
-      this.segReporte.reporte=this.pets.segundoReporte;
-      this.segReporte.id=UUID.UUID();
+      this.textoHijo2.nombre = this.correo;
+      this.segReporte.nombre = this.correo;
+      this.segReporte.reporte == this.pets.segundoReporte;
+      this.segReporte.id = UUID.UUID();
 
       console.log(this.segReporte);
       // this.pets.$key=this.valorReporte;
@@ -106,6 +106,6 @@ this.segReporte.id=UUID.UUID();
     //   console.log(respuesta)
     // });
     this.arraySegundoReporte.length = 0;
-    this.pets.segundoReporte = '';
+    this.pets.segundoReporte?.reporte == '';
   }
 }

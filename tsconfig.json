@@ -7,9 +7,11 @@
    // "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "skipLibCheck": true,
+
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

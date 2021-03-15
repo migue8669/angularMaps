@@ -29,8 +29,8 @@ export class MapaFormComponent implements OnInit {
   lat: number;
   lng: number;
   zoom: number;
-  address: string;
-  private geoCoder: google.maps.Geocoder;
+  address?: string;
+  private geoCoder!: google.maps.Geocoder;
 
   mapTypeId: string;
   located: boolean;
@@ -58,8 +58,8 @@ export class MapaFormComponent implements OnInit {
   @Output()
   emitReport: EventEmitter<any> = new EventEmitter<any>();
   arraySegundoReporte: any[] = [];
-  token: any[] = [];
-  puerta: boolean = true;
+  token!: string;
+    puerta: boolean = true;
   reporte: any;
   nombre: any;
   @Input()
@@ -159,7 +159,7 @@ export class MapaFormComponent implements OnInit {
       this.guardarValid=true;
     }
   }
-  markerDragEnd($event: MouseEvent) {
+  markerDragEnd($event: any) {
     console.log($event);
     this.lat = $event.coords.lat;
     this.lng = $event.coords.lng;
@@ -279,7 +279,7 @@ export class MapaFormComponent implements OnInit {
     });
     // this.valorReporte.$key = segundoReporte.$key;
     //  this.componentService.getMessage().subscribe(res=>{this.token=res} );
-    this.token = localStorage.getItem('email');
+    this.token = localStorage.getItem('email') || '';
     //this.reporte.push(segundoReporte)
     console.log(this.segReporte);
     console.log(this.reporte);

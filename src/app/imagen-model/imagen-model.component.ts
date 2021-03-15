@@ -20,7 +20,7 @@ export class ImagenModelComponent  {
   referencia:any;
   close= '';
   @Output()
-url:EventEmitter<string>=new EventEmitter<string>();
+  url:EventEmitter<string>=new EventEmitter<string>();
 
   constructor(private petService:FirebaseService,private componentS:ComponentService) { }
   

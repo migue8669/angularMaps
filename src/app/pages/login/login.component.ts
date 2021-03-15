@@ -17,7 +17,7 @@ recordar=false;
 
   ngOnInit() {
     if(localStorage.getItem('email')){
-      this.usuario.email=localStorage.getItem('email');
+      this.usuario.email=localStorage.getItem('email')||"";
       
       if(this.usuario.email="undefined"){
             this.usuario.email=""
@@ -38,8 +38,8 @@ Swal.showLoading();
       console.log(resp)
       Swal.close()
       if(this.recordar){
-        localStorage.setItem('email',this.usuario.email);
-        localStorage.setItem('nombre',this.usuario.nombre);
+        localStorage.setItem('email',this.usuario.email||"");
+        localStorage.setItem('nombre',this.usuario.nombre||"");
 
       }
       this.router.navigateByUrl('/home')
