@@ -32,7 +32,7 @@ export class MapaFormComponent implements OnInit {
   address!: string;
   private geoCoder!: google.maps.Geocoder;
 
-  mapTypeId: string;
+  mapTypeId: any;
   located: boolean;
   value: string;
   @Input() mascotass: PetModel[] = [];
