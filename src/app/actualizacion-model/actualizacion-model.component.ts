@@ -12,7 +12,7 @@ import { ComponentService } from '../services/component.service';
 export class ActualizacionModelComponent implements OnInit {
   segundoReporteView: PetModel = new PetModel();
   @Input()
-  segundoReporte: SegundoReporte= new SegundoReporte();
+  segundoReporte!: SegundoReporte;
 
   info: any=null;
 
@@ -32,7 +32,7 @@ export class ActualizacionModelComponent implements OnInit {
     
 
 
-    this.segundoReporteView = this.segundoReporte;
+    this.segundoReporteView.segundoReporte.reporte= this.segundoReporte.reporte;
     //console.log(this.segundoReporte);
   }
 }

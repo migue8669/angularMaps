@@ -1,8 +1,8 @@
 export class SegundoReporte {
-    id?:string;
-    nombre?: string;
+    id!:string;
+    nombre!: string;
     
-    reporte?: string;
+    reporte!: string;
   }
   
   

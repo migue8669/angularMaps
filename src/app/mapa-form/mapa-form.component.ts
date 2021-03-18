@@ -31,8 +31,8 @@ export class MapaFormComponent implements OnInit {
   zoom: number;
   address!: string;
   private geoCoder!: google.maps.Geocoder;
-
-  mapTypeId: string;
+   
+  mapTypeId:string;
   located: boolean;
   value: string;
   @Input() mascotass: PetModel[] = [];
@@ -49,7 +49,7 @@ export class MapaFormComponent implements OnInit {
   @Output()
   textoCambiado: EventEmitter<PetModel> = new EventEmitter<PetModel>();
   @Output()
-  textoCambiado2: EventEmitter<PetModel> = new EventEmitter<PetModel>();
+  textoCambiado2: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   emailReporte: EventEmitter<any> = new EventEmitter<any>();
   abrirModal: boolean = true;
@@ -85,7 +85,7 @@ export class MapaFormComponent implements OnInit {
     this.lat = 0;
     this.lng = 0;
     this.zoom = 5;
-    this.mapTypeId = 'hybrid';
+    this.mapTypeId = 'HYBRID';
     this.located = false;
     this.value = '';
   }

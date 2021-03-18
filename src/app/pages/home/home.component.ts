@@ -8,9 +8,9 @@ import { PetModel } from 'src/app/models/pet.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  textoHijo11: PetModel[] = [];
-  textoHijo1: PetModel[] = [];
-  segundoReporteMain:SegundoReporte[]=[];
+  textoHijo11!: string;
+  textoHijo1: PetModel= new PetModel();
+  segundoReporteMain:any;
   selectedImage: any = null;
   emailEnviado:any=null;
   arrayReporte:any=[];

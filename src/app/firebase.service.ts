@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PetModel } from './models/pet.model';
 import { map, catchError } from 'rxjs/operators';
-import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
+//import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 import{Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { SegundoReporte } from './models/segundoReporte.model';
@@ -103,7 +103,7 @@ console.log("referenciaCloud")
    Object.keys(petsObj).forEach(key=>{
      console.log(key);
      console.log(petsObj);
-     const pet:any=petsObj[key];
+     const pet:any=petsObj;
 pet.$key=key;
 heroes.push(pet);
    })
@@ -116,7 +116,7 @@ heroes.push(pet);
     Object.keys(petsObj).forEach(key=>{
       console.log(key);
       console.log(petsObj);
-      const pet:any=petsObj[key];
+      const pet:any=petsObj;
  pet.$key=key;
  heroes.push(pet);
     })

@@ -29,8 +29,6 @@ recordar=false;
     if(form.invalid){return;
     }
 Swal.fire({
-  allowOutsideClick:false,
-  type:'info',
   text:'Autenticando...'
 });
 Swal.showLoading();
@@ -47,7 +45,6 @@ Swal.showLoading();
     },(err)=>{
       // console.log(err.error.error.message)
       Swal.fire({
-        type:'error',
         title:"Error al autenticar",
         text:err.error.error.message
       })
