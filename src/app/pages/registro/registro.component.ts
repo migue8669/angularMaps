@@ -22,8 +22,6 @@ export class RegistroComponent implements OnInit {
       return;
     }
     Swal.fire({
-      allowOutsideClick: false,
-      type: 'info',
       text: 'Espere',
     });
     this.auth.nuevoUsuario(this.usuario).subscribe(
@@ -42,7 +40,6 @@ export class RegistroComponent implements OnInit {
       (err) => {
         console.log(err.error.error.message);
         Swal.fire({
-          type: 'error',
           title: 'Error al autenticar',
           text: err.error.error.message,
         });
@@ -54,8 +51,7 @@ export class RegistroComponent implements OnInit {
   submitAnonimo() {
     // if(form.invalid){return;}
     Swal.fire({
-      allowOutsideClick: false,
-      type: 'info',
+
       text: 'Espere',
     });
     this.auth.usuarioAnonimo(this.usuario).subscribe(
@@ -72,7 +68,6 @@ this.componentService.sendMessage(resp);
       (err) => {
         console.log(err.error.error.message);
         Swal.fire({
-          type: 'error',
           title: 'Error al autenticar',
           text: err.error.error.message,
         });

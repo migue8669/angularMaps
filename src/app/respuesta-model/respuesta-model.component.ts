@@ -23,7 +23,7 @@ export class RespuestaModelComponent implements OnInit {
   @Input()
   textoHijo2: PetModel = new PetModel();
   @Input()
-  textoHijo21!: string;
+  textoHijo21!: any;
   @Input()
   token: string;
 
@@ -82,7 +82,7 @@ this.segReporte.id=UUID.UUID();
       this.textoHijo2.segundoReporte = this.pets.segundoReporte;
       this.textoHijo2.nombre=this.correo
       this.segReporte.nombre=this.correo
-      this.segReporte.reporte==this.pets.segundoReporte;
+      this.segReporte.reporte=this.pets.segundoReporte.reporte;
       this.segReporte.id=UUID.UUID();
 
       console.log(this.segReporte);

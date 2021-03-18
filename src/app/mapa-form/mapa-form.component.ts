@@ -49,7 +49,7 @@ export class MapaFormComponent implements OnInit {
   @Output()
   textoCambiado: EventEmitter<PetModel> = new EventEmitter<PetModel>();
   @Output()
-  textoCambiado2: EventEmitter<PetModel> = new EventEmitter<PetModel>();
+  textoCambiado2: EventEmitter<PetModel[]> = new EventEmitter<PetModel[]>();
   @Output()
   emailReporte: EventEmitter<any> = new EventEmitter<any>();
   abrirModal: boolean = true;

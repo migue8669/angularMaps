@@ -122,7 +122,7 @@ export class AppComponent implements OnInit {
     this.valorReporte=key;
     console.log(this.valorReporte)
 this.v=  this.petService.getPet(this.valorReporte).subscribe(
-      resp=>{this.petActualizacion=resp;      }
+      resp=>{this.petActualizacion.reporte=resp.toString();      }
 
       );
     
