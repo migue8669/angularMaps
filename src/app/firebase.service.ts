@@ -97,28 +97,28 @@ console.log("referenciaCloud")
   
  }
 
-   private crearArreglo(petsObj:object){
+   private crearArreglo(petsObj:any){
    const heroes:PetModel[]=[];
    if(petsObj===null){return [];}
-   Object.keys(petsObj).forEach(key=>{
+   Object.keys(petsObj).forEach(key =>{
      console.log(key);
      console.log(petsObj);
-     const pet:any=petsObj[key];
+     const pet:PetModel=petsObj[key];
 pet.$key=key;
 heroes.push(pet);
    })
    console.log(heroes);
     return heroes;
    }
-   private crearArregloReporte(petsObj:object){
+   private crearArregloReporte(petsObj:any){
     const heroes:SegundoReporte[]=[];
     if(petsObj===null){return [];}
     Object.keys(petsObj).forEach(key=>{
       console.log(key);
       console.log(petsObj);
-      const pet:any=petsObj[key];
-      pet.$key=key;
- pet.$key=key;
+      const pet:SegundoReporte=petsObj[key];
+      pet.id=key;
+ pet.id=key;
  heroes.push(pet);
     })
     console.log(heroes);
