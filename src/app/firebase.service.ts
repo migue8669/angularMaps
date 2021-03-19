@@ -103,7 +103,7 @@ console.log("referenciaCloud")
    Object.keys(petsObj).forEach(key=>{
      console.log(key);
      console.log(petsObj);
-     const pet:any=petsObj;
+     const pet:any=petsObj[key];
 pet.$key=key;
 heroes.push(pet);
    })
@@ -116,7 +116,8 @@ heroes.push(pet);
     Object.keys(petsObj).forEach(key=>{
       console.log(key);
       console.log(petsObj);
-      const pet:any=petsObj;
+      const pet:any=petsObj[key];
+      pet.$key=key;
  pet.$key=key;
  heroes.push(pet);
     })

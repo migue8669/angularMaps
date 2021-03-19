@@ -10,10 +10,11 @@ import { ComponentService } from '../services/component.service';
   styleUrls: ['./actualizacion-model.component.css'],
 })
 export class ActualizacionModelComponent implements OnInit {
-  segundoReporteView: PetModel = new PetModel();
-  @Input()
-  segundoReporte: PetModel = new PetModel();
+   segundoReporteView: SegundoReporte[]=[];
+  //segundoReporteView: any;
 
+  @Input()
+  segundoReporte: SegundoReporte[]=[];
   info: any=null;
 
   constructor(
@@ -32,7 +33,7 @@ export class ActualizacionModelComponent implements OnInit {
     
 
 
-    this.segundoReporteView.segundoReporte.reporte = this.segundoReporte.reporte;
+    this.segundoReporteView = this.segundoReporte;
     //console.log(this.segundoReporte);
   }
 }
