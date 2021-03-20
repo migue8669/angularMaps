@@ -1,1 +1,19 @@
 /*  */
+button.centrado {
+    width: 110px; /* Para que no se rompa en dos líneas, y lo translade tal cual. */
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  nav.mainNav {
+    display: inline-block;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #4800ff;
+}
+ 
+nav.mainNav > .navItem {
+    display: inline-block;
+    padding: 20px;
+    background: #4800ff;
+    color: #fff;
+}

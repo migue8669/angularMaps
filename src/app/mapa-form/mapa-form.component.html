@@ -1,19 +1,45 @@
 <form #myForm="ngForm">
   <div class="col-xs-3" style="text-align: center">
     <h1>Registro de animales perdidos o abandonados</h1>
+    <br/>
+
     <h6>Elige el tipo de reporte que realizarás</h6>
+    <br/>
+
+    <div class="btn-group">
+
     <input
       id="checkPerdida"
+      class="navItem"
       type="checkbox"
       [(ngModel)]="opcion1"
       name="check"
+      style="margin-left: 10px"
     />Pérdida<br />
     <input
       id="checkAbandono"
+      class="navItem"
       type="checkbox"
       [(ngModel)]="opcion2"
       name="check1"
-    />Abandono<br />
+      style="margin-left: 10px"
+    />Abandono
+
+      </div>
+      <br />
+      <br/>
+
+    <button
+    type="button"
+    class="btn btn-outline-primary"
+    data-toggle="modal"
+    data-target="#myModalPicture"
+  >Fotografía
+    <!-- <img img src="./assets/camara.png" width="30" height="30" /> -->
+    <!-- Cargar foto -->
+  </button><br/>    <br/>
+
+  <div class="form-group">
 
     <textarea
       class="col-4"
@@ -23,6 +49,7 @@
       placeholder="Describe los hechos"
       >{{ textoHijo2 }}</textarea
     >
+  </div>
     <br/>
     <input
       id="search"
@@ -40,16 +67,7 @@
       #search
     />
     <br />
-    <button
-      type="button"
-      class="btn btn-light"
-      style="margin: 10px"
-      data-toggle="modal"
-      data-target="#myModalPicture"
-    >
-      <img img src="./assets/camara.png" width="30" height="30" />
-      <!-- Cargar foto -->
-    </button>
+   
 
     <button
       type="button"

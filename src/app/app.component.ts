@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   src = '';
   valorReporte:any;
  petActualizacion:PetModel=new PetModel()
-  v:any;
+  valueReport:any;
   segundoReporteView:any;
   segundoReporteMain:PetModel[]=[];
   textoHijo1: PetModel[] = [];
@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
   async openDialog(key:PetModel){
     this.valorReporte=key;
     console.log(this.valorReporte)
-this.v=  this.petService.getPet(this.valorReporte).subscribe(
+this.valueReport=  this.petService.getPet(this.valorReporte).subscribe(
       resp=>{this.petActualizacion.reporte=resp.toString();      }
 
       );
@@ -143,16 +143,12 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
     
       console.log(this.arraySegundoReporte.toString())
       this.petActualizacion.segundoReporte=this.arraySegundoReporte.toString()
-      // this.arraySegundoReporte.forEach(i=>{this.petActualizacion.segundoReporte=i})
-      // console.log(this.petActualizacion.segundoReporte)
+
     }else{
-    //  this.petService.getPet(this.valorReporte).subscribe(
-    //    resp=>{this.petActualizacion=resp});
-    // console.log(this.petActualizacion)
+
     this.petActualizacion.$key=this.valorReporte;
     this.petActualizacion.segundoReporte=this.pets.segundoReporte
          console.log(this.petActualizacion)
-        // this.pets.$key=this.valorReporte;
     
     }this.petService.actualizarReporte(this.valorReporte,this.petActualizacion).subscribe((respuesta)=>{
       console.log(respuesta) 
@@ -184,25 +180,6 @@ this.v=  this.petService.getPet(this.valorReporte).subscribe(
     }
   }
 
-  //Sube el archivo a Cloud Storage
-  // public subirArchivo() {
-  //   let archivo = this.datosFormulario.get('archivo');
-  //   let referencia = this.petService.referenciaCloudStorage(this.nombreArchivo);
-  //   let tarea = this.petService.tareaCloudStorage(this.nombreArchivo, archivo);
 
-  //   //Cambia el porcentaje
-  //   tarea.percentageChanges().subscribe((porcentaje:any) => {
-  //     this.porcentaje = Math.round(porcentaje);
-  //     if (this.porcentaje == 100) {
-  //       this.finalizado = true;
-  //     }
-  //   });
-
-  //   referencia.getDownloadURL().subscribe((URL: any) => {
-  //     this.URLPublica = URL;
-  //     this.selectedImage=URL;
-  //     console.log(this.selectedImage)
-  //   });
-  // }
 
 }
