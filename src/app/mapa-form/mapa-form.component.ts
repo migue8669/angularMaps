@@ -98,6 +98,7 @@ export class MapaFormComponent implements OnInit {
       console.log(pets);
       this.mascotass = pets;
       console.log(this.mascotass);
+      
     });
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -116,7 +117,6 @@ export class MapaFormComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          console.log('return');
 
           //set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
@@ -137,6 +137,8 @@ export class MapaFormComponent implements OnInit {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.zoom = 8;
+        console.log(this.lat);
+        console.log(this.lng);
         this.getAddress(this.lat, this.lng);
       });
       if (
@@ -170,8 +172,8 @@ export class MapaFormComponent implements OnInit {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
       (results: { formatted_address: string }[], status: string) => {
-        console.log(results);
-        console.log(status);
+      //  console.log(results);
+       // console.log(status);
         if (status === 'OK') {
           if (results[0]) {
             this.zoom = 12;
@@ -223,12 +225,22 @@ export class MapaFormComponent implements OnInit {
  
 
     if (this.pets.lat == this.lat && this.pets.long == this.lng) {
+      console.log("this.lat");
+      console.log(this.lat);
+      this.lat=this.lat+Math.floor(0.0009995) + 0.00001;
+      console.log(this.lat);
+      this.lng=this.lng+Math.floor(0.0009995) + 0.00001;
+      console.log(this.pets.lat);
+//       const random = (min: number, max: number) => {
+//         return Math.floor(Math.random() * (max - min + 1)) + min;
+//       }
+// console.log("random "+random)
+      this.pets.lat = this.lat;
+
+
       console.log(this.pets.lat);
 
-      this.pets.lat = this.pets.lat + 0.00001;
-      console.log(this.pets.lat);
-
-      this.pets.long =  this.pets.long + 0.00001;
+      this.pets.long =  this.lng;
       // this.pets.foto = this.URLPublica;
       this.pets.foto = this.selectedImage;
 
