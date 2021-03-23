@@ -1,5 +1,5 @@
 <app-actualizacion-model
-  [segundoReporte]="arrayReporte"
+  [segundoReporte]="arraySegundoReporte"
 ></app-actualizacion-model>
 <app-alert-modal [alert]="puerta" ></app-alert-modal>
 <app-mapa-form
@@ -8,7 +8,7 @@
   (textoCambiado2)="textoHijo11 = $event"
   (segundoReporte)="segundoReporteMain = $event"
   (emailReporte)="emailEnviado=$event"
-  (emitReport)="arrayReporte=$event"
+  (emitReport)="arraySegundoReporte=$event"
   (alertEmit)="puerta=$event"
 ></app-mapa-form>
 <app-respuesta-model

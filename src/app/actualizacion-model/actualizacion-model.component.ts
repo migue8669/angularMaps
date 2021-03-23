@@ -23,7 +23,6 @@ export class ActualizacionModelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     }
 
  

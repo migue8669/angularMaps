@@ -295,11 +295,13 @@ export class MapaFormComponent implements OnInit {
     //this.reporte.push(segundoReporte)
     console.log(this.segReporte);
     console.log(this.reporte);
+    console.log(this.token);
 
     this.componentService.sendMessage(segundoReporte);
     this.emailReporte.emit(this.token);
     this.segundoReporteView = segundoReporte;
     // this.messageService.sendMessage(segundoReporte);
+    this.arraySegundoReporte.length=0;
   }
   salir() {
     this.auth.logOut();

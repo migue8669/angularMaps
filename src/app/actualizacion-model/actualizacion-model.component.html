@@ -14,10 +14,11 @@
             >
               &times;
             </button>
+            Actualización de reporte
             </div>
               
             
-                <div *ngFor="let item of segundoReporte">{{ item }}</div>
+                <div *ngFor="let item of segundoReporte;  let i=index">{{ item }}</div>
               
             </div>
           </div>

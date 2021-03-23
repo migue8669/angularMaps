@@ -40,7 +40,6 @@ segReporte:SegundoReporte=new SegundoReporte();
   }
   inicio() {
     this.textoHijo2.$key = this.textoHijo21;
-    console.log(this.token);
     console.log(this.textoHijo21);
     this.segundoReporte(this.textoHijo2);
   }
@@ -82,7 +81,7 @@ this.segReporte.id=UUID.UUID();
       this.textoHijo2.segundoReporte = this.pets.segundoReporte;
       this.textoHijo2.nombre=this.correo
       this.segReporte.nombre=this.correo
-      this.segReporte.reporte=this.pets.segundoReporte.reporte;
+      this.segReporte.reporte=this.arraySegundoReporte.toString();
       this.segReporte.id=UUID.UUID();
 
       console.log(this.segReporte);
