@@ -1,56 +1,60 @@
 <form #myForm="ngForm">
   <div class="col-xs-3" style="text-align: center">
     <h1>Registro de animales perdidos o abandonados</h1>
-    <br/>
+    <br />
 
     <h6>Elige el tipo de reporte que realizarás</h6>
-    <br/>
 
     <div class="btn-group">
-
-    <input
-      id="checkPerdida"
-      class="navItem"
-      type="checkbox"
-      [(ngModel)]="opcion1"
-      name="check"
-      style="margin-left: 10px"
-    />Pérdida<br />
-    <input
-      id="checkAbandono"
-      class="navItem"
-      type="checkbox"
-      [(ngModel)]="opcion2"
-      name="check1"
-      style="margin-left: 10px"
-    />Abandono
-
-      </div>
+      <label>
+        <input
+          id="checkPerdida"
+          class="navItem"
+          type="checkbox"
+          [(ngModel)]="opcion1"
+          name="check"
+          style="margin: 10px"
+        />Pérdida
+      </label>
       <br />
-      <br/>
+      <label>
+        <input
+          id="checkAbandono"
+          class="navItem"
+          type="checkbox"
+          [(ngModel)]="opcion2"
+          name="check1"
+          style="margin: 10px"
+        />Abandono
+      </label>
+    </div>
+    <br />
+    <label>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        data-toggle="modal"
+        data-target="#myModalPicture"
+      >
+        Fotografía
+        <!-- <img img src="./assets/camara.png" width="30" height="30" /> -->
+        <!-- Cargar foto -->
+      </button>
+    </label>
+    <br />
+    <br />
 
-    <button
-    type="button"
-    class="btn btn-outline-primary"
-    data-toggle="modal"
-    data-target="#myModalPicture"
-  >Fotografía
-    <!-- <img img src="./assets/camara.png" width="30" height="30" /> -->
-    <!-- Cargar foto -->
-  </button><br/>    <br/>
-
-  <div class="form-group">
-
-    <textarea
-      class="col-4"
-      type="textArea"
-      [(ngModel)]="pets.reporte"
-      name="reporte"
-      placeholder="Describe los hechos"
-      >{{ textoHijo2 }}</textarea
-    >
-  </div>
-    <br/>
+    <div class="form-group">
+      <textarea
+        class="col-4"
+        type="textArea"
+        [(ngModel)]="pets.reporte"
+        name="reporte"
+        placeholder="Describe los hechos"
+        >{{ textoHijo2 }}</textarea
+      >
+    </div>
+    <br />
     <input
       id="search"
       type="text"
@@ -67,7 +71,6 @@
       #search
     />
     <br />
-   
 
     <button
       type="button"
