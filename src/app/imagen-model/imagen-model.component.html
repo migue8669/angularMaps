@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModalPicture" data-backdrop="" *ngIf="finalizado">
+<div class="modal fade" id="myModalPicture" data-backdrop="" *ngIf="close">
   <div class="modal-dialog">
     <div class="card" style="width: 25rem">
       <div class="card-body">
@@ -49,6 +49,7 @@
                     [disabled]="
                       !archivoForm.valid && porcentaje > 0 && porcentaje < 100
                     "
+                    onclick="$('#myModalPicture').modal('hide');"
                   >
                     Guardar
                   </button>

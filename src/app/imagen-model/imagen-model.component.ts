@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output  } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output,Input, OnInit  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComponentService } from '../services/component.service';
 import { FirebaseService } from '../firebase.service';
@@ -8,7 +8,7 @@ import { FirebaseService } from '../firebase.service';
   templateUrl: './imagen-model.component.html',
   styleUrls: ['./imagen-model.component.css']
 })
-export class ImagenModelComponent  {
+export class ImagenModelComponent  implements OnInit {
   datosFormulario = new FormData();
   mensajeArchivo = 'No hay un archivo seleccionado';
   nombreArchivo = '';
@@ -18,12 +18,22 @@ export class ImagenModelComponent  {
   URLPublica = '';
   tarea:any;
   referencia:any;
-  close= '';
+  @Input()
+  close: boolean=true;
   @Output()
 url:EventEmitter<string>=new EventEmitter<string>();
 
   constructor(private petService:FirebaseService,private componentS:ComponentService) { }
-  
+  ngOnInit(): void {
+    this.close=true;
+    this.componentS.getMessage();
+    console.log("onInit Imagen")
+
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    
+  }
+
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
   });
@@ -68,5 +78,12 @@ this.referencia.getDownloadURL().subscribe((URL: any) => {
     });
 
   }
-
+async cerrar (){
+  console.log("cerrar")
+  this.close!=this.close;
+  console.log(this.close)
+this.close=false
 }
+}
+
+

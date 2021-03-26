@@ -1,11 +1,11 @@
-<form #myForm="ngForm">
+
+<form #myForm="ngForm" style="background-color: #7761A5;">
   <div class="col-xs-3" style="text-align: center">
-    <h1>Registro de animales perdidos o abandonados</h1>
-    <br />
+    <h1 style="color: white; ">Registro Desapariciones</h1>
 
-    <h6>Elige el tipo de reporte que realizarás</h6>
+    <h6 style="color: white;">Sube una foto </h6>
 
-    <div class="btn-group">
+    <!-- <div class="btn-group">
       <label>
         <input
           id="checkPerdida"
@@ -27,21 +27,22 @@
           style="margin: 10px"
         />Abandono
       </label>
-    </div>
-    <br />
+    </div> 
+    <br />-->
     <label>
       <button
         type="button"
-        class="btn btn-outline-primary"
+        class="btn btn-primary"
         data-toggle="modal"
         data-target="#myModalPicture"
+ 
+    (click)="openAlert()"
       >
         Fotografía
         <!-- <img img src="./assets/camara.png" width="30" height="30" /> -->
         <!-- Cargar foto -->
       </button>
     </label>
-    <br />
     <br />
 
     <div class="form-group">
@@ -74,7 +75,7 @@
 
     <button
       type="button"
-      class="btn btn-outline-primary"
+      class="btn btn-primary"
       style="margin: 10px"
       (click)="primerReporte()"
       *ngIf="guardarValid"
@@ -83,7 +84,7 @@
     </button>
     <button
       type="button"
-      class="btn btn-outline-danger"
+      class="btn btn-danger"
       style="margin: 10px"
       (click)="salir()"
     >

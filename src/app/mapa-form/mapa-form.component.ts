@@ -154,6 +154,7 @@ export class MapaFormComponent implements OnInit {
   openAlert() {
     this.modalTemp = true;
     this.alertEmit.emit(this.modalTemp);
+    this.componentService.sendMessage(this.modalTemp)
     console.log(this.modalTemp);
     if(this.modalTemp=false){
       this.guardarValid=false;

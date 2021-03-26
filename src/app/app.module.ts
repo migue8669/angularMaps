@@ -24,6 +24,8 @@ import { ComponentService } from './services/component.service';
 import { SearchComponentComponent } from './search-component/search-component.component';
 import { FirebaseService } from './firebase.service';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import {MatCardModule} from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
     FormsModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatCardModule,
     AgmCoreModule.forRoot({
 
       apiKey: 'AIzaSyAWKO1-r6f-pr-DWvw8ydfPSnMuwsUpwgo',
