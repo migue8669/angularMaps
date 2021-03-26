@@ -47,6 +47,7 @@
 
     <div class="form-group">
       <textarea
+      id="reporte"
         class="col-4"
         type="textArea"
         [(ngModel)]="pets.reporte"
@@ -77,7 +78,7 @@
       type="button"
       class="btn btn-primary"
       style="margin: 10px"
-      (click)="primerReporte()"
+      (click)="primerReporte(myForm)"
       *ngIf="guardarValid"
     >
       Guardar

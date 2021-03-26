@@ -17,6 +17,7 @@ import { SegundoReporte } from '../models/segundoReporte.model';
 import { ActualizacionModelComponent } from '../actualizacion-model/actualizacion-model.component';
 import { UbicacionModel } from '../models/ubicacion.model';
 import { MapsAPILoader } from '@agm/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-mapa-form',
@@ -93,40 +94,8 @@ export class MapaFormComponent implements OnInit {
   public searchElementRef: ElementRef = new ElementRef('');
 
   ngOnInit() {
-    console.log(this.searchElementRef);
-    this.petService.getAll().subscribe((pets) => {
-      console.log(pets);
-      this.mascotass = pets;
-      console.log(this.mascotass);
-      
-    });
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder();
+    this.initMap();}
 
-      let autocomplete = new google.maps.places.Autocomplete(
-        this.searchElementRef.nativeElement
-      );
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          //set latitude, longitude and zoom
-          this.lat = place.geometry.location.lat();
-          this.lng = place.geometry.location.lng();
-          this.zoom = 12;
-  
-        });
-      });
-    });
-  }
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
@@ -190,14 +159,42 @@ export class MapaFormComponent implements OnInit {
   }
 
   initMap() {
+    console.log(this.searchElementRef);
     this.petService.getAll().subscribe((pets) => {
       console.log(pets);
       this.mascotass = pets;
       console.log(this.mascotass);
+      
+    });
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder();
+
+      let autocomplete = new google.maps.places.Autocomplete(
+        this.searchElementRef.nativeElement
+      );
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
+          this.zoom = 12;
+  
+        });
+      });
     });
   }
 
-  primerReporte() {
+  primerReporte(form:NgForm) {
     navigator.geolocation.getCurrentPosition((position) => {
       this.lat = position.coords.latitude;
       this.lng = position.coords.longitude;
@@ -232,10 +229,11 @@ export class MapaFormComponent implements OnInit {
       console.log(this.lat);
       this.lng=this.lng+Math.floor(0.0009995) + 0.00001;
       console.log(this.pets.lat);
-//       const random = (min: number, max: number) => {
-//         return Math.floor(Math.random() * (max - min + 1)) + min;
-//       }
-// console.log("random "+random)
+
+
+
+
+
       this.pets.lat = this.lat;
 
 
@@ -262,6 +260,14 @@ export class MapaFormComponent implements OnInit {
 
     this.zoom = 17;
     this.located = true;
+    form.resetForm();
+    this.petService.getAll().subscribe((pets) => {
+      console.log(pets);
+      this.mascotass = pets;
+      console.log(this.mascotass);
+      
+    });
+    this.initMap();
   }
 
   openDialog(key: PetModel) {
