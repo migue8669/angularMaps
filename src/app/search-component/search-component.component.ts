@@ -44,7 +44,6 @@ export class SearchComponentComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          console.log("return")
 
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
@@ -59,7 +58,6 @@ export class SearchComponentComponent implements OnInit {
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
-    console.log("set")
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -72,7 +70,6 @@ export class SearchComponentComponent implements OnInit {
 
 
   markerDragEnd($event: any) {
-    console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
@@ -80,8 +77,7 @@ export class SearchComponentComponent implements OnInit {
 
   getAddress(latitude: number, longitude: number) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results: { formatted_address: string; }[], status: string) => {
-      console.log(results);
-      console.log(status);
+     
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;

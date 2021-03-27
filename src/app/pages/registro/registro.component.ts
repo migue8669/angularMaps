@@ -33,12 +33,10 @@ export class RegistroComponent implements OnInit {
 
         }
         this.router.navigateByUrl('/login');
-        console.log(resp);
         this.componentService.sendMessage(resp);
 
       },
       (err) => {
-        console.log(err.error.error.message);
         Swal.fire({
           title: 'Error al autenticar',
           text: err.error.error.message,
@@ -63,10 +61,8 @@ export class RegistroComponent implements OnInit {
         }
         this.router.navigateByUrl('/home');
 this.componentService.sendMessage(resp);
-        console.log(resp);
       },
       (err) => {
-        console.log(err.error.error.message);
         Swal.fire({
           title: 'Error al autenticar',
           text: err.error.error.message,

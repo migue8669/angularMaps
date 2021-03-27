@@ -34,7 +34,6 @@ Swal.fire({
 });
 Swal.showLoading();
     this.auth.logIn(this.usuario).subscribe(resp=>{
-      console.log(resp)
       Swal.close()
       if(this.recordar){
         localStorage.setItem('email',this.usuario.email);
@@ -44,14 +43,12 @@ Swal.showLoading();
       this.router.navigateByUrl('/home')
 
     },(err)=>{
-      // console.log(err.error.error.message)
       Swal.fire({
         title:"Error al autenticar",
         text:err.error.error.message
       })
     })
 
-console.log("login",form)
   }
 
 }

@@ -99,15 +99,12 @@ export class MapaFormComponent implements OnInit {
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
-    console.log('set');
     if ('geolocation' in navigator) {
-      console.log(navigator);
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.zoom = 8;
-        console.log(this.lat);
-        console.log(this.lng);
+    
         this.getAddress(this.lat, this.lng);
       });
       if (
@@ -116,7 +113,6 @@ export class MapaFormComponent implements OnInit {
         })
       ) {
         this.geolocal = false;
-        console.log(this.geolocal);
       }
     }
   }
@@ -124,7 +120,6 @@ export class MapaFormComponent implements OnInit {
     this.modalTemp = true;
     this.alertEmit.emit(this.modalTemp);
     this.componentService.sendMessage(this.modalTemp)
-    console.log(this.modalTemp);
     if(this.modalTemp=false){
       this.guardarValid=false;
     }else{
@@ -132,7 +127,6 @@ export class MapaFormComponent implements OnInit {
     }
   }
   markerDragEnd($event: any) {
-    console.log($event);
     this.lat = $event.coords.lat;
     this.lng = $event.coords.lng;
     this.getAddress(this.lat, this.lng);
@@ -142,8 +136,7 @@ export class MapaFormComponent implements OnInit {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
       (results: { formatted_address: string }[], status: string) => {
-      //  console.log(results);
-       // console.log(status);
+      
         if (status === 'OK') {
           if (results[0]) {
             this.zoom = 12;
@@ -159,11 +152,8 @@ export class MapaFormComponent implements OnInit {
   }
 
   initMap() {
-    console.log(this.searchElementRef);
     this.petService.getAll().subscribe((pets) => {
-      console.log(pets);
       this.mascotass = pets;
-      console.log(this.mascotass);
       
     });
     //load Places Autocomplete
@@ -206,13 +196,11 @@ export class MapaFormComponent implements OnInit {
     if (this.opcion2) {
       this.pets.tipoReporte = 'abandono';
     }
-    //  console.log(position);
 
     if ((this.modalTemp = false)) {
       this.mascotass.forEach((r) => {
         console.log((this.pets.lat = r.lat));
       });
-      console.log(this.lat);
       this.mascotass.forEach((r) => {
         console.log((this.pets.long = r.long));
       });
@@ -223,12 +211,9 @@ export class MapaFormComponent implements OnInit {
  
 
     if (this.pets.lat == this.lat && this.pets.long == this.lng) {
-      console.log("this.lat");
-      console.log(this.lat);
+      
       this.lat=this.lat+Math.floor(0.0009995) + 0.00001;
-      console.log(this.lat);
       this.lng=this.lng+Math.floor(0.0009995) + 0.00001;
-      console.log(this.pets.lat);
 
 
 
@@ -237,24 +222,20 @@ export class MapaFormComponent implements OnInit {
       this.pets.lat = this.lat;
 
 
-      console.log(this.pets.lat);
 
       this.pets.long =  this.lng;
       // this.pets.foto = this.URLPublica;
       this.pets.foto = this.selectedImage;
 
-      console.log(this.pets);
     } else {
       this.pets.lat = this.lat;
       this.pets.long =  this.lng;
       // this.pets.foto = this.URLPublica;
       this.pets.foto = this.selectedImage;
 
-      console.log(this.pets);
     }
     
     this.petService.crearReporte(this.pets).subscribe((respuesta) => {
-      console.log(respuesta);
       this.pets = respuesta;
     });
 
@@ -262,9 +243,7 @@ export class MapaFormComponent implements OnInit {
     this.located = true;
     form.resetForm();
     this.petService.getAll().subscribe((pets) => {
-      console.log(pets);
       this.mascotass = pets;
-      console.log(this.mascotass);
       
     });
     this.initMap();
@@ -273,41 +252,29 @@ export class MapaFormComponent implements OnInit {
   openDialog(key: PetModel) {
     this.valorReporte = key;
     this.valorReporte.$key = key.$key;
-    // this.abrirModal.emit(this.puerta);
-    // console.log(this.puerta);
+
     this.componentService.sendMessage(this.abrirModal);
-    console.log(this.valorReporte);
-    // this.v=  this.petService.getPet(this.valorReporte).subscribe(
-    //       resp=>{this.petActualizacion=resp,      console.log(this.petActualizacion)
-    // }
+   
     this.textoCambiado.emit(this.valorReporte); // );
     this.textoCambiado2.emit(this.valorReporte.$key);
   }
   openDialogo(segundoReporte: PetModel) {
     this.valorReporte = segundoReporte;
-    console.log(this.valorReporte);
 
     this.petService.getReporteAll(this.valorReporte.$key).subscribe((res) => {
       res.forEach((element) => {
         (this.reporte = element.reporte),
-          console.log(this.reporte),
           (this.nombre = element.nombre),
           this.arraySegundoReporte.push(this.reporte, this.nombre),
           this.emitReport.emit(this.arraySegundoReporte);
       });
     });
-    // this.valorReporte.$key = segundoReporte.$key;
-    //  this.componentService.getMessage().subscribe(res=>{this.token=res} );
-    this.token.push( localStorage.getItem('email'));
-    //this.reporte.push(segundoReporte)
-    console.log(this.segReporte);
-    console.log(this.reporte);
-    console.log(this.token);
+  this.token.push( localStorage.getItem('email'));
+
 
     this.componentService.sendMessage(segundoReporte);
     this.emailReporte.emit(this.token);
     this.segundoReporteView = segundoReporte;
-    // this.messageService.sendMessage(segundoReporte);
     this.arraySegundoReporte.length=0;
   }
   salir() {

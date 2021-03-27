@@ -27,7 +27,6 @@ url:EventEmitter<string>=new EventEmitter<string>();
   ngOnInit(): void {
     this.close=true;
     this.componentS.getMessage();
-    console.log("onInit Imagen")
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -45,7 +44,6 @@ url:EventEmitter<string>=new EventEmitter<string>();
       for (let i = 0; i < event.target.files.length; i++) {
         this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
         this.nombreArchivo = event.target.files[i].name;
-        console.log(this.nombreArchivo)
         this.datosFormulario.delete('archivo');
         this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
       }
@@ -59,29 +57,23 @@ url:EventEmitter<string>=new EventEmitter<string>();
 
   //Sube el archivo a Cloud Storage
   async subirArchivo() {
-    console.log(this.referencia)
-    console.log(this.tarea)
 
     //Cambia el porcentaje
     this.tarea.percentageChanges().subscribe((porcentaje:any) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
         // this.finalizado = false;
-        console.log(this.finalizado)
       }
     });
 this.referencia.getDownloadURL().subscribe((URL: any) => {
       this.URLPublica = URL;
       this.selectedImage=URL;
-      console.log(URL)
       this.url.emit(this.selectedImage)
     });
 
   }
 async cerrar (){
-  console.log("cerrar")
   this.close!=this.close;
-  console.log(this.close)
 this.close=false
 }
 }

@@ -10,29 +10,23 @@ import { ComponentService } from '../services/component.service';
   styleUrls: ['./actualizacion-model.component.css'],
 })
 export class ActualizacionModelComponent implements OnInit {
-   segundoReporteView: SegundoReporte[]=[];
+  segundoReporteView: SegundoReporte[] = [];
   //segundoReporteView: any;
 
   @Input()
-  segundoReporte: SegundoReporte[]=[];
-  info: any=null;
+  segundoReporte: SegundoReporte[] = [];
+  info: any = null;
 
   constructor(
     private petService: FirebaseService,
     private componentService: ComponentService
   ) {}
 
-  ngOnInit(): void {
-    }
+  ngOnInit(): void {}
 
- 
-   openDialogo(value: string) {
-    this.info=value;
-    console.log(this.info);
-    
-
+  openDialogo(value: string) {
+    this.info = value;
 
     this.segundoReporteView = this.segundoReporte;
-    //console.log(this.segundoReporte);
   }
 }

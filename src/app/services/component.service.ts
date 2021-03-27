@@ -10,7 +10,6 @@ export class ComponentService {
 
   sendMessage(message: any) {
       this.subject.next({ text: message });
-      console.log(message)
   }
 
   clearMessage() {
