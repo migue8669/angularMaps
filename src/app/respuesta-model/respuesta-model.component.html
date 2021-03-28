@@ -1,9 +1,10 @@
-<div class="modal fade" id="myModalRespuesta" role="dialog" data-backdrop="" *ngIf="puerta">
+<div class="modal fade" id="myModalRespuesta"  role="dialog" data-backdrop="" *ngIf="puerta">
     <div class="modal-dialog">
       <div class="card" style="width: 25rem">
         <div class="card-body">
           <div class="modal-content">
               <div class="contenedor">
+                <form #myForm="ngForm">
                 <div class="contenedor_formulario" style="margin: 10px;"> 
                   <div>
                     <button
@@ -28,7 +29,7 @@
                   <button
                     style="margin: 10px"
                     class="btn btn-outline-primary"
-                    (click)="inicio()"
+                    (click)="inicio(myForm)"
                     onclick="$('#myModalRespuesta').modal('hide');"
 
                   >
@@ -36,6 +37,7 @@
                   </button>
          
               </div>
+            </form>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { FirebaseService } from '../firebase.service';
 import { SegundoReporte } from '../models/segundoReporte.model';
 import { PetModel } from '../models/pet.model';
 import { UUID } from 'angular2-uuid';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-respuesta-model',
@@ -38,12 +39,13 @@ segReporte:SegundoReporte=new SegundoReporte();
   ngOnInit(): void {
     this.textoHijo2.$key = this.textoHijo21;
   }
-  inicio() {
+  inicio(form:NgForm) {
     this.textoHijo2.$key = this.textoHijo21;
     console.log(this.textoHijo21);
-    this.segundoReporte(this.textoHijo2);
+
+    this.segundoReporte(this.textoHijo2,form);
   }
-  segundoReporte(texto: PetModel) {
+  segundoReporte(texto: PetModel,form:NgForm) {
     this.correo = localStorage.getItem('email')
     if(this.correo='undefined'){
       this.correo='Anónimo'
@@ -52,6 +54,8 @@ segReporte:SegundoReporte=new SegundoReporte();
     this.textoHijo2.$key == this.textoHijo21;
 
     if (this.textoHijo2.segundoReporte) {
+      console.log(        this.pets.segundoReporte
+        )
       this.arraySegundoReporte.push(
        // this.textoHijo2.segundoReporte,
         this.pets.segundoReporte
@@ -63,19 +67,35 @@ this.segReporte.reporte=this.arraySegundoReporte.toString();
 this.segReporte.id=UUID.UUID();
   
     } else {
+      this.arraySegundoReporte.push(
+        // this.textoHijo2.segundoReporte,
+         this.pets.segundoReporte
+       );
       console.log(this.valorReporte);
       this.petService.getPet(this.textoHijo21).subscribe((resp) => {
         console.log(resp);
       });
       this.textoHijo2.$key = this.textoHijo21;
+      console.log( this.textoHijo2.$key);
+
       this.textoHijo2.segundoReporte = this.pets.segundoReporte;
+      console.log( this.textoHijo2.segundoReporte);
+
       this.textoHijo2.nombre=this.correo
+      console.log(   this.textoHijo2.nombre);
+
       this.segReporte.nombre=this.correo
+      console.log(   this.segReporte.nombre);
+
       this.segReporte.reporte=this.arraySegundoReporte.toString();
+      console.log(   this.segReporte.reporte);
+
       this.segReporte.id=UUID.UUID();
+      console.log(   this.segReporte.id);
 
       // this.pets.$key=this.valorReporte;
     }
+    console.log(this.textoHijo21,this.segReporte)
     this.petService
       .actualizarReporteConModelo(this.textoHijo21, this.segReporte)
       .subscribe((respuesta) => {
@@ -85,5 +105,8 @@ this.segReporte.id=UUID.UUID();
 
     this.arraySegundoReporte.length = 0;
     this.pets.segundoReporte?.reporte == '';
+    this.textoHijo2=new PetModel()
+    form.resetForm();
+
   }
 }
