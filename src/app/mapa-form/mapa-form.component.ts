@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentService } from '../services/component.service';
-import { FirebaseService } from '../firebase.service';
+import { FirebaseService } from '../services/firebase.service';
 import { PetModel } from '../models/pet.model';
 import { AuthService } from '../services/auth.service';
 import { SegundoReporte } from '../models/segundoReporte.model';
@@ -18,6 +18,7 @@ import { ActualizacionModelComponent } from '../actualizacion-model/actualizacio
 import { UbicacionModel } from '../models/ubicacion.model';
 import { MapsAPILoader } from '@agm/core';
 import { NgForm } from '@angular/forms';
+import { UsuarioModel } from '../models/usuario.model';
 
 @Component({
   selector: 'app-mapa-form',
@@ -69,7 +70,10 @@ export class MapaFormComponent implements OnInit {
   modalTemp: boolean = false;
   @Output()
   alertEmit: EventEmitter<boolean> = new EventEmitter<boolean>(false);
-  guardarValid:boolean=false;
+  guardarValid: boolean = false;
+  botonGuardarValid: boolean = false;
+  usuario!: UsuarioModel;
+
   // @Input()
   // segundoReporte!: string;
 
@@ -89,13 +93,16 @@ export class MapaFormComponent implements OnInit {
     this.mapTypeId = 'hybrid';
     this.located = false;
     this.value = '';
+    this.guardarValid = false;
   }
   @ViewChild('search')
   public searchElementRef: ElementRef = new ElementRef('');
 
   ngOnInit() {
-    this.initMap();}
+    this.usuario = new UsuarioModel();
 
+    this.initMap();
+  }
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
@@ -104,7 +111,7 @@ export class MapaFormComponent implements OnInit {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.zoom = 8;
-    
+
         this.getAddress(this.lat, this.lng);
       });
       if (
@@ -119,11 +126,11 @@ export class MapaFormComponent implements OnInit {
   openAlert() {
     this.modalTemp = true;
     this.alertEmit.emit(this.modalTemp);
-    this.componentService.sendMessage(this.modalTemp)
-    if(this.modalTemp=false){
-      this.guardarValid=false;
-    }else{
-      this.guardarValid=true;
+    this.componentService.sendMessage(this.modalTemp);
+    if ((this.modalTemp = false)) {
+      this.botonGuardarValid = false;
+    } else {
+      this.botonGuardarValid = true;
     }
   }
   markerDragEnd($event: any) {
@@ -136,7 +143,6 @@ export class MapaFormComponent implements OnInit {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
       (results: { formatted_address: string }[], status: string) => {
-      
         if (status === 'OK') {
           if (results[0]) {
             this.zoom = 12;
@@ -154,7 +160,6 @@ export class MapaFormComponent implements OnInit {
   initMap() {
     this.petService.getAll().subscribe((pets) => {
       this.mascotass = pets;
-      
     });
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -178,13 +183,12 @@ export class MapaFormComponent implements OnInit {
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 12;
-  
         });
       });
     });
   }
 
-  primerReporte(form:NgForm) {
+  primerReporte(form: NgForm) {
     navigator.geolocation.getCurrentPosition((position) => {
       this.lat = position.coords.latitude;
       this.lng = position.coords.longitude;
@@ -208,54 +212,80 @@ export class MapaFormComponent implements OnInit {
       this.pets.lat = this.lat;
       this.pets.long = this.lng;
     }
- 
 
     if (this.pets.lat == this.lat && this.pets.long == this.lng) {
-      
-      this.lat=this.lat+Math.floor(0.0009995) + 0.00001;
-      this.lng=this.lng+Math.floor(0.0009995) + 0.00001;
-
-
-
-
-
+      // this.lat = this.lat + Math.floor(0.0009995) + 0.00001;
+      // this.lng = this.lng + Math.floor(0.0009995) + 0.00001;
+      this.lat = this.lat + Math.floor(0.00001);
+      this.lng = this.lng + Math.floor(0.00001);
       this.pets.lat = this.lat;
 
-
-
-      this.pets.long =  this.lng;
+      this.pets.long = this.lng;
       // this.pets.foto = this.URLPublica;
       this.pets.foto = this.selectedImage;
-
     } else {
       this.pets.lat = this.lat;
-      this.pets.long =  this.lng;
+      this.pets.long = this.lng;
       // this.pets.foto = this.URLPublica;
       this.pets.foto = this.selectedImage;
-
     }
-    
-    this.petService.crearReporte(this.pets).subscribe((respuesta) => {
-      this.pets = respuesta;
+    // console.log(this.guardarValid);
+    // if (this.guardarValid == false) {
+      this.petService.crearReporte(this.pets).subscribe((respuesta) => {
+        this.pets = respuesta;
+//this.auth.logOut();
+this.auth.usuarioAnonimo(this.usuario).subscribe(
+  (resp) => {
+      localStorage.setItem('email', this.usuario.email);
+      localStorage.setItem('nombre',this.usuario.nombre);
+    this.router.navigateByUrl('/home');
+this.componentService.sendMessage(resp);
+  }
+);
+      //  this.guardarValid = true;
+     //   this.refresh();
+
+      });
+  //  }
+    // if (this.guardarValid == true) {
+    //   this.mascotass.forEach((r) => {
+    //     //if(r.$key==)
+    //     console.log(r.$key);
+    //   });
+    //   //     this.guardarValid=false;
+
+    //   this.petService.getPet(this.pets.$key);
+    //   this.petService
+    //     .actualizarReporte(this.pets.$key, this.pets)
+    //     .subscribe((respuesta) => {
+    //       //    this.pets = respuesta;
+    //     });
+    // }
+    this.petService.getAll().subscribe((pets) => {
+      this.mascotass = pets;
     });
 
     this.zoom = 17;
     this.located = true;
-    form.resetForm();
-    this.petService.getAll().subscribe((pets) => {
-      this.mascotass = pets;
-      
-    });
+    //   form.resetForm();
+    // this.petService.getAll().subscribe((pets) => {
+    //   this.mascotass = pets;
+
+    // });
     this.initMap();
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
   openDialog(key: PetModel) {
     this.valorReporte = key;
     this.valorReporte.$key = key.$key;
 
     this.componentService.sendMessage(this.abrirModal);
-   
-    this.textoCambiado.emit(this.valorReporte); // );
+
+    this.textoCambiado.emit(this.valorReporte);
+
     this.textoCambiado2.emit(this.valorReporte.$key);
   }
   openDialogo(segundoReporte: PetModel) {
@@ -269,13 +299,12 @@ export class MapaFormComponent implements OnInit {
           this.emitReport.emit(this.arraySegundoReporte);
       });
     });
-  this.token.push( localStorage.getItem('email'));
-
+    this.token.push(localStorage.getItem('email'));
 
     this.componentService.sendMessage(segundoReporte);
     this.emailReporte.emit(this.token);
     this.segundoReporteView = segundoReporte;
-    this.arraySegundoReporte.length=0;
+    this.arraySegundoReporte.length = 0;
   }
   salir() {
     this.auth.logOut();

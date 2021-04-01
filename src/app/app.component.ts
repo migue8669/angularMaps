@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { FirebaseService } from './firebase.service';
+import { FirebaseService } from './services/firebase.service';
 import { PetModel } from './models/pet.model';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';

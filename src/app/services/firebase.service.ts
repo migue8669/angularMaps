@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PetModel } from './models/pet.model';
+import { PetModel } from '../models/pet.model';
 import { map, catchError } from 'rxjs/operators';
 //import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import {
   AngularFireStorageReference,
   AngularFireUploadTask,
 } from '@angular/fire/storage';
-import { SegundoReporte } from './models/segundoReporte.model';
+import { SegundoReporte } from '../models/segundoReporte.model';
 @Injectable({
   providedIn: 'root',
 })

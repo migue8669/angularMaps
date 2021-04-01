@@ -22,7 +22,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ComponentService } from './services/component.service';
 import { SearchComponentComponent } from './search-component/search-component.component';
-import { FirebaseService } from './firebase.service';
+import { FirebaseService } from './services/firebase.service';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import {MatCardModule} from '@angular/material/card';
 
