@@ -100,13 +100,14 @@ export class MapaFormComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
+    this.guardarValid = false;
 
     this.initMap();
   }
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
-    if ('geolocation' in navigator) {
+//    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
@@ -114,14 +115,14 @@ export class MapaFormComponent implements OnInit {
 
         this.getAddress(this.lat, this.lng);
       });
-      if (
-        navigator.geolocation.watchPosition((length) => {
-          0;
-        })
-      ) {
-        this.geolocal = false;
-      }
-    }
+      // if (
+      //   navigator.geolocation.watchPosition((length) => {
+      //     0;
+      //   })
+      // ) {
+      //   this.geolocal = false;
+      // }
+   // }
   }
   openAlert() {
     this.modalTemp = true;
@@ -158,6 +159,7 @@ export class MapaFormComponent implements OnInit {
   }
 
   initMap() {
+
     this.petService.getAll().subscribe((pets) => {
       this.mascotass = pets;
     });
@@ -190,8 +192,10 @@ export class MapaFormComponent implements OnInit {
 
   primerReporte(form: NgForm) {
     navigator.geolocation.getCurrentPosition((position) => {
+
       this.lat = position.coords.latitude;
       this.lng = position.coords.longitude;
+
     });
 
     if (this.opcion1) {
@@ -213,66 +217,75 @@ export class MapaFormComponent implements OnInit {
       this.pets.long = this.lng;
     }
 
-    if (this.pets.lat == this.lat && this.pets.long == this.lng) {
+    //if (this.pets.lat == this.lat && this.pets.long == this.lng) {
+
       // this.lat = this.lat + Math.floor(0.0009995) + 0.00001;
       // this.lng = this.lng + Math.floor(0.0009995) + 0.00001;
-      this.lat = this.lat + Math.floor(0.00001);
-      this.lng = this.lng + Math.floor(0.00001);
+
+//this.lat = this.lat + Math.floor(0.00001);
+
+  //    this.lng = this.lng + Math.floor(0.00001);
       this.pets.lat = this.lat;
 
       this.pets.long = this.lng;
       // this.pets.foto = this.URLPublica;
       this.pets.foto = this.selectedImage;
-    } else {
-      this.pets.lat = this.lat;
-      this.pets.long = this.lng;
-      // this.pets.foto = this.URLPublica;
-      this.pets.foto = this.selectedImage;
-    }
+  //  } else {
+
+      // this.pets.lat = this.lat;
+      // this.pets.long = this.lng;
+      // // this.pets.foto = this.URLPublica;
+      // this.pets.foto = this.selectedImage;
+  //  }
     // console.log(this.guardarValid);
     // if (this.guardarValid == false) {
+
+    if (this.guardarValid == true) {
+      this.guardarValid = false;
+
+      this.mascotass.forEach((r) => {
+        //if(r.$key==)
+        console.log(r.$key);
+      });
+      //     this.guardarValid=false;
+
+      this.petService.getPet(this.pets.$key);
+      this.petService
+        .actualizarReporte(this.pets.$key, this.pets)
+        .subscribe((respuesta) => {
+          //    this.pets = respuesta;
+        });
+      this.auth.usuarioAnonimo(this.usuario).subscribe((resp) => {
+        localStorage.setItem('email', this.usuario.email);
+        localStorage.setItem('nombre', this.usuario.nombre);
+        this.router.navigateByUrl('/home');
+        this.componentService.sendMessage(resp);
+      });
+
+    } else {
+      this.guardarValid = true;
+
       this.petService.crearReporte(this.pets).subscribe((respuesta) => {
         this.pets = respuesta;
-//this.auth.logOut();
-this.auth.usuarioAnonimo(this.usuario).subscribe(
-  (resp) => {
-      localStorage.setItem('email', this.usuario.email);
-      localStorage.setItem('nombre',this.usuario.nombre);
-    this.router.navigateByUrl('/home');
-this.componentService.sendMessage(resp);
-  }
-);
-      //  this.guardarValid = true;
-     //   this.refresh();
-
+        //this.auth.logOut();
+        this.auth.usuarioAnonimo(this.usuario).subscribe((resp) => {
+          localStorage.setItem('email', this.usuario.email);
+          localStorage.setItem('nombre', this.usuario.nombre);
+          this.router.navigateByUrl('/home');
+          this.componentService.sendMessage(resp);
+        });
       });
-  //  }
-    // if (this.guardarValid == true) {
-    //   this.mascotass.forEach((r) => {
-    //     //if(r.$key==)
-    //     console.log(r.$key);
-    //   });
-    //   //     this.guardarValid=false;
 
-    //   this.petService.getPet(this.pets.$key);
-    //   this.petService
-    //     .actualizarReporte(this.pets.$key, this.pets)
-    //     .subscribe((respuesta) => {
-    //       //    this.pets = respuesta;
-    //     });
-    // }
+    }
     this.petService.getAll().subscribe((pets) => {
       this.mascotass = pets;
     });
 
     this.zoom = 17;
     this.located = true;
-    //   form.resetForm();
-    // this.petService.getAll().subscribe((pets) => {
-    //   this.mascotass = pets;
-
-    // });
-    this.initMap();
+    //form.reset();
+    this.salir();
+//this.initMap();
   }
 
   refresh(): void {
@@ -307,7 +320,8 @@ this.componentService.sendMessage(resp);
     this.arraySegundoReporte.length = 0;
   }
   salir() {
-    this.auth.logOut();
-    this.router.navigateByUrl('/login');
+   this.auth.logOut();
+   // this.initMap();
+  this.router.navigateByUrl('/login');
   }
 }

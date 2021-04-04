@@ -25,6 +25,7 @@ import { SearchComponentComponent } from './search-component/search-component.co
 import { FirebaseService } from './services/firebase.service';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import {MatCardModule} from '@angular/material/card';
+import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,8 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+
   providers: [AngularFireStorage,ComponentService,FirebaseService],
   bootstrap: [AppComponent],
 })

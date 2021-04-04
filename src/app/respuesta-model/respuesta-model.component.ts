@@ -73,7 +73,7 @@ this.segReporte.id=UUID.UUID();
        );
    //   console.log(this.valorReporte);
       this.petService.getPet(this.textoHijo21).subscribe((resp) => {
-        console.log(resp);
+      console.log(resp);
       });
       this.textoHijo2.$key = this.textoHijo21;
   //    console.log( this.textoHijo2.$key);
