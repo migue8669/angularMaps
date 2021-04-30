@@ -30,7 +30,7 @@ export class RespuestaModelComponent implements OnInit {
 
 segReporte:SegundoReporte=new SegundoReporte();
 
-  correo: any;
+nombre: any;
   constructor(private petService: FirebaseService) {
     this.textoHijo21 = '';
     this.token = '';
@@ -45,10 +45,12 @@ segReporte:SegundoReporte=new SegundoReporte();
 
     this.segundoReporte(this.textoHijo2,form);
   }
-  segundoReporte(texto: PetModel,form:NgForm) {
-    this.correo = localStorage.getItem('email')
-    if(this.correo='undefined'){
-      this.correo='Anónimo'
+  segundoReporte(key: PetModel,form:NgForm) {
+//this.nombre = localStorage.getItem('nombre')
+this.nombre=this.petService.getPet(key.$key);
+console.log(this.nombre)  
+if(this.nombre='undefined'){
+      this.nombre='Anónimo'
     }
 
     this.textoHijo2.$key == this.textoHijo21;
@@ -60,9 +62,9 @@ segReporte:SegundoReporte=new SegundoReporte();
        // this.textoHijo2.segundoReporte,
         this.pets.segundoReporte
       );
-       this.textoHijo2.nombre=this.correo
+       this.textoHijo2.nombre=this.pets.nombre
       this.textoHijo2.segundoReporte.reporte = this.arraySegundoReporte.toString();
-this.segReporte.nombre=this.correo;
+this.segReporte.nombre=this.nombre;
 this.segReporte.reporte=this.arraySegundoReporte.toString();
 this.segReporte.id=UUID.UUID();
   
@@ -81,10 +83,10 @@ this.segReporte.id=UUID.UUID();
       this.textoHijo2.segundoReporte = this.pets.segundoReporte;
  //     console.log( this.textoHijo2.segundoReporte);
 
-      this.textoHijo2.nombre=this.correo
+      this.textoHijo2.nombre=this.nombre
  //     console.log(   this.textoHijo2.nombre);
 
-      this.segReporte.nombre=this.correo
+      this.segReporte.nombre=this.nombre
     //  console.log(   this.segReporte.nombre);
 
       this.segReporte.reporte=this.arraySegundoReporte.toString();

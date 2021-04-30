@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { UsuarioModel } from '../models/usuario.model';
 
@@ -10,7 +11,7 @@ export class AuthService {
 url='https://identitytoolkit.googleapis.com/v1/accounts:'
 private apiKey='AIzaSyDxt9Juen-d02GQG_dspB_7kZVb__J-gVY'
   userToken: string ='';
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient,private router:Router) {
     this.leerToken();
   }
 
@@ -88,7 +89,10 @@ const expiraDate=new Date();
 expiraDate.setTime(expira);
 
 if(expiraDate>new Date){
-  return true;}else{
+  this.router.navigateByUrl('/login');
+
+  return   true;}
+  else{
     return false;
   }
 

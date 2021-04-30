@@ -17,7 +17,46 @@ nav.mainNav > .navItem {
     background: #4800ff;
     color: #fff;
 }
+#h1{
+  background-color: #7761a5;
+  color:white;
+  justify-content: center;
 
+}
+#btnCollapse{
+  background-color: inherit;
+  color:whitesmoke;
+  /* padding: 1px 1px; */
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  /* margin: 2px 1px; */
+  margin-left: 35% !important;
+  margin-right: 50% !important;
+  justify-content: center;
+  cursor: pointer;
+  border:1px #eee;
+
+}
+#btnCollapse:hover {
+  background-color: #eee;
+  color:#7761a5;
+
+}
+.block {
+  border:1px #eee;
+  background-color:inherit;
+  color:#7761a5;
+  /* padding: 14px 28px; */
+  font-size: 5px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.block:hover {
+  background-color: #eee;
+}
 .example-card {
   max-width: 400px;
 }

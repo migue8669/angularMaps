@@ -31,7 +31,7 @@ export class RegistroComponent implements OnInit {
           localStorage.setItem('email', this.usuario.email);
           localStorage.setItem('nombre',this.usuario.nombre);
 
-        }
+         }
         this.router.navigateByUrl('/login');
         this.componentService.sendMessage(resp);
 

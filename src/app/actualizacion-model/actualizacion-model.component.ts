@@ -26,7 +26,7 @@ export class ActualizacionModelComponent implements OnInit {
 
   openDialogo(value: string) {
     this.info = value;
-
+console.log(this.segundoReporte)
     this.segundoReporteView = this.segundoReporte;
   }
 }

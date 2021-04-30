@@ -18,7 +18,8 @@ recordar=false;
   ngOnInit() {
     if(localStorage.getItem('email')){
       this.usuario.email==localStorage.getItem('email');
-      
+      this.usuario.nombre==localStorage.getItem('nombre');
+
       if(this.usuario.email="undefined"){
             this.usuario.email=""
       }
@@ -35,11 +36,11 @@ Swal.fire({
 Swal.showLoading();
     this.auth.logIn(this.usuario).subscribe(resp=>{
       Swal.close()
-      if(this.recordar){
+       if(this.recordar){
         localStorage.setItem('email',this.usuario.email);
         localStorage.setItem('nombre',this.usuario.nombre);
 
-      }
+       }
       this.router.navigateByUrl('/home')
 
     },(err)=>{
